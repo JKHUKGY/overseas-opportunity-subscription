@@ -1,0 +1,30 @@
+{
+  "source": "VGen",
+  "checked_date": "2026-09-23",
+  "method": "Safari 原生界面，实际导航并读取公开页面",
+  "status": "页面可读；本次未找到可申请的公开买方需求",
+  "valid_opportunities": 0,
+  "visited": [
+    "https://vgen.co/",
+    "https://vgen.co/littleling_/service/black-white-manga-style-sketch-surprise-me-skeb/7eefb714-815a-4810-88e5-60bc86b71db0",
+    "https://vgen.co/HAVENFRAME/requested",
+    "https://vgen.co/RoyalBunny/portfolio/showcase/havenframe-s-bundle-giftuber-pfp-emotes/7df41d7b-219b-4a6b-ac9a-b66ada058def"
+  ],
+  "samples": [
+    {
+      "title": "Black White Manga style Sketch Surprise me ! Skeb",
+      "url": "https://vgen.co/littleling_/service/black-white-manga-style-sketch-surprise-me-skeb/7eefb714-815a-4810-88e5-60bc86b71db0",
+      "classification": "画师服务广告 · 排除",
+      "observed": "首页标记 OPEN；详情为 Custom service，展示 From NT$1,902.39、Request → proposal → commit (pay) 和 Accept terms to start request。",
+      "reason": "这是买家向画师购买服务的入口，不是画师申请买方项目的入口。价格是服务显示报价，不是需求方预算；条款更新时间不是买方需求发布时间。未接受条款、未发起请求。"
+    },
+    {
+      "title": "HAVENFRAME's BUNDLE GIFtuber + PFP + Emotes",
+      "url": "https://vgen.co/RoyalBunny/portfolio/showcase/havenframe-s-bundle-giftuber-pfp-emotes/7df41d7b-219b-4a6b-ac9a-b66ada058def",
+      "classification": "已完成委托的展示 · 排除",
+      "observed": "从 Requested 栏目进入，详情显示 Commissioned by client、Jun 2026、客户对最终交付的评价，以及 Published Jun 28, 2026。",
+      "reason": "客户评价已交付的作品，不是等待画师申请的新需求；展示发布日期不能当作买方招募发布时间。"
+    }
+  ],
+  "boundary": "本次四个公开页面、两条具体记录中有效机会为零，不代表平台全站没有需求。未登录、未读私有委托、未提交表单、未接受条款、未做持续采集。VGen仍保留在测试范围。"
+}

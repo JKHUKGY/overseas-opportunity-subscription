@@ -71,6 +71,10 @@ def normalize(project, checked_at, annotations):
 
 
 def build(snapshot):
+    vgen_file = HERE / 'vgen-browser-check.json'
+    if vgen_file.exists():
+        snapshot['vgen_check'] = json.loads(vgen_file.read_text())
+        snapshot['vgen'] = '2026-09-23 Safari 已读到首页、服务、Requested 栏及作品详情；两条具体记录均不属于可申请买方机会。'
     browser_file = HERE / 'browser-sample.json'
     if browser_file.exists():
         snapshot['upwork_sample'] = json.loads(browser_file.read_text())
