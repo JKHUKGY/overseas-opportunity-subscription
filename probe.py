@@ -71,6 +71,10 @@ def normalize(project, checked_at, annotations):
 
 
 def build(snapshot):
+    browser_file = HERE / 'browser-sample.json'
+    if browser_file.exists():
+        snapshot['upwork_sample'] = json.loads(browser_file.read_text())
+        snapshot['upwork'] = 'Safari 已读到公开分类列表及 1 条详情（现有会话）；仅相对时间，尚未持续采集。内置浏览器仍不可用。'
     (HERE / 'snapshot.json').write_text(json.dumps(snapshot, ensure_ascii=False, indent=2))
     template = (HERE / 'prototype.template.html').read_text()
     encoded = json.dumps(snapshot, ensure_ascii=False).replace('<', '\\u003c')
