@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>绘画机会 · 采集实验</title>
+<style>
+:root{font-family:system-ui,-apple-system,"PingFang SC",sans-serif;color:#23322d;background:#f3f5f1;line-height:1.6}*{box-sizing:border-box}body{max-width:1120px;margin:0 auto;padding:38px 24px 70px}h1{font-size:32px;letter-spacing:-1px;margin:10px 0}h2{font-size:21px;margin:0 0 14px}h3{font-size:16px;margin:0 0 8px}p{margin:8px 0}.eyebrow,.muted{color:#64746b;font-size:13px}.eyebrow{letter-spacing:2px;font-weight:700}.notice{border-left:3px solid #44795f;padding:10px 16px;background:#e9efe9;margin:20px 0}.tabs,.actions,.filters{display:flex;gap:9px;flex-wrap:wrap;align-items:center}button,.button{font:inherit;border:1px solid #cad4cc;border-radius:7px;padding:8px 13px;background:white;color:#285640;cursor:pointer;text-decoration:none}button:hover{background:#e8eee8}button[aria-selected=true],.primary{background:#285640;color:white;border-color:#285640}button:disabled{opacity:.4;cursor:default}input,select{font:inherit;padding:6px;border:1px solid #cad4cc;border-radius:5px;background:white}input[type=number]{width:85px}section,.card{background:white;border:1px solid #dbe2db;border-radius:10px;padding:22px;margin-top:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.stat{background:#eef2ed;padding:14px;border-radius:7px}.stat b{font-size:24px;display:block}.pill{display:inline-block;background:#edf2ee;color:#356447;padding:3px 9px;border-radius:20px;font-size:12px;margin-right:5px}.warn{background:#f6eee0;color:#855e28}.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cards .card{margin:0}.metadata{font-size:13px;color:#5e6c64;margin-top:12px;display:grid;gap:4px}.budget{font-weight:700;margin:12px 0;color:#285640}a{color:#285640}details{margin-top:12px}pre{white-space:pre-wrap;word-break:break-word;font-size:12px}table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;border-bottom:1px solid #e5eae4;padding:9px;vertical-align:top;word-break:break-word}.scroll{overflow:auto}.hidden{display:none!important}.scenario{margin-top:15px;background:#f4f6f2;padding:18px;border-radius:8px}.log{font-size:13px;max-height:160px;overflow:auto}.empty{padding:22px;color:#68746c;text-align:center;border:1px dashed #c9d4cb;border-radius:8px}.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}.label{font-size:13px}footer{font-size:12px;color:#6b796e;margin-top:24px}@media(max-width:700px){body{padding:20px 14px}.cards,.grid,.split{grid-template-columns:1fr}h1{font-size:27px}section{padding:16px}}
+</style>
+<header><div class="eyebrow">PROTOTYPE / 绘画接稿</div><h1>真实需求，能变成可推送机会吗？</h1><p>先观察采集样本，再点击模拟流程，检查重复、失效和重复推送的边界。</p><div class="notice">实验原型。真实样本是一次采集快照；模拟操作只改变内存，不修改平台项目，也不发送邮件。刷新页面恢复初始状态。</div></header>
+<nav class="tabs" aria-label="实验区域"><button id="tab-real" aria-selected="true" onclick="showView('real')">① 真实采集结果</button><button id="tab-sim" aria-selected="false" onclick="showView('sim')">② 点击模拟流程</button></nav>
+<main id="real">
+<section><h2>本次读取到了什么</h2><p id="snapshotTime" class="muted"></p><div id="stats" class="grid"></div><div id="sources" class="metadata"></div><details><summary>查看请求记录与验证边界</summary><div id="requests" class="scroll"></div><p class="muted">筛选和中文总结由本次助手逐条阅读样本生成。采集脚本没有接入持续运行的 AI 总结服务；重跑发现的新项目会标为待整理。页面不自动刷新外部来源。</p></details></section>
+<section><h2>按你的订阅条件筛选</h2><div class="filters"><label>原始发布距采样时刻 <input id="days" type="number" min="1" max="365" value="3"> 天</label><label>内容 <select id="decision"><option value="include">绘画候选</option><option value="all">全部采集结果</option><option value="exclude">已排除</option><option value="review">待人工判断</option></select></label><label>关键词 <input id="keyword" placeholder="如：头像 / Roblox"></label><label>计价 <select id="pricing"><option value="all">全部</option><option value="fixed">固定总价</option><option value="hourly">时薪</option></select></label></div><p class="muted">时间以来源的原始提交时间计算；“绘画候选”不代表已经成交核验或保证仍可申请。关键词原型只匹配文字，尚无中英文扩展。</p><details><summary>人民币参考预算（手动汇率实验）</summary><p class="muted">没有预填或虚构实时汇率。输入“1 单位外币等于多少人民币”后才显示换算；时薪和总价分别筛选。区间暂按下限判断，仅是本原型的试验规则。</p><div class="filters" id="fx"></div><div class="filters"><label>固定总价至少 ¥<input id="minFixed" type="number" min="0" placeholder="不限制"></label><label>时薪至少 ¥<input id="minHourly" type="number" min="0" placeholder="不限制"></label><label><input id="includeUnknown" type="checkbox">包含预算或换算金额未知</label></div></details></section>
+<p id="count" class="muted"></p><div id="projects" class="cards"></div>
+</main>
+<main id="sim" class="hidden">
+<section><h2>当前状态 · 全部为模拟需求</h2><div id="simStats" class="grid"></div><p id="lastAction" class="notice" aria-live="polite"></p><div class="split"><div><h3>网站中的机会详情</h3><div id="activeState"></div></div><div><h3>独立结束记录</h3><div id="archiveState"></div></div></div><details><summary>已推送记录与操作轨迹</summary><div id="sentState"></div><ol id="log" class="log"></ol></details></section>
+<section><h2>自由操作</h2><div class="actions" id="freeActions"></div><p class="muted">“生成每日摘要”只预览并模拟记录一次推送，不会发送邮件。导出的结束记录是独立文件；页面本身不自动保存。</p><h3>每日摘要预览</h3><div id="digest" class="empty">还未生成</div></section>
+<section><h2>跟着场景试一遍</h2><div class="tabs" id="scenarioTabs" role="tablist"></div><div class="scenario"><h3 id="scenarioTitle"></h3><p id="scenarioDescription"></p><div id="steps" class="actions"></div></div></section>
+</main>
+<footer>一次性实验 · 不连接生产数据库 · 不包含登录、投标、付款或自动发送功能。</footer>
+<script>
+const SNAPSHOT = __SNAPSHOT__;
+</script>
+<script>
+// Portable, pure logic: no DOM or network access in this module.
+const OpportunityLogic = (() => {
+ const canonical = value => {const u=new URL(value);['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(k=>u.searchParams.delete(k));u.hash='';return u.href;};
+ const seed = () => ({source:'模拟来源',url:'https://example.com/projects/avatar-001',title:'为原创角色绘制头像',summary:'模拟：纯色背景的角色头像，预算人民币 500–800 元。',published_at:'2026-09-21T08:00:00Z',budget:'CNY 500–800 / 总价',status:'未发现结束证据',checked_at:'2026-09-22T08:00:00Z'});
+ const initial = () => ({active:[],archive:[],sent:[],digest:[],log:[],notice:'尚未发现需求。',tick:0});
+ const reduce = (before,action) => {
+  const s=structuredClone(before), t=new Date(Date.UTC(2026,8,22,8,0,s.tick++)).toISOString();
+  const p=seed(),key=canonical(p.url);let message='';
+  if(action==='discover'||action==='duplicate'){
+   if(action==='duplicate')p.url+='?utm_source=email';
+   const k=canonical(p.url);
+   if(s.archive.some(x=>canonical(x.url)===k))message='命中结束记录：直接排除，没有再次整理或入库。';
+   else if(s.active.some(x=>canonical(x.url)===k))message='已存在相同需求：追踪参数不同也不重复入库。';
+   else{s.active.push({...p,url:k,checked_at:t});message='发现模拟需求：已整理并加入网站候选。';}
+  }else if(action==='close'||action==='archiveFailure'){
+   const item=s.active.find(x=>canonical(x.url)===key);
+   if(!item)message='没有可结束的机会。';
+   else if(action==='archiveFailure')message='模拟结束记录写入失败：保留机会详情，没有执行删除。';
+   else{
+    s.archive.push({url:item.url,source:item.source,deleted_at:t,reason:'需求方明确确认已找到画师'});
+    s.active=s.active.filter(x=>canonical(x.url)!==key);s.digest=s.digest.filter(x=>canonical(x.url)!==key);
+    message='结束记录已写入，然后删除详情；网站和后续摘要不再出现。已发邮件不可撤回。';
+   }
+  }else if(action==='unknown'||action==='pending'){
+   const item=s.active.find(x=>canonical(x.url)===key);
+   if(item){item.status=action==='unknown'?'无法核实（页面暂时打不开）':'需求方正在挑选／联系画师';item.checked_at=t;message='保留机会并更新状态，没有推断为已接走。';}else message='请先发现一条模拟需求。';
+  }else if(action==='digest'){
+   s.digest=s.active.filter(x=>!s.sent.includes(canonical(x.url)));
+   s.sent.push(...s.digest.map(x=>canonical(x.url)));
+   message=s.digest.length?'已生成一条模拟摘要，并记录该订阅者已收到。':'没有此前未推送的新机会；本次摘要为空。';
+  }else if(action==='sourceDelete'){
+   s.active=s.active.filter(x=>canonical(x.url)!==key);s.archive=s.archive.filter(x=>canonical(x.url)!==key);s.sent=s.sent.filter(x=>x!==key);s.digest=s.digest.filter(x=>canonical(x.url)!==key);
+   message='按来源删除要求清理详情和网址记录；以后再遇相同网址将无法靠旧记录排除。';
+  }
+  s.notice=message;s.log.push(t+' '+message);return s;
+ };
+ return {canonical,seed,initial,reduce};
+})();
+</script>
+<script>
+const $=id=>document.getElementById(id),esc=v=>String(v??'未说明').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const date=v=>v?new Date(v).toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false})+'（北京时间）':'未知';
+const decisionText={include:'绘画候选',exclude:'排除',review:'待判断'};
+function showView(v){$('real').classList.toggle('hidden',v!=='real');$('sim').classList.toggle('hidden',v!=='sim');['real','sim'].forEach(k=>$('tab-'+k).setAttribute('aria-selected',String(k===v)));}
+const currencies=[...new Set(SNAPSHOT.projects.map(p=>p.currency).filter(Boolean))];
+$('fx').innerHTML=currencies.map(c=>`<label>1 ${esc(c)} = ¥ <input id="fx-${esc(c)}" type="number" min="0" step="0.01" placeholder="待输入"></label>`).join('');
+$('snapshotTime').textContent='页面生成时间：'+date(SNAPSHOT.generated_at)+'。两组词各取最多 5 条，未完整翻页。';
+$('stats').innerHTML=[['真实项目',SNAPSHOT.projects.length],['助手判断为绘画',SNAPSHOT.projects.filter(p=>p.decision==='include').length],['详情重读成功',SNAPSHOT.projects.filter(p=>p.detail_verified).length]].map(([s,n])=>`<div class="stat"><b>${n}</b>${s}</div>`).join('');
+$('sources').innerHTML=`<div><b>Freelancer：</b> ${esc(SNAPSHOT.requests.map(r=>'HTTP '+r.http_status+' / '+r.returned_count+' 条').join('；'))}</div><div><b>Upwork：</b>${esc(SNAPSHOT.upwork)}</div><div><b>VGen：</b>${esc(SNAPSHOT.vgen)}</div><div>${esc(SNAPSHOT.scope_note)}</div>`;
+$('requests').innerHTML='<table><tr><th>请求</th><th>结果</th><th>读取时间</th></tr>'+[...SNAPSHOT.requests,SNAPSHOT.detail_request].filter(Boolean).map(r=>`<tr><td>${esc(r.url)}</td><td>HTTP ${esc(r.http_status)}${r.transport_error?' · '+esc(r.transport_error):''}</td><td>${date(r.checked_at)}</td></tr>`).join('')+'</table>';
+function renderReal(){
+ const days=Math.max(1,Number($('days').value)||3),query=$('keyword').value.trim().toLowerCase(),mode=$('decision').value,pricing=$('pricing').value,reference=Date.parse(SNAPSHOT.generated_at);
+ const list=SNAPSHOT.projects.filter(p=>{
+  const age=reference-Date.parse(p.published_at);if(!Number.isFinite(age)||age<0||age>days*86400000)return false;
+  if(mode!=='all'&&p.decision!==mode)return false;if(pricing!=='all'&&p.pricing!==pricing)return false;
+  if(query&&!(p.title+' '+p.summary+' '+p.kind).toLowerCase().includes(query))return false;
+  const threshold=Number($(p.pricing==='hourly'?'minHourly':'minFixed').value)||0,rate=Number($('fx-'+p.currency)?.value);
+  if(threshold>0){if(p.budget_min==null||!rate)return $('includeUnknown').checked;if(p.budget_min*rate<threshold)return false;}return true;
+ });
+ $('count').textContent=`显示 ${list.length} / ${SNAPSHOT.projects.length} 条采集样本 · 时间窗口以本次采样时刻为参照，不代表今天仍开放`;
+ $('projects').innerHTML=list.length?list.map(p=>{
+  const rate=Number($('fx-'+p.currency)?.value),unit=p.pricing==='hourly'?'每小时':p.pricing==='fixed'?'项目总价':'计价单位未知';
+  const rmb=rate&&p.budget_min!=null&&p.budget_max!=null?`约 ¥${Math.round(p.budget_min*rate)}–${Math.round(p.budget_max*rate)} / ${unit}（手动汇率）`:'人民币参考：未换算';
+  return `<article class="card"><span class="pill ${p.decision==='include'?'':'warn'}">${decisionText[p.decision]}</span><span class="pill">${esc(p.kind)}</span><h3 style="margin-top:12px">${esc(p.title)}</h3><p>${esc(p.summary)}</p><p class="budget">${esc(p.currency)} ${esc(p.budget_min)}–${esc(p.budget_max)} / ${unit}</p><p class="muted">${rmb}</p><div class="metadata"><div>判断理由：${esc(p.reason)}</div><div>原始发布：${date(p.published_at)}</div><div>最近读取：${date(p.checked_at)}</div><div>来源状态：${esc(p.source_status)} / ${esc(p.frontend_status)}${p.detail_verified?' · 已重读详情':''}，不等于保证可接</div><div>${esc(p.region)}</div></div><p><a target="_blank" rel="noopener noreferrer" href="${esc(p.url)}">查看原项目 ↗</a></p><details><summary>来源字段与摘要说明</summary><p class="muted">ID ${esc(p.id)} · ${esc(p.summary_method)}</p><p class="muted">正文已在本地快照保存，供抽查；不把它复制到公开网站。持续运行的 AI 服务尚未接入。</p></details></article>`;
+ }).join(''):'<div class="empty">没有符合当前条件的样本。可以扩大时间范围或查看全部结果。</div>';
+}
+document.querySelectorAll('#real input,#real select').forEach(e=>e.addEventListener('input',renderReal));
+const labels={discover:'发现新需求',duplicate:'再次遇到同一网址',unknown:'原页面暂时打不开',pending:'需求方正在挑选',close:'确认已找到画师',archiveFailure:'模拟结束记录写入失败',digest:'生成每日摘要（模拟）',sourceDelete:'来源要求清理记录'};
+let sim=OpportunityLogic.initial(),scenarioIndex=0,stepIndex=0;
+const scenarios=[
+ {title:'正常发现与去重',description:'追踪参数变化不代表新需求。观察网站机会是否仍只有一条。',steps:['discover','duplicate','digest','digest']},
+ {title:'结束后再次发现',description:'确认结束后先写独立记录，再删详情；下次发现先命中结束记录。',steps:['discover','close','duplicate','digest']},
+ {title:'记录写入失败',description:'记录写入失败时不能先删详情，否则之后无法排除同一个网址。',steps:['discover','archiveFailure','close']},
+ {title:'无法核实不等于结束',description:'页面打不开、正在挑选，都不能当作需求已被接走。',steps:['discover','unknown','pending','digest']},
+ {title:'来源删除的取舍',description:'清理网址后会失去去重依据。最后一次“发现”会重新入库，这是已接受的例外。',steps:['discover','close','sourceDelete','duplicate']}
+];
+function fieldTable(items){return '<table>'+items.map(([k,v])=>`<tr><th>${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')+'</table>';}
+function renderSim(){
+ $('simStats').innerHTML=[['网站机会',sim.active.length],['结束记录',sim.archive.length],['已推送给此订阅者',sim.sent.length]].map(([s,n])=>`<div class="stat"><b>${n}</b>${s}</div>`).join('');
+ $('lastAction').textContent=sim.notice;
+ $('activeState').innerHTML=sim.active.length?sim.active.map(p=>fieldTable([['来源',p.source],['原网址',p.url],['标题',p.title],['摘要',p.summary],['预算',p.budget],['发布时间',date(p.published_at)],['接单状态',p.status],['最近检查',date(p.checked_at)]])).join(''):'<div class="empty">没有机会详情</div>';
+ $('archiveState').innerHTML=sim.archive.length?sim.archive.map(p=>fieldTable([['原网址',p.url],['来源',p.source],['删除时间',date(p.deleted_at)],['删除原因',p.reason]])).join(''):'<div class="empty">没有结束记录</div>';
+ $('sentState').textContent='已推送网址：'+(sim.sent.join('；')||'无');$('log').innerHTML=sim.log.map(l=>'<li>'+esc(l)+'</li>').join('');
+ $('digest').textContent=sim.digest.length?sim.digest.map(p=>p.title+'：'+p.summary+' ['+p.status+']').join('\n'):'本次没有未推送的新机会。';
+ const s=scenarios[scenarioIndex];$('scenarioTitle').textContent=s.title;$('scenarioDescription').textContent=s.description;
+ $('steps').innerHTML=s.steps.map((a,i)=>`<button ${i===stepIndex?'class="primary"':''} ${i!==stepIndex?'disabled':''} onclick="guidedStep()">${i+1}. ${labels[a]}${i<stepIndex?' ✓':''}</button>`).join('')+'<button onclick="startScenario(scenarioIndex)">重新开始此场景</button>';
+ document.querySelectorAll('#scenarioTabs button').forEach((b,i)=>b.setAttribute('aria-selected',String(i===scenarioIndex)));
+}
+function act(a){sim=OpportunityLogic.reduce(sim,a);renderSim();}
+function startScenario(i){scenarioIndex=i;stepIndex=0;sim=OpportunityLogic.initial();renderSim();}
+function guidedStep(){const s=scenarios[scenarioIndex];if(stepIndex<s.steps.length){sim=OpportunityLogic.reduce(sim,s.steps[stepIndex++]);renderSim();}}
+function exportArchive(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(sim.archive,null,2)],{type:'application/json'}));a.download='PROTOTYPE-ended-records.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+$('freeActions').innerHTML=Object.entries(labels).map(([a,l])=>`<button onclick="act('${a}')">${l}</button>`).join('')+'<button onclick="exportArchive()">导出独立结束记录</button><button onclick="startScenario(scenarioIndex)">重置模拟</button>';
+$('scenarioTabs').innerHTML=scenarios.map((s,i)=>`<button role="tab" onclick="startScenario(${i})">${s.title}</button>`).join('');
+renderReal();renderSim();
+</script>
+</html>
