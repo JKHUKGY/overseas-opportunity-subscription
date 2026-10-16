@@ -1,5 +1,7 @@
-freelancer-*.json
-extra-probes.json
-syntax-check.js
+.DS_Store
 __pycache__/
-.env*
+*.py[cod]
+.env
+.env.*
+/temp/*
+!/temp/prototype-opportunity-lab/

@@ -1,0 +1,5 @@
+freelancer-*.json
+extra-probes.json
+syntax-check.js
+__pycache__/
+.env*
