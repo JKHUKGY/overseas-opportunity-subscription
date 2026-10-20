@@ -14,6 +14,24 @@ class SourceError(Exception):
         self.retry_after = retry_after
 
 
+def _response_headers(raw: bytes) -> tuple[Optional[int], Optional[str]]:
+    status = None
+    retry_after = None
+    # The header stream can contain proxy CONNECT and informational responses.
+    for block in raw.split(b"\r\n\r\n")[:-1]:
+        lines = block.split(b"\r\n")
+        parts = lines[0].split()
+        if len(parts) < 2 or not parts[0].startswith(b"HTTP/") or not parts[1].isdigit():
+            continue
+        status = int(parts[1])
+        retry_after = None
+        for header in lines[1:]:
+            name, _, value = header.partition(b":")
+            if name.lower() == b"retry-after":
+                retry_after = value.strip().decode("latin-1")
+    return status, retry_after
+
+
 class FreelancerSource:
     def __init__(self, token: str = "", *,
                  base_url: str = "https://www.freelancer.com/api/projects/0.1/projects/active/") -> None:
@@ -30,33 +48,30 @@ class FreelancerSource:
         if self._token:
             escaped = self._token.replace("\\", "\\\\").replace('"', '\\"')
             config += 'header = "freelancer-oauth-v1: ' + escaped + '"\n'
+        transfer_error = None
         try:
             response = subprocess.run(
                 ["curl", "--disable", "--config", "-", "--silent", "--show-error",
-                 "--request", "GET", "--include", "--max-time", str(timeout), "--max-filesize", "2097152",
-                 "--write-out", "\n%{http_code}", url],
+                 "--request", "GET", "--dump-header", "/dev/stderr", "--max-time", str(timeout),
+                 "--max-filesize", "2097152", url],
                 input=config.encode(), capture_output=True, timeout=timeout,
             )
-        except subprocess.TimeoutExpired:
-            raise SourceError("timeout") from None
+            body, headers = response.stdout, response.stderr
+            if response.returncode != 0:
+                transfer_error = "timeout" if response.returncode == 28 else "transport_error"
+        except subprocess.TimeoutExpired as error:
+            body, headers = error.stdout or b"", error.stderr or b""
+            transfer_error = "timeout"
         except OSError:
             raise SourceError("transport_unavailable") from None
-        if response.returncode != 0:
-            raise SourceError("timeout" if response.returncode == 28 else "transport_error")
-        body, _, status = response.stdout.rpartition(b"\n")
-        retry_after = None
-        # curl may include proxy CONNECT / informational headers before the final block.
-        while body.startswith(b"HTTP/"):
-            headers, separator, body = body.partition(b"\r\n\r\n")
-            if not separator:
-                raise SourceError("invalid_response")
-            retry_after = None
-            for header in headers.split(b"\r\n")[1:]:
-                name, _, value = header.partition(b":")
-                if name.lower() == b"retry-after":
-                    retry_after = value.strip().decode("latin-1")
-        if status != b"200":
-            raise SourceError("http_error", int(status) if status.isdigit() else None, retry_after=retry_after)
+        status, retry_after = _response_headers(headers)
+        # Keep an explicit HTTP refusal even if its optional body cannot be read.
+        if status is not None and status >= 300:
+            raise SourceError("http_error", status, retry_after=retry_after)
+        if transfer_error:
+            raise SourceError(transfer_error)
+        if status != 200:
+            raise SourceError("invalid_response")
         try:
             payload = json.loads(body.decode("utf-8"))
         except (ValueError, UnicodeError):

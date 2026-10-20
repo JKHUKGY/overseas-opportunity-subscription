@@ -9,7 +9,7 @@ from typing import Any, Callable, Optional, Protocol, Union
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from uuid import uuid4
 
-from .models import Config, RunReport
+from .models import Config, RunReport, SourceLimit
 from .storage import SQLiteStore
 from .source import SourceError
 
@@ -72,7 +72,7 @@ def _candidate(project: dict[str, Any], checked_at: str) -> dict[str, Any]:
     budget = budget if isinstance(budget, dict) else {}
     currency = project.get("currency")
     currency = currency if isinstance(currency, dict) else {}
-    return {
+    candidate = {
         "source": "Freelancer", "id": str(project["id"]),
         "url": url, "canonical_url": canonical, "title": _text(project.get("title")),
         "description": _text(project.get("description")) or _text(project.get("preview_description")),
@@ -84,6 +84,10 @@ def _candidate(project: dict[str, Any], checked_at: str) -> dict[str, Any]:
         "frontend_status": _text(project.get("frontend_project_status")),
         "status": "未核实", "region": "地域未说明", "processing_status": "pending",
     }
+    for value in candidate.values():
+        if isinstance(value, str):
+            value.encode("utf-8")
+    return candidate
 
 
 def collect(config: Config, store: SQLiteStore, source: ProjectSource,
@@ -94,7 +98,7 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
     report.unfinished_run_ids = [run["id"] for run in store.runs() if run.get("status") == "running"]
     deadline = clock() + config.max_seconds
     source_limit = store.source_limit()
-    not_before = source_limit["next_allowed_at"]
+    not_before = source_limit.next_allowed_at
     if not_before is not None and datetime.fromisoformat(not_before) > now():
         report.finished_at = now().isoformat()
         report.status = "skipped"
@@ -132,9 +136,9 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                 report.errors.append({"kind": error.kind, "http_status": error.http_status})
                 request.update(status="failed", error_kind=error.kind, http_status=error.http_status)
                 if error.http_status == 429:
-                    streak = min(source_limit["rate_limit_streak"] + 1, 7)
+                    streak = min(source_limit.rate_limit_streak + 1, 7)
                     report.next_allowed_at = _retry_time(error.retry_after, now(), streak)
-                    source_limit = {"next_allowed_at": report.next_allowed_at, "rate_limit_streak": streak}
+                    source_limit = SourceLimit(report.next_allowed_at, streak)
                 stop = True
                 break
             report.requests_succeeded += 1
@@ -164,5 +168,5 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
     elif report.truncated or report.invalid_count:
         report.status = "partial"
     if report.requests_succeeded and not report.requests_failed:
-        source_limit = {"next_allowed_at": None, "rate_limit_streak": 0}
+        source_limit = SourceLimit()
     return store.commit_run([], report, source_limit)

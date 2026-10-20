@@ -6,7 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Optional
 
-from .models import RunReport
+from .models import RunReport, SourceLimit
 
 
 class StorageError(Exception):
@@ -52,12 +52,12 @@ class SQLiteStore:
             raise StorageError("Collection state is closed")
         return self._db
 
-    def source_limit(self) -> dict[str, Any]:
+    def source_limit(self) -> SourceLimit:
         rows = self._read("SELECT payload FROM source_limits WHERE source = 'Freelancer'")
-        return rows[0] if rows else {"next_allowed_at": None, "rate_limit_streak": 0}
+        return SourceLimit(**rows[0]) if rows else SourceLimit()
 
     def commit_run(self, candidates: list[dict[str, Any]], report: RunReport,
-                   source_limit: Optional[dict[str, Any]] = None) -> RunReport:
+                   source_limit: Optional[SourceLimit] = None) -> RunReport:
         db = self._connection()
         counts = (report.new_count, report.duplicate_count)
         try:
@@ -81,7 +81,7 @@ class SQLiteStore:
                 db.execute("INSERT INTO runs VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload", (report.id, json.dumps(asdict(report), ensure_ascii=False, allow_nan=False)))
                 if source_limit is not None:
                     db.execute("INSERT INTO source_limits VALUES ('Freelancer', ?) ON CONFLICT(source) DO UPDATE SET payload=excluded.payload",
-                               (json.dumps(source_limit, allow_nan=False),))
+                               (json.dumps(asdict(source_limit), allow_nan=False),))
             return report
         except (sqlite3.Error, ValueError, KeyError, TypeError):
             report.new_count, report.duplicate_count = counts

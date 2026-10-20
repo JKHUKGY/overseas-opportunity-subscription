@@ -19,7 +19,8 @@ from tests.test_collection import NOW, Source, project
 
 
 @contextmanager
-def http_source(replies: list[tuple[int, dict[str, str], bytes]], *, stall: bool = False) -> Iterator[FreelancerSource]:
+def http_source(replies: list[tuple[int, dict[str, str], bytes]], *,
+                stall: bool = False, stall_body: bool = False) -> Iterator[FreelancerSource]:
     release = threading.Event()
 
     class Handler(BaseHTTPRequestHandler):
@@ -33,7 +34,13 @@ def http_source(replies: list[tuple[int, dict[str, str], bytes]], *, stall: bool
                 self.send_header(name, value)
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            self.wfile.write(body)
+            if stall_body:
+                release.wait()
+                return
+            try:
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                pass  # A bounded client may reject the response before its body.
 
         def log_message(self, *args: Any) -> None:
             pass
@@ -268,11 +275,47 @@ with SQLiteStore(Path(sys.argv[1])) as store:
             report = collect(Config(), store, Source([]), now=lambda: NOW)
             self.assertEqual(report.status, "success")
 
-    def test_invalid_limits_raise_value_error_before_collection(self) -> None:
-        for name in ("max_seconds", "request_timeout"):
-            for value in (0, -1, True, float("nan"), float("inf"), 10 ** 1000):
-                with self.subTest(name=name, value=str(value)[:20]), self.assertRaises(ValueError):
-                    if name == "max_seconds":
-                        Config(max_seconds=value)
-                    else:
-                        Config(request_timeout=value)
+    def test_invalid_limits_reject_complete_cli_run_without_creating_state(self) -> None:
+        for name in ("--max-seconds", "--request-timeout"):
+            for value in ("0", "-1", "True", "nan", "inf", str(10 ** 1000)):
+                with self.subTest(name=name, value=value[:20]):
+                    result = subprocess.run(
+                        [sys.executable, "-m", "opportunity_intake", "run", "--state", str(self.database), name, value],
+                        capture_output=True,
+                    )
+                    self.assertEqual(result.returncode, 2)
+                    self.assertFalse(self.database.exists())
+
+    def test_http_looking_error_body_cannot_override_rate_limit_headers(self) -> None:
+        replies = [(429, {"Retry-After": "120"}, b"HTTP/1.1 503 private proxy error body")]
+        with http_source(replies) as source, SQLiteStore(self.database) as store:
+            report = collect(Config(), store, source, now=lambda: NOW)
+            self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
+            self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())
+
+    def test_rate_limit_headers_survive_oversized_error_body(self) -> None:
+        with http_source([(429, {"Retry-After": "120"}, b"x" * 2097153)]) as source:
+            with SQLiteStore(self.database) as store:
+                report = collect(Config(), store, source, now=lambda: NOW)
+                self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
+                self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())
+                skipped = collect(Config(), store, source, now=lambda: NOW + timedelta(seconds=119))
+                self.assertEqual(skipped.status, "skipped")
+                self.assertEqual(skipped.requests_attempted, 0)
+
+    def test_invalid_unicode_record_does_not_discard_valid_neighbor(self) -> None:
+        malformed = project(43)
+        malformed["description"] = "bad surrogate: \ud800"
+        body = json.dumps({"status": "success", "result": {"projects": [project(), malformed]}}).encode()
+        with http_source([(200, {}, body)]) as source, SQLiteStore(self.database) as store:
+            report = collect(Config(queries=("portrait",)), store, source, now=lambda: NOW)
+            self.assertEqual(report.status, "partial")
+            self.assertEqual(report.invalid_count, 1)
+            self.assertEqual([row["id"] for row in store.candidates()], ["42"])
+
+    def test_rate_limit_headers_survive_body_timeout(self) -> None:
+        with http_source([(429, {"Retry-After": "120"}, b"body")], stall_body=True) as source:
+            with SQLiteStore(self.database) as store:
+                report = collect(Config(request_timeout=0.1), store, source, now=lambda: NOW)
+                self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
+                self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())

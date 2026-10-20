@@ -32,6 +32,12 @@ class Config:
 
 
 @dataclass
+class SourceLimit:
+    next_allowed_at: Optional[str] = None
+    rate_limit_streak: int = 0
+
+
+@dataclass
 class RunReport:
     id: str
     started_at: str
