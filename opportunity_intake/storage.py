@@ -59,7 +59,8 @@ class SQLiteStore:
     def commit_run(self, candidates: list[dict[str, Any]], report: RunReport,
                    source_limit: Optional[SourceLimit] = None) -> RunReport:
         db = self._connection()
-        counts = (report.new_count, report.duplicate_count)
+        checkpoint = asdict(report)
+        results = {(row["source"], row["id"]): row for row in report.candidate_results}
         try:
             with db:
                 for candidate in candidates:
@@ -71,20 +72,47 @@ class SQLiteStore:
                         saved = json.loads(previous[0])
                         for field in ("first_seen_at", "status", "processing_status", "last_status_verified_at"):
                             candidate[field] = saved[field]
+                        candidate["content_version"] = saved.get("content_version", 1)
+                        for field in ("classification", "summary"):
+                            candidate[field] = saved.get(field)
+                        change = "unchanged"
+                        if any(candidate[field] != saved.get(field) for field in
+                               ("title", "description", "budget_min", "budget_max", "currency", "pricing", "region")):
+                            candidate["content_version"] += 1
+                            candidate.update(processing_status="pending", classification=None, summary=None)
+                            change = "changed"
                         report.duplicate_count += 1
                     else:
-                        report.new_count += 1
+                        candidate.update(content_version=1, classification=None, summary=None)
+                        change = "new"
+                    key = (candidate["source"], candidate["id"])
+                    if key in results and results[key]["change"] in ("new", "changed"):
+                        change = results[key]["change"]
+                    candidate["last_change"] = change
+                    results[key] = {"source": candidate["source"], "id": candidate["id"], "change": change,
+                                    "recency": candidate["recency"], "field_status": candidate["field_status"]}
                     db.execute(
                         "INSERT INTO candidates VALUES (?, ?, ?) ON CONFLICT(source, id) DO UPDATE SET payload=excluded.payload",
                         (candidate["source"], candidate["id"], json.dumps(candidate, ensure_ascii=False, allow_nan=False)),
                     )
+                report.candidate_results = list(results.values())
+                report.new_count = sum(row["change"] == "new" for row in report.candidate_results)
+                report.unchanged_count = sum(row["change"] == "unchanged" for row in report.candidate_results)
+                report.changed_count = sum(row["change"] == "changed" for row in report.candidate_results)
+                report.recent_count = sum(row["recency"] == "recent" for row in report.candidate_results)
+                report.field_counts = {}
+                for row in report.candidate_results:
+                    for name, status in row["field_status"].items():
+                        counts = report.field_counts.setdefault(name, {})
+                        counts[status] = counts.get(status, 0) + 1
                 db.execute("INSERT INTO runs VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload", (report.id, json.dumps(asdict(report), ensure_ascii=False, allow_nan=False)))
                 if source_limit is not None:
                     db.execute("INSERT INTO source_limits VALUES ('Freelancer', ?) ON CONFLICT(source) DO UPDATE SET payload=excluded.payload",
                                (json.dumps(asdict(source_limit), allow_nan=False),))
             return report
         except (sqlite3.Error, ValueError, KeyError, TypeError):
-            report.new_count, report.duplicate_count = counts
+            for name, value in checkpoint.items():
+                setattr(report, name, value)
             raise StorageError("Unable to commit collection; transaction rolled back") from None
 
     def candidates(self) -> list[dict[str, Any]]:

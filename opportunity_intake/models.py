@@ -58,3 +58,11 @@ class RunReport:
     next_allowed_at: Optional[str] = None
     skip_reason: Optional[str] = None
     unfinished_run_ids: list[str] = field(default_factory=list)
+    unchanged_count: int = 0
+    changed_count: int = 0
+    candidate_results: list[dict[str, Any]] = field(default_factory=list)
+    recent_count: int = 0
+    recent_window_start: Optional[str] = None
+    recent_window_end: Optional[str] = None
+    statistics_timezone: str = "UTC"
+    field_counts: dict[str, dict[str, int]] = field(default_factory=dict)

@@ -1,6 +1,6 @@
 # 海外绘画约稿机会采集实验
 
-当前实现：工单 01–02，手动读取 Freelancer 候选、持久保存和去重，并在请求失败、限流或进程中断时保全已完成进度。运行依赖 Python 3.9+ 和 curl；运行时无需安装 Python 第三方包。
+当前实现：工单 01–03，手动读取 Freelancer 候选、持久保存和去重，识别内容变化与近期候选，并在请求失败、限流或进程中断时保全已完成进度。运行依赖 Python 3.9+ 和 curl；运行时无需安装 Python 第三方包。
 
 ## 使用
 
@@ -30,9 +30,25 @@ python3 -m opportunity_intake run --query illustration --limit 2 --max-requests 
 
 “必要正文”在本工单中具体使用来源返回的 `description`，缺失时使用 `preview_description`；不会下载完整网页、附件或扩展需求方资料。最近成功详情核验时间为空，因为本工单尚未实施详情状态复查。地域资格标记为“地域未说明”，未作申请资格核验。
 
-相同来源及 ID 更新同一候选，保留首次发现时间、已有处理状态、接单状态和最近成功核验时间。每次成功请求的候选与运行进度在同一个 SQLite 事务内提交；某一批写入失败只回滚该批，不清空此前成功保存的数据。旧版本数据库会自动从 schema 1 升到 2，保留候选及报告；无法识别或损坏的状态会明确报错。
+相同来源及 ID 更新同一候选，保留首次发现时间、接单状态和最近成功核验时间。整理输入未变时保留已有处理状态；输入变化时使旧整理结果失效。每次成功请求的候选与运行进度在同一个 SQLite 事务内提交；某一批写入失败只回滚该批，不清空此前成功保存的数据。旧版本数据库会自动从 schema 1 升到 2，保留候选及报告；无法识别或损坏的状态会明确报错。
 
 报告中 `received_count` 是实际返回条目数，`unique_count` 是本轮有效候选的不同 ID 数，`new_count` 是新入库数，`duplicate_count` 是有效条目中已存在或同轮重复的次数，`invalid_count` 是本轮处理范围内身份无效的记录数。达到配置条数后的额外响应不入库。未知字段不等于无效身份；这些数量均不代表已经确认的约稿机会数。
+
+### 内容版本与近期统计
+
+`content_version` 从 1 开始。标题、正文、原币种预算上下限、币种、计价方式或地域字段有变化时递增；恢复成更早内容也算一次新变化。内容没有变化时保留版本和已有的 `classification`、`summary`、`processing_status`；变化时清空前两项，并把处理状态设为 `pending`。这里只维护失效状态，不调用模型，也没有新增人工录入功能。发布时间、读取时间及来源状态的变化单独保存，不作为这一阶段的内容版本输入。
+
+本轮去重后的候选分为 `new_count`、`changed_count` 和 `unchanged_count`，三项之和等于 `unique_count`。每个来源及 ID 只计一次：本轮新增优先归入新增；本轮开始前已存在且任一次观察发生内容变化的归入变化；其余归入未变化。`duplicate_count` 仍保留原有按条目统计的含义，不能与这三项相加作为候选总数。
+
+候选的 `last_change` 表示它最近参与的采集运行中的类别，`last_read_at` 表示最近一次读取。报告的 `candidate_results` 只保存来源、ID、变化类别、时间范围状态和字段状态，不保存正文、摘要或预算值。该列表按项目去重；同轮多次观察时，字段与时间状态采用最后一次成功保存的观察值。
+
+最近三天采用 UTC 下的闭区间 `[运行开始时刻 − 72 小时, 运行开始时刻]`，整轮共用同一窗口。`recent_count` 只计算本轮实际读取、原始发布时间已知且落在该窗口内的不同候选；不统计未重读的历史候选，不外推平台全量。报告明确记录 `recent_window_start`、`recent_window_end` 与 `statistics_timezone`。候选中的 `recency` 为 `recent`、`older`、`future` 或 `unknown`，`recency_as_of` 表示判断时刻；查看历史候选时应同时看这个时刻，它不会随打开列表自动刷新。
+
+来源时间使用 `time_submitted`，缺失时使用 `submitdate`，只接受可解析的数值 Unix 秒数。合法的来源修正值更新 `published_at`，不会重写首次发现时间或冒充成功状态核验；缺失、非数值、非有限数或超出可解析范围时保持未知，绝不以运行时间补齐。未来时间单列为 `future`，不计入近期候选。
+
+`field_status` 和报告的 `field_counts` 显示发布时间、标题、正文、预算、币种、计价方式及地域的字段状态。统计分母均为本轮 `unique_count`；未出现的状态计数视为 0。预算按 `known`、`partial`、`unknown`、`invalid` 区分，负数、非有限数与倒置区间不作为有效预算；有效的单边预算可保留。固定总价与时薪分别保留为 `fixed`、`hourly`，未知单位保持为空。不拿投标均价补预算，不生成汇率换算；地域始终保持“地域未说明”。字段不足不等于候选身份无效。
+
+旧候选在下一次成功读取时补齐这些字段；未记录版本的候选以原有内容作为版本 1 的比较基准。未重读的旧候选和旧运行报告可能没有新字段。内容版本是当前状态标识，数据库不新增历史正文副本。
 
 `requests` 按实际请求顺序记录关键词、偏移量、请求条数、成功／失败及返回条数；失败时附错误类型和可用的 HTTP 状态。由此可以区分“计划查询但因预算没有执行”和“确实执行后返回零条”。运行历史不包含来源正文或凭证。较早版本的实网验证报告可能没有该字段。
 
@@ -54,7 +70,7 @@ CLI 对成功／部分完成／跳过返回 0，来源失败返回 1，配置或
 
 429 优先采用 [HTTP Retry-After](https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after) 的秒数或 HTTP 日期，写入 `next_allowed_at`。缺失或无效时从 60 秒开始翻倍，最高 3600 秒；来源请求成功完成且没有请求失败时重置退避。等待时间与限流次数持久保存，重启后仍有效；未到期的完整运行记为 `skipped`，附 `skip_reason: source_cooldown`，到期后可再运行。程序不在等待期内睡眠重试，也不把原始等待响应、正文或凭证写入报告。
 
-正文版本变化、真实结束记录、来源删除、定时调度和观察期汇总属于后续工单。当前数据是本地候选，不应直接作为已核实的推送清单。
+真实结束记录、来源删除、定时调度和观察期汇总属于后续工单。当前数据是本地候选，不应直接作为已核实的推送清单。
 
 ## 验证
 
@@ -76,5 +92,6 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 - [持续采集实验规格](.scratch/freelancer-continuous-intake/spec.md)
 - [工单 01](.scratch/freelancer-continuous-intake/issues/01-manual-persistent-collection.md)
 - [工单 02](.scratch/freelancer-continuous-intake/issues/02-bounded-failure-safe-runs.md)
+- [工单 03](.scratch/freelancer-continuous-intake/issues/03-incremental-change-and-recency.md)
 - [领域术语](CONTEXT.md)
 - [保留的历史原型](temp/prototype-opportunity-lab/README.md)

@@ -50,15 +50,22 @@ def _number(value: Any) -> Optional[Union[int, float]]:
     return None
 
 
-def _candidate(project: dict[str, Any], checked_at: str) -> dict[str, Any]:
+def _candidate(project: dict[str, Any], checked_at: str, run_started: datetime) -> dict[str, Any]:
     project_id = project.get("id")
     if type(project_id) is not int or project_id <= 0:
         raise ValueError("Missing or invalid source project ID")
-    timestamp = _number(project.get("time_submitted") if project.get("time_submitted") is not None else project.get("submitdate"))
+    source_time = project.get("time_submitted") if project.get("time_submitted") is not None else project.get("submitdate")
+    timestamp = _number(source_time)
     published = None
+    publication_status = "unknown" if source_time is None else "invalid"
+    recency = "unknown"
     if timestamp is not None:
         try:
-            published = datetime.fromtimestamp(timestamp, timezone.utc).isoformat()
+            published_time = datetime.fromtimestamp(timestamp, timezone.utc)
+            published = published_time.isoformat()
+            publication_status = "known"
+            recency = "recent" if run_started - timedelta(days=3) <= published_time <= run_started else (
+                "future" if published_time > run_started else "older")
         except (OverflowError, ValueError, OSError):
             pass
     slug = _text(project.get("seo_url"))
@@ -70,20 +77,39 @@ def _candidate(project: dict[str, Any], checked_at: str) -> dict[str, Any]:
         canonical = urlunsplit((parts.scheme, parts.netloc, parts.path, query, ""))
     budget = project.get("budget")
     budget = budget if isinstance(budget, dict) else {}
+    budget_min, budget_max = _number(budget.get("minimum")), _number(budget.get("maximum"))
+    invalid_budget = any(budget.get(name) is not None and _number(budget[name]) is None
+                         for name in ("minimum", "maximum"))
+    if budget_min is not None and budget_min < 0:
+        budget_min, invalid_budget = None, True
+    if budget_max is not None and budget_max < 0:
+        budget_max, invalid_budget = None, True
+    if budget_min is not None and budget_max is not None and budget_min > budget_max:
+        budget_min, budget_max, invalid_budget = None, None, True
+    budget_status = "invalid" if invalid_budget else (
+        "known" if budget_min is not None and budget_max is not None else
+        "unknown" if budget_min is None and budget_max is None else "partial")
     currency = project.get("currency")
     currency = currency if isinstance(currency, dict) else {}
-    candidate = {
+    pricing = project.get("type")
+    pricing_status = "known" if pricing in ("fixed", "hourly") else "unknown" if pricing is None else "invalid"
+    candidate: dict[str, Any] = {
         "source": "Freelancer", "id": str(project["id"]),
         "url": url, "canonical_url": canonical, "title": _text(project.get("title")),
         "description": _text(project.get("description")) or _text(project.get("preview_description")),
         "published_at": published, "first_seen_at": checked_at,
         "last_read_at": checked_at, "last_status_verified_at": None,
-        "budget_min": _number(budget.get("minimum")), "budget_max": _number(budget.get("maximum")),
-        "currency": _text(currency.get("code")), "pricing": _text(project.get("type")),
+        "budget_min": budget_min, "budget_max": budget_max,
+        "currency": _text(currency.get("code")), "pricing": pricing if pricing_status == "known" else None,
         "source_status": _text(project.get("status")),
         "frontend_status": _text(project.get("frontend_project_status")),
         "status": "未核实", "region": "地域未说明", "processing_status": "pending",
+        "recency": recency, "recency_as_of": run_started.isoformat(),
+        "field_status": {"published_at": publication_status, "budget": budget_status,
+                         "pricing": pricing_status, "region": "unknown"},
     }
+    for name in ("title", "description", "currency"):
+        candidate["field_status"][name] = "known" if candidate[name] is not None else "unknown"
     for value in candidate.values():
         if isinstance(value, str):
             value.encode("utf-8")
@@ -93,8 +119,14 @@ def _candidate(project: dict[str, Any], checked_at: str) -> dict[str, Any]:
 def collect(config: Config, store: SQLiteStore, source: ProjectSource,
             *, now: Callable[[], datetime] = utc_now,
             clock: Callable[[], float] = monotonic) -> RunReport:
-    started = now().isoformat()
+    run_started = now()
+    if run_started.utcoffset() is None:
+        raise ValueError("Run time must include a timezone")
+    run_started = run_started.astimezone(timezone.utc)
+    started = run_started.isoformat()
     report = RunReport(str(uuid4()), started, None, asdict(config), status="running")
+    report.recent_window_start = (run_started - timedelta(days=3)).isoformat()
+    report.recent_window_end = started
     report.unfinished_run_ids = [run["id"] for run in store.runs() if run.get("status") == "running"]
     deadline = clock() + config.max_seconds
     source_limit = store.source_limit()
@@ -149,7 +181,7 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                 try:
                     if not isinstance(project, dict):
                         raise ValueError("Invalid project record")
-                    candidates.append(_candidate(project, now().isoformat()))
+                    candidates.append(_candidate(project, now().astimezone(timezone.utc).isoformat(), run_started))
                 except ValueError:
                     report.invalid_count += 1
             seen.update((p["source"], p["id"]) for p in candidates)
