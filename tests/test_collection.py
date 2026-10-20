@@ -165,7 +165,10 @@ class CollectionTests(unittest.TestCase):
             with self.assertRaises(StorageError):
                 collect(Config(queries=("illustration",)), store, Source([project(1), project(2)]), now=lambda: NOW)
             self.assertEqual([row["id"] for row in store.candidates()], ["42"])
-            self.assertEqual(len(store.runs()), 1)
+            # The failed batch rolls back; its durable start marker remains detectable.
+            self.assertEqual(len(store.runs()), 2)
+            self.assertEqual(store.runs()[-1]["status"], "running")
+            self.assertEqual(store.runs()[-1]["new_count"], 0)
             with sqlite3.connect(str(self.database)) as fault:
                 fault.execute("DROP TRIGGER reject_write")
             report = collect(Config(queries=("illustration",)), store, Source([project(1), project(2)]), now=lambda: NOW)

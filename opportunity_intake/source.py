@@ -7,10 +7,11 @@ from urllib.parse import urlencode
 
 
 class SourceError(Exception):
-    def __init__(self, kind: str, http_status: Optional[int] = None) -> None:
+    def __init__(self, kind: str, http_status: Optional[int] = None, *, retry_after: Optional[str] = None) -> None:
         super().__init__(kind)
         self.kind = kind
         self.http_status = http_status
+        self.retry_after = retry_after
 
 
 class FreelancerSource:
@@ -32,9 +33,9 @@ class FreelancerSource:
         try:
             response = subprocess.run(
                 ["curl", "--disable", "--config", "-", "--silent", "--show-error",
-                 "--request", "GET", "--max-time", str(timeout), "--max-filesize", "2097152",
+                 "--request", "GET", "--include", "--max-time", str(timeout), "--max-filesize", "2097152",
                  "--write-out", "\n%{http_code}", url],
-                input=config, capture_output=True, text=True, timeout=timeout + 1,
+                input=config.encode(), capture_output=True, timeout=timeout,
             )
         except subprocess.TimeoutExpired:
             raise SourceError("timeout") from None
@@ -42,12 +43,23 @@ class FreelancerSource:
             raise SourceError("transport_unavailable") from None
         if response.returncode != 0:
             raise SourceError("timeout" if response.returncode == 28 else "transport_error")
-        body, _, status = response.stdout.rpartition("\n")
-        if status != "200":
-            raise SourceError("http_error", int(status) if status.isdigit() else None)
+        body, _, status = response.stdout.rpartition(b"\n")
+        retry_after = None
+        # curl may include proxy CONNECT / informational headers before the final block.
+        while body.startswith(b"HTTP/"):
+            headers, separator, body = body.partition(b"\r\n\r\n")
+            if not separator:
+                raise SourceError("invalid_response")
+            retry_after = None
+            for header in headers.split(b"\r\n")[1:]:
+                name, _, value = header.partition(b":")
+                if name.lower() == b"retry-after":
+                    retry_after = value.strip().decode("latin-1")
+        if status != b"200":
+            raise SourceError("http_error", int(status) if status.isdigit() else None, retry_after=retry_after)
         try:
-            payload = json.loads(body)
-        except ValueError:
+            payload = json.loads(body.decode("utf-8"))
+        except (ValueError, UnicodeError):
             raise SourceError("invalid_json") from None
         if not isinstance(payload, dict) or payload.get("status") != "success":
             raise SourceError("api_error")

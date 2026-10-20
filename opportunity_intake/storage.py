@@ -29,10 +29,17 @@ class SQLiteStore:
                     db.execute("PRAGMA user_version = 1")
             if db.execute("PRAGMA quick_check").fetchone() != ("ok",):
                 raise StorageError("State integrity check failed")
-            if db.execute("PRAGMA user_version").fetchone() != (1,):
+            version = db.execute("PRAGMA user_version").fetchone()
+            if version not in ((1,), (2,)):
                 raise StorageError("Unrecognized state schema; refusing to reset it")
             db.execute("SELECT source, id, payload FROM candidates LIMIT 0")
             db.execute("SELECT id, payload FROM runs LIMIT 0")
+            if version == (1,):
+                db.execute("BEGIN IMMEDIATE")
+                with db:
+                    db.execute("CREATE TABLE source_limits (source TEXT PRIMARY KEY, payload TEXT NOT NULL)")
+                    db.execute("PRAGMA user_version = 2")
+            db.execute("SELECT source, payload FROM source_limits LIMIT 0")
         except (sqlite3.Error, OSError):
             self.close()
             raise StorageError("Unable to open collection state; existing data was not reset") from None
@@ -45,8 +52,14 @@ class SQLiteStore:
             raise StorageError("Collection state is closed")
         return self._db
 
-    def commit_run(self, candidates: list[dict[str, Any]], report: RunReport) -> RunReport:
+    def source_limit(self) -> dict[str, Any]:
+        rows = self._read("SELECT payload FROM source_limits WHERE source = 'Freelancer'")
+        return rows[0] if rows else {"next_allowed_at": None, "rate_limit_streak": 0}
+
+    def commit_run(self, candidates: list[dict[str, Any]], report: RunReport,
+                   source_limit: Optional[dict[str, Any]] = None) -> RunReport:
         db = self._connection()
+        counts = (report.new_count, report.duplicate_count)
         try:
             with db:
                 for candidate in candidates:
@@ -55,7 +68,9 @@ class SQLiteStore:
                         (candidate["source"], candidate["id"]),
                     ).fetchone()
                     if previous:
-                        candidate["first_seen_at"] = json.loads(previous[0])["first_seen_at"]
+                        saved = json.loads(previous[0])
+                        for field in ("first_seen_at", "status", "processing_status", "last_status_verified_at"):
+                            candidate[field] = saved[field]
                         report.duplicate_count += 1
                     else:
                         report.new_count += 1
@@ -63,9 +78,13 @@ class SQLiteStore:
                         "INSERT INTO candidates VALUES (?, ?, ?) ON CONFLICT(source, id) DO UPDATE SET payload=excluded.payload",
                         (candidate["source"], candidate["id"], json.dumps(candidate, ensure_ascii=False, allow_nan=False)),
                     )
-                db.execute("INSERT INTO runs VALUES (?, ?)", (report.id, json.dumps(asdict(report), ensure_ascii=False, allow_nan=False)))
+                db.execute("INSERT INTO runs VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload", (report.id, json.dumps(asdict(report), ensure_ascii=False, allow_nan=False)))
+                if source_limit is not None:
+                    db.execute("INSERT INTO source_limits VALUES ('Freelancer', ?) ON CONFLICT(source) DO UPDATE SET payload=excluded.payload",
+                               (json.dumps(source_limit, allow_nan=False),))
             return report
         except (sqlite3.Error, ValueError, KeyError, TypeError):
+            report.new_count, report.duplicate_count = counts
             raise StorageError("Unable to commit collection; transaction rolled back") from None
 
     def candidates(self) -> list[dict[str, Any]]:

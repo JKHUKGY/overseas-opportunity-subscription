@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from math import isfinite
-from typing import Any
+from typing import Any, Optional
 
 
 @dataclass(frozen=True)
@@ -23,7 +23,11 @@ class Config:
                 raise ValueError(name + " must be a positive integer")
         for name in ("request_timeout", "max_seconds"):
             value = getattr(self, name)
-            if type(value) not in (int, float) or not isfinite(value) or value <= 0:
+            try:
+                valid = type(value) in (int, float) and isfinite(value) and value > 0
+            except OverflowError:
+                valid = False
+            if not valid:
                 raise ValueError(name + " must be finite and positive")
 
 
@@ -31,7 +35,7 @@ class Config:
 class RunReport:
     id: str
     started_at: str
-    finished_at: str
+    finished_at: Optional[str]
     config: dict[str, Any]
     status: str = "success"
     requests_attempted: int = 0
@@ -45,3 +49,6 @@ class RunReport:
     truncated: bool = False
     errors: list[dict[str, Any]] = field(default_factory=list)
     requests: list[dict[str, Any]] = field(default_factory=list)
+    next_allowed_at: Optional[str] = None
+    skip_reason: Optional[str] = None
+    unfinished_run_ids: list[str] = field(default_factory=list)

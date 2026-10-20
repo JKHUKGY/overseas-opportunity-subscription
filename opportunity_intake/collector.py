@@ -1,7 +1,8 @@
 """One complete manual run: search, normalize, persist, report."""
 
 from dataclasses import asdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from math import isfinite
 from time import monotonic
 from typing import Any, Callable, Optional, Protocol, Union
@@ -19,6 +20,20 @@ class ProjectSource(Protocol):
 
 def utc_now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _retry_time(value: Optional[str], failed_at: datetime, streak: int) -> str:
+    if value is not None:
+        value = value.strip()
+        try:
+            if value.isascii() and value.isdigit():
+                return (failed_at + timedelta(seconds=int(value))).isoformat()
+            date = parsedate_to_datetime(value)
+            if date.tzinfo is not None:
+                return max(failed_at, date.astimezone(timezone.utc)).isoformat()
+        except (ValueError, TypeError, OverflowError):
+            pass
+    return (failed_at + timedelta(seconds=min(60 * 2 ** (streak - 1), 3600))).isoformat()
 
 
 def _text(value: Any) -> Optional[str]:
@@ -75,9 +90,19 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
             *, now: Callable[[], datetime] = utc_now,
             clock: Callable[[], float] = monotonic) -> RunReport:
     started = now().isoformat()
-    report = RunReport(str(uuid4()), started, started, asdict(config))
+    report = RunReport(str(uuid4()), started, None, asdict(config), status="running")
+    report.unfinished_run_ids = [run["id"] for run in store.runs() if run.get("status") == "running"]
     deadline = clock() + config.max_seconds
-    candidates = []
+    source_limit = store.source_limit()
+    not_before = source_limit["next_allowed_at"]
+    if not_before is not None and datetime.fromisoformat(not_before) > now():
+        report.finished_at = now().isoformat()
+        report.status = "skipped"
+        report.skip_reason = "source_cooldown"
+        report.next_allowed_at = not_before
+        return store.commit_run([], report)
+    store.commit_run([], report)
+    seen: set[tuple[str, str]] = set()
     stop = False
     for query in config.queries:
         if stop:
@@ -90,19 +115,32 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                 break
             report.requests_attempted += 1
             request = {"query": query, "offset": page * config.limit, "limit": config.limit,
-                       "status": "failed", "received_count": 0}
+                       "status": "running", "received_count": 0}
             report.requests.append(request)
+            store.commit_run([], report)
+            remaining = deadline - clock()
+            if remaining <= 0:
+                report.requests_attempted -= 1
+                report.requests.pop()
+                report.truncated = True
+                stop = True
+                break
             try:
                 projects = source.search(query, config.limit, page * config.limit, min(config.request_timeout, remaining))
             except SourceError as error:
                 report.requests_failed += 1
                 report.errors.append({"kind": error.kind, "http_status": error.http_status})
-                request.update(error_kind=error.kind, http_status=error.http_status)
+                request.update(status="failed", error_kind=error.kind, http_status=error.http_status)
+                if error.http_status == 429:
+                    streak = min(source_limit["rate_limit_streak"] + 1, 7)
+                    report.next_allowed_at = _retry_time(error.retry_after, now(), streak)
+                    source_limit = {"next_allowed_at": report.next_allowed_at, "rate_limit_streak": streak}
                 stop = True
                 break
             report.requests_succeeded += 1
             report.received_count += len(projects)
             request.update(status="success", received_count=len(projects))
+            candidates = []
             for project in projects[:config.limit]:
                 try:
                     if not isinstance(project, dict):
@@ -110,14 +148,21 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                     candidates.append(_candidate(project, now().isoformat()))
                 except ValueError:
                     report.invalid_count += 1
+            seen.update((p["source"], p["id"]) for p in candidates)
+            report.unique_count = len(seen)
+            store.commit_run(candidates, report)
             if len(projects) < config.limit:
                 break
             if page == config.pages - 1 or len(projects) > config.limit:
                 report.truncated = True
-    report.unique_count = len({(p["source"], p["id"]) for p in candidates})
+    if clock() >= deadline:
+        report.truncated = True
     report.finished_at = now().isoformat()
+    report.status = "success"
     if report.requests_failed:
         report.status = "partial" if report.requests_succeeded else "failed"
     elif report.truncated or report.invalid_count:
         report.status = "partial"
-    return store.commit_run(candidates, report)
+    if report.requests_succeeded and not report.requests_failed:
+        source_limit = {"next_allowed_at": None, "rate_limit_streak": 0}
+    return store.commit_run([], report, source_limit)
