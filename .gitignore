@@ -5,3 +5,5 @@ __pycache__/
 .env.*
 /temp/*
 !/temp/prototype-opportunity-lab/
+/data/
+.mypy_cache/

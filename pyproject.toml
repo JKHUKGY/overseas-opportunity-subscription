@@ -1,0 +1,4 @@
+[tool.mypy]
+python_version = "3.9"
+strict = true
+cache_dir = "temp/mypy-cache"
