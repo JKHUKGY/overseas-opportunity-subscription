@@ -226,3 +226,22 @@ class IncrementalTests(unittest.TestCase):
         self.assertEqual(candidate["last_change"], "unchanged")
         self.assertEqual(candidate["recency_as_of"], "2026-10-21T12:00:00+00:00")
         self.assertEqual(candidate["field_status"]["budget"], "known")
+
+    def test_missing_or_invalid_later_time_preserves_last_verified_publication(self) -> None:
+        original = project()
+        original["time_submitted"] = (NOW - timedelta(hours=1)).timestamp()
+        with SQLiteStore(self.database) as store:
+            collect(Config(), store, Source([original]), now=lambda: NOW)
+            for offset, missing_time in enumerate((None, "invalid", float("inf")), 1):
+                with self.subTest(missing_time=missing_time):
+                    later = project()
+                    later["time_submitted"] = missing_time
+                    report = collect(Config(), store, Source([later]), now=lambda: NOW + timedelta(hours=offset))
+                    saved = store.candidates()[0]
+                    self.assertEqual(saved["published_at"], "2026-10-20T11:00:00+00:00")
+                    self.assertEqual(saved["published_at_read_at"], NOW.isoformat())
+                    self.assertEqual(saved["field_status"]["published_at"], "unknown" if missing_time is None else "invalid")
+                    self.assertEqual(saved["recency"], "unknown")
+                    self.assertEqual(report.recent_count, 0)
+                    self.assertEqual(saved["first_seen_at"], NOW.isoformat())
+                    self.assertEqual(saved["content_version"], 1)

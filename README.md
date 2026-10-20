@@ -44,7 +44,9 @@ python3 -m opportunity_intake run --query illustration --limit 2 --max-requests 
 
 最近三天采用 UTC 下的闭区间 `[运行开始时刻 − 72 小时, 运行开始时刻]`，整轮共用同一窗口。`recent_count` 只计算本轮实际读取、原始发布时间已知且落在该窗口内的不同候选；不统计未重读的历史候选，不外推平台全量。报告明确记录 `recent_window_start`、`recent_window_end` 与 `statistics_timezone`。候选中的 `recency` 为 `recent`、`older`、`future` 或 `unknown`，`recency_as_of` 表示判断时刻；查看历史候选时应同时看这个时刻，它不会随打开列表自动刷新。
 
-来源时间使用 `time_submitted`，缺失时使用 `submitdate`，只接受可解析的数值 Unix 秒数。合法的来源修正值更新 `published_at`，不会重写首次发现时间或冒充成功状态核验；缺失、非数值、非有限数或超出可解析范围时保持未知，绝不以运行时间补齐。未来时间单列为 `future`，不计入近期候选。
+来源时间使用 `time_submitted`，缺失时使用 `submitdate`，只接受可解析的数值 Unix 秒数。合法的来源修正值更新 `published_at`，并用 `published_at_read_at` 记录取得这个值的时刻，不会重写首次发现时间或冒充成功状态核验。后续响应缺失时间、给出非数值、非有限数或超出可解析范围时，保留此前最后一次可靠的 `published_at` 及其读取时刻；从未取得可靠值时才保持为空，绝不以运行时间补齐。旧候选没有记录这个读取时刻时保持为空，不追溯编造。
+
+`field_status.published_at`、`recency` 和近期计数反映本轮最后一次观察：本次响应没有可靠时间时，即使保留了以前的可靠值，也标记为未知／无效并排除本轮近期计数。这样既保全来源历史可靠值，也不把缺失响应说成已完成时间确认。未来时间单列为 `future`，不计入近期候选。
 
 `field_status` 和报告的 `field_counts` 显示发布时间、标题、正文、预算、币种、计价方式及地域的字段状态。统计分母均为本轮 `unique_count`；未出现的状态计数视为 0。预算按 `known`、`partial`、`unknown`、`invalid` 区分，负数、非有限数与倒置区间不作为有效预算；有效的单边预算可保留。固定总价与时薪分别保留为 `fixed`、`hourly`，未知单位保持为空。不拿投标均价补预算，不生成汇率换算；地域始终保持“地域未说明”。字段不足不等于候选身份无效。
 

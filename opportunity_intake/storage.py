@@ -6,7 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Optional
 
-from .models import RunReport, SourceLimit
+from .models import ChangeKind, RunReport, SourceLimit
 
 
 class StorageError(Exception):
@@ -68,10 +68,14 @@ class SQLiteStore:
                         "SELECT payload FROM candidates WHERE source = ? AND id = ?",
                         (candidate["source"], candidate["id"]),
                     ).fetchone()
+                    change: ChangeKind = "new"
                     if previous:
                         saved = json.loads(previous[0])
                         for field in ("first_seen_at", "status", "processing_status", "last_status_verified_at"):
                             candidate[field] = saved[field]
+                        if candidate["published_at"] is None:
+                            candidate["published_at"] = saved.get("published_at")
+                            candidate["published_at_read_at"] = saved.get("published_at_read_at")
                         candidate["content_version"] = saved.get("content_version", 1)
                         for field in ("classification", "summary"):
                             candidate[field] = saved.get(field)

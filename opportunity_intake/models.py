@@ -1,6 +1,19 @@
 from dataclasses import dataclass, field
 from math import isfinite
-from typing import Any, Optional
+from typing import Any, Literal, Optional, TypedDict
+
+
+ChangeKind = Literal["new", "changed", "unchanged"]
+Recency = Literal["recent", "older", "future", "unknown"]
+FieldStatus = Literal["known", "partial", "unknown", "invalid"]
+
+
+class CandidateResult(TypedDict):
+    source: str
+    id: str
+    change: ChangeKind
+    recency: Recency
+    field_status: dict[str, FieldStatus]
 
 
 @dataclass(frozen=True)
@@ -60,7 +73,7 @@ class RunReport:
     unfinished_run_ids: list[str] = field(default_factory=list)
     unchanged_count: int = 0
     changed_count: int = 0
-    candidate_results: list[dict[str, Any]] = field(default_factory=list)
+    candidate_results: list[CandidateResult] = field(default_factory=list)
     recent_count: int = 0
     recent_window_start: Optional[str] = None
     recent_window_end: Optional[str] = None
