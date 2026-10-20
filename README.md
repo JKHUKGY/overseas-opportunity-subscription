@@ -85,6 +85,8 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 
 测试从完整采集入口进入，使用可控来源、时钟及真实临时 SQLite 存储；覆盖持久读取和去重、成功零条、部分失败、非法响应、坏记录隔离、超时、401／403／5xx、429 的两种等待格式和有界退避、请求／时间截断、进程退出恢复、数据库升级及批次回滚。推进可控时间验证等待期跳过和到期恢复，不进行真实退避等待。HTTP 适配通过本机测试服务器验证，自动化测试不依赖真实 Freelancer 账号。
 
+增量采集测试另覆盖相同／变化内容的版本与整理结果、跨查询互斥计数、三天闭区间及未来时间、来源时间修正与缺失保全、预算和地域字段、旧候选兼容及 CLI 展示。已有摘要与分类仅作为隔离测试的前置数据。
+
 项目搜索参数依据 [Freelancer 官方 SDK 的 search_projects](https://github.com/freelancer/freelancer-sdk-python/blob/master/freelancersdk/resources/projects/projects.py)；本实现只使用公开项目搜索的 GET 请求。
 
 2026-10-20 实网检查：两轮各一个请求、每轮最多两条。第一轮新增两条，第二轮新增零条、重复两条，数据库保留两条候选及两份运行报告。两轮都因样本上限标记为部分完成；没有验证多日稳定性或候选的绘画相关性。
