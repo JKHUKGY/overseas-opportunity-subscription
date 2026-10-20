@@ -44,3 +44,4 @@ class RunReport:
     invalid_count: int = 0
     truncated: bool = False
     errors: list[dict[str, Any]] = field(default_factory=list)
+    requests: list[dict[str, Any]] = field(default_factory=list)

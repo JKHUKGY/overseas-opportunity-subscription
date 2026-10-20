@@ -89,15 +89,20 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                 stop = True
                 break
             report.requests_attempted += 1
+            request = {"query": query, "offset": page * config.limit, "limit": config.limit,
+                       "status": "failed", "received_count": 0}
+            report.requests.append(request)
             try:
                 projects = source.search(query, config.limit, page * config.limit, min(config.request_timeout, remaining))
             except SourceError as error:
                 report.requests_failed += 1
                 report.errors.append({"kind": error.kind, "http_status": error.http_status})
+                request.update(error_kind=error.kind, http_status=error.http_status)
                 stop = True
                 break
             report.requests_succeeded += 1
             report.received_count += len(projects)
+            request.update(status="success", received_count=len(projects))
             for project in projects[:config.limit]:
                 try:
                     if not isinstance(project, dict):

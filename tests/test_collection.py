@@ -125,12 +125,15 @@ class CollectionTests(unittest.TestCase):
             self.assertEqual(store.runs()[-1]["errors"], [{"kind": "http_error", "http_status": 403}])
 
     def test_invalid_configuration_is_rejected_before_access(self) -> None:
-        overrides: list[dict[str, Any]] = [{"queries": ()}, {"queries": ("",)}, {"max_requests": 0},
-                         {"limit": -1}, {"pages": True}, {"request_timeout": float("nan")},
-                         {"max_seconds": float("inf")}]
-        for override in overrides:
-            with self.subTest(override=override), self.assertRaises(ValueError):
-                Config(**override)
+        for arguments in [("--query", ""), ("--max-requests", "0"), ("--limit", "-1"),
+                          ("--pages", "True"), ("--request-timeout", "nan"), ("--max-seconds", "inf")]:
+            with self.subTest(arguments=arguments):
+                result = subprocess.run(
+                    [sys.executable, "-m", "opportunity_intake", "run", "--state", str(self.database), *arguments],
+                    capture_output=True, text=True,
+                )
+                self.assertEqual(result.returncode, 2)
+                self.assertFalse(self.database.exists())
 
     def test_overlap_and_restart_preserve_identity_and_cli_readback(self) -> None:
         with SQLiteStore(self.database) as store:
@@ -176,6 +179,29 @@ class CollectionTests(unittest.TestCase):
             self.assertEqual(report.invalid_count, 2)
             self.assertEqual(report.status, "partial")
             self.assertEqual([row["id"] for row in store.candidates()], ["42"])
+
+    def test_saved_report_distinguishes_actual_queries_and_pages(self) -> None:
+        class PagedSource(Source):
+            def __init__(self, results: dict[tuple[str, int], list[dict[str, Any]]]) -> None:
+                self.results = results
+
+            def search(self, query: str, limit: int, offset: int, timeout: float) -> list[dict[str, Any]]:
+                return self.results[(query, offset)]
+
+        cases = [
+            ({("illustration", 0): [project(42), project(43)], ("illustration", 2): [project(44)]},
+             [("illustration", 0, 2), ("illustration", 2, 1)]),
+            ({("illustration", 0): [project(42)], ("portrait", 0): [project(43), project(44)]},
+             [("illustration", 0, 1), ("portrait", 0, 2)]),
+        ]
+        for index, (responses, expected) in enumerate(cases):
+            with SQLiteStore(self.database.with_name(f"scope-{index}.sqlite3")) as store:
+                report = collect(Config(limit=2, pages=2), store, PagedSource(responses), now=lambda: NOW)
+                self.assertEqual(report.received_count, 3)
+                self.assertEqual(report.status, "partial")
+                requests = store.runs()[0]["requests"]
+                self.assertEqual([(r["query"], r["offset"], r["received_count"]) for r in requests], expected)
+                self.assertTrue(all(r["status"] == "success" and r["limit"] == 2 for r in requests))
 
 
 if __name__ == "__main__":
