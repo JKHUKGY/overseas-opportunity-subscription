@@ -360,3 +360,47 @@ with SQLiteStore(Path(sys.argv[1])) as store:
             gaps = [event for event in result.schedule.events if event["kind"] == "observation_gap"]
             self.assertEqual(gaps[0]["from"], NOW.isoformat())
             self.assertEqual(gaps[0]["to"], "2026-10-20T12:03:00+00:00")
+
+    def test_worker_does_not_adopt_a_new_plan_created_while_waiting(self) -> None:
+        with SQLiteStore(self.database) as store:
+            scheduler = Scheduler(store, now=lambda: self.time)
+            original = scheduler.start(self.config, interval_seconds=60, max_runs=2)
+
+            def replace_plan(seconds: float) -> None:
+                scheduler.control("stop")
+                scheduler.start(self.config, interval_seconds=60, max_runs=1)
+                self.time += timedelta(seconds=seconds)
+
+            result = scheduler.work(Source([]), wait=replace_plan)
+            self.assertEqual(result.status, "schedule_changed")
+            self.assertNotEqual(result.schedule.id, original.id)
+            self.assertEqual(result.schedule.status, "active")
+            self.assertEqual(result.schedule.runs_started, 0)
+            self.assertEqual(len(store.runs()), 1)
+
+    def test_cooldown_deferral_preserves_the_gap_before_the_late_trigger(self) -> None:
+        from opportunity_intake import collect
+        from opportunity_intake.source import SourceError
+        from typing import Any
+
+        class Limited(Source):
+            def search(self, query: str, limit: int, offset: int, timeout: float) -> list[dict[str, Any]]:
+                raise SourceError("http_error", 429, retry_after="120")
+
+        with SQLiteStore(self.database) as store:
+            scheduler = Scheduler(store, now=lambda: self.time)
+            scheduler.start(self.config, interval_seconds=60, max_runs=1)
+            self.time += timedelta(seconds=120)
+            collect(self.config, store, Limited([]), now=lambda: self.time)
+            self.time += timedelta(seconds=60)
+            result = scheduler.tick(Source([]))
+            self.assertEqual(result.status, "deferred")
+            self.assertEqual(result.schedule.runs_started, 0)
+            gaps = [event for event in result.schedule.events if event["kind"] == "observation_gap"]
+            self.assertEqual(len(gaps), 1)
+            self.assertEqual(gaps[0]["from"], NOW.isoformat())
+            self.assertEqual(gaps[0]["to"], "2026-10-20T12:03:00+00:00")
+            self.time += timedelta(seconds=60)
+            result = scheduler.tick(Source([]))
+            self.assertEqual(result.schedule.status, "completed")
+            self.assertEqual(sum(event["kind"] == "observation_gap" for event in result.schedule.events), 1)

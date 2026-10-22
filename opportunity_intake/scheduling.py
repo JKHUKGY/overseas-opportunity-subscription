@@ -100,20 +100,24 @@ class Scheduler:
             return state
         return self.store.update_schedule(update)
 
-    def tick(self, source: ProjectSource) -> TickResult:
+    def tick(self, source: ProjectSource, *, expected_schedule_id: Optional[str] = None) -> TickResult:
         with self.store.operation_lock("schedule") as acquired:
             if not acquired:
                 state = self._change(lambda current: current.events.append({"kind": "overlap", "at": self.now().isoformat()}))
                 return TickResult("overlap", state)
-            return self._tick(source)
+            state = self.status()
+            if expected_schedule_id is not None and state.id != expected_schedule_id:
+                return TickResult("schedule_changed", state)
+            return self._tick(source, expected_schedule_id)
 
     def work(self, source: ProjectSource, *, wait: Callable[[float], None] = sleep) -> TickResult:
+        schedule_id = self.status().id
         while True:
-            result = self.tick(source)
+            result = self.tick(source, expected_schedule_id=schedule_id)
             state = result.schedule
             if state.status != "active":
                 return TickResult(state.status, state)
-            if result.status == "overlap":
+            if result.status in ("overlap", "schedule_changed"):
                 return result
             next_check = datetime.fromisoformat(state.next_run_at)
             if state.until is not None:
@@ -155,12 +159,15 @@ class Scheduler:
                 current.inflight_run_id = None
         self._change(recover)
 
-    def _tick(self, source: ProjectSource) -> TickResult:
+    def _tick(self, source: ProjectSource, expected_schedule_id: Optional[str]) -> TickResult:
         self._recover()
         outcome = "not_due"
 
         def prepare(state: ScheduleState) -> None:
             nonlocal outcome
+            if expected_schedule_id is not None and state.id != expected_schedule_id:
+                outcome = "schedule_changed"
+                return
             self._complete_if_limit(state)
             if state.status != "active":
                 outcome = state.status
@@ -169,16 +176,16 @@ class Scheduler:
             due = datetime.fromisoformat(state.next_run_at)
             if current < due:
                 return
+            late = (current - due).total_seconds()
+            if late >= state.interval_seconds:
+                state.events.append({"kind": "observation_gap", "from": due.isoformat(), "to": current.isoformat(),
+                                     "overdue_intervals": int(late // state.interval_seconds)})
             not_before = self.store.source_limit().next_allowed_at
             if not_before is not None and datetime.fromisoformat(not_before) > current:
                 state.next_run_at = not_before
                 state.events.append({"kind": "source_cooldown", "at": current.isoformat(), "until": not_before})
                 outcome = "deferred"
                 return
-            late = (current - due).total_seconds()
-            if late >= state.interval_seconds:
-                state.events.append({"kind": "observation_gap", "from": due.isoformat(), "to": current.isoformat(),
-                                     "overdue_intervals": int(late // state.interval_seconds)})
             state.runs_started += 1
             state.inflight_run_id = str(uuid4())
             state.events.append({"kind": "dispatch", "at": current.isoformat(), "run_id": state.inflight_run_id})
