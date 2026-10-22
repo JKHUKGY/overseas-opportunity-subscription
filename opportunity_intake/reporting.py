@@ -45,8 +45,9 @@ def _summary(runs: list[dict[str, Any]]) -> dict[str, Any]:
         statuses[status] = statuses.get(status, 0) + 1
     redacted = sum(run.get("redacted_candidate_results", 0) for run in runs)
     # Older runs may predate candidate-level evidence; never fill in fake identities.
-    unavailable = redacted + sum(max(0, run.get("new_count", 0) + run.get("changed_count", 0)
-                                      + run.get("unchanged_count", 0) - len(run.get("candidate_results", []))
+    unavailable = redacted + sum(max(0, max(run.get("unique_count", 0),
+                                      run.get("new_count", 0) + run.get("changed_count", 0)
+                                      + run.get("unchanged_count", 0)) - len(run.get("candidate_results", []))
                                       - run.get("redacted_candidate_results", 0)) for run in runs)
     errors = Counter((error["kind"], error.get("http_status")) for run in runs for error in run.get("errors", []))
     return {

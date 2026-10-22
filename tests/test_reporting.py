@@ -194,3 +194,22 @@ class ReportingTests(unittest.TestCase):
         self.assertEqual(total["candidate_observations"], 2)
         self.assertEqual(total["field_coverage"]["budget"]["denominator"], 1)
         self.assertEqual(result["current_candidates"]["count"], 1)
+
+    def test_legacy_repeat_without_identity_evidence_is_not_complete_zero_supply(self) -> None:
+        import json
+        import sqlite3
+        with SQLiteStore(self.database) as store:
+            collect(Config(recheck_limit=0), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0), store, Source([project()]), now=lambda: NOW + timedelta(hours=1))
+            old = store.runs()[-1]
+        # Storage-boundary fixture from the pre-incremental report format.
+        for key in ("candidate_results", "changed_count", "unchanged_count", "field_counts", "recent_count"):
+            old.pop(key)
+        with sqlite3.connect(str(self.database)) as db:
+            db.execute("UPDATE runs SET payload=? WHERE id=?", (json.dumps(old), old["id"]))
+        with SQLiteStore(self.database) as store:
+            report = observation_report(store, start=NOW + timedelta(hours=1), end=NOW + timedelta(days=1))
+        self.assertFalse(report["total"]["unique_counts_complete"])
+        self.assertEqual(report["total"]["unavailable_candidate_observations"], 1)
+        self.assertEqual(report["total"]["candidate_observations"], 1)
+        self.assertIsNone(report["total"]["unique_new_candidates"])
