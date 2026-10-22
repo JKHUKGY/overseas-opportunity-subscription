@@ -5,9 +5,10 @@ import sqlite3
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Optional
+from urllib.parse import urlsplit
 
 from .identity import canonical_url
-from .models import ChangeKind, RunReport, SourceLimit
+from .models import ChangeKind, RunReport, SourceDeletionResult, SourceLimit
 
 
 class StorageError(Exception):
@@ -195,6 +196,67 @@ class SQLiteStore:
 
     def ended_records(self) -> list[dict[str, Any]]:
         return self._read("SELECT payload FROM ended_records ORDER BY source, id")
+
+    def delete_source_data(self, source: str, *, project_id: Optional[str] = None,
+                           url: Optional[str] = None) -> SourceDeletionResult:
+        if (project_id is None) == (url is None):
+            raise ValueError("Specify exactly one project ID or URL")
+        for value in (source, project_id if project_id is not None else url):
+            if not isinstance(value, str) or not value or value != value.strip() or any(ord(char) < 32 for char in value):
+                raise ValueError("Source and selector must be nonempty text without surrounding whitespace or controls")
+        if url is not None:
+            try:
+                parts = urlsplit(url)
+                if parts.scheme not in ("http", "https") or not parts.hostname:
+                    raise ValueError
+            except ValueError:
+                raise ValueError("Project URL must be an absolute HTTP or HTTPS URL") from None
+        db = self._connection()
+        try:
+            with db:
+                db.execute("BEGIN IMMEDIATE")
+                rows = [(table, row) for table in ("candidates", "ended_records")
+                        for row in self._read("SELECT payload FROM " + table) if row["source"] == source]
+                ids = {project_id} if project_id is not None else set()
+                urls = {canonical_url(url)} if url is not None else set()
+                # A known ID can have a saved and an ended URL; follow both and their aliases.
+                changed = True
+                while changed:
+                    before = (len(ids), len(urls))
+                    for _, row in rows:
+                        normalized = canonical_url(row.get("url"))
+                        if row["id"] in ids or (normalized is not None and normalized in urls):
+                            ids.add(row["id"])
+                            if normalized is not None:
+                                urls.add(normalized)
+                    changed = before != (len(ids), len(urls))
+                counts = {"candidates": 0, "ended_records": 0}
+                for table, row in rows:
+                    if row["id"] in ids:
+                        counts[table] += db.execute("DELETE FROM " + table + " WHERE source=? AND id=?",
+                                                    (source, row["id"])).rowcount
+                cursors = 0
+                for identifier in ids:
+                    cursors += db.execute("DELETE FROM recheck_state WHERE source=? AND cursor=?", (source, identifier)).rowcount
+                redacted = 0
+                for run in self.runs():
+                    run_redacted = 0
+                    for field, count_field in (("candidate_results", "redacted_candidate_results"),
+                                               ("requests", "redacted_detail_requests")):
+                        entries = run.get(field, [])
+                        kept = [entry for entry in entries
+                                if not (entry.get("source") == source and entry.get("id") in ids)]
+                        removed = len(entries) - len(kept)
+                        if removed:
+                            run[field] = kept
+                            run[count_field] = run.get(count_field, 0) + removed
+                            run_redacted += removed
+                    if run_redacted:
+                        db.execute("UPDATE runs SET payload=? WHERE id=?", (json.dumps(run, ensure_ascii=False, allow_nan=False), run["id"]))
+                        redacted += run_redacted
+            return SourceDeletionResult(counts["candidates"], counts["ended_records"], redacted, cursors)
+        except (sqlite3.Error, ValueError, KeyError, TypeError):
+            raise StorageError("Source deletion failed; transaction rolled back; retry deletion") from None
 
     def candidates(self) -> list[dict[str, Any]]:
         return [row for row in self._read("SELECT payload FROM candidates ORDER BY source, id")

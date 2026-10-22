@@ -1,6 +1,6 @@
 # 海外绘画约稿机会采集实验
 
-当前实现：工单 01–04，手动读取 Freelancer 候选、持久保存和去重，识别内容变化与近期候选，轮转复查已存项目，排除确认结束的机会，并在失败、限流或进程中断时保全已完成进度。运行依赖 Python 3.9+ 和 curl；运行时无需安装 Python 第三方包。
+当前实现：工单 01–05，手动读取 Freelancer 候选、持久保存和去重，识别内容变化与近期候选，轮转复查已存项目，排除确认结束的机会，支持按来源删除要求清理关联数据，并在失败、限流或进程中断时保全已完成进度。运行依赖 Python 3.9+ 和 curl；运行时无需安装 Python 第三方包。
 
 ## 使用
 
@@ -21,7 +21,7 @@ python3 -m opportunity_intake run --query illustration --limit 2 --max-requests 
 
 `--recheck-limit` 控制每轮最多复查多少个已存候选（默认 1，设为 0 暂停详情复查）；`--query` 可重复提供；`--pages` 控制每个关键词最多读取多少页，所有查询共享 `--max-requests` 预算。单页不足设定条数时停止该词的分页。页数或请求预算限制了进一步读取时，报告会明确 `truncated: true`，不会将样本说成平台全量。
 
-数据默认存入项目的 `data/freelancer.sqlite3`，不进入 Git。`run`、`list`、`runs`、`ended` 都可用 `--state` 指定另一份持久状态；查看命令要求该状态已经存在。测试与一次性验证文件使用项目 `temp/`。
+数据默认存入项目的 `data/freelancer.sqlite3`，不进入 Git。`run`、`list`、`runs`、`ended`、`delete-source` 都可用 `--state` 指定另一份持久状态；查看命令要求该状态已经存在。测试与一次性验证文件使用项目 `temp/`。
 
 需要凭证时从 `FLN_OAUTH_TOKEN` 环境变量读取，CLI 不提供令牌参数。传给 curl 时使用标准输入，不写入命令行、状态和运行报告；HTTP 错误只保留类型与状态码，不保存原始错误响应或需求方账户对象。正常情况下可先使用未配置令牌的有界只读运行，是否允许访问以实际结果为准。
 
@@ -87,7 +87,27 @@ CLI 对成功／部分完成／跳过返回 0，来源失败返回 1，配置或
 
 报告区分 `rechecks_attempted`、`rechecks_succeeded`、`rechecks_failed`（读取成功不等于状态已核实）；`rechecks_unresolved` 包含失败和未知状态。`confirmed_ended_count` 统计新写入的结束记录；`ended_record_hits` 统计被排除的出现次数；`recovered_deletions` 统计启动时补完的详情删除数。`pending_recheck_count` 是仍存候选中本轮尚未尝试复查的数量，包括本轮新发现的项目；未核实但已尝试的项目记入 unresolved。启用复查而仍有待复查项时，本轮标注截断；设 0 暂停复查时仍报告待查数量。
 
-来源删除、定时调度和观察期汇总属于后续工单。当前数据是本地候选，不应直接作为已核实的推送清单。
+### 按来源删除要求清理
+
+收到平台或原作者的明确删除要求后，使用独立的 `delete-source` 命令。每次指定来源以及项目 ID 或原帖网址（二选一）；命令只操作本地现有状态，不访问或联系来源。
+
+```bash
+python3 -m opportunity_intake delete-source --source Freelancer --project-id 123456
+# 或按原帖网址定位；含查询参数时用引号包住整条网址
+python3 -m opportunity_intake delete-source --source Freelancer --url 'https://www.freelancer.com/projects/illustration/example?utm_source=link'
+```
+
+公开 Python 入口为 `store.delete_source_data("Freelancer", project_id="123456")`，或以 `url=` 替代 `project_id=`。来源名称和稳定 ID 精确匹配；网址使用与采集相同的规范化规则，只移除片段和 `utm_*` 参数，保留其他身份参数。找到项目后沿同来源的已知 ID／规范网址关联，清理对应候选和结束记录（包括结束后尚未补完物理删除的候选）。不同来源和身份参数不同的独立项目不受影响。
+
+所有清理在一个 SQLite 事务里完成，包括候选正文、摘要、分类等字段、完整结束记录及其网址索引、指向目标项目的复查游标。当前没有其他应用维护的详情副本或导出缓存。没有新增永久屏蔽名单；删除成功后再次采集到该项目，允许作为新候选入库。普通需求结束仍走第 04 张工单的流程，保留最小结束记录。
+
+历史运行报告中目标项目的 `candidate_results` 和详情 `requests` 逐项引用一并移除，分别增加 `redacted_candidate_results` 和 `redacted_detail_requests` 计数。原运行的新增、请求、字段覆盖等汇总保留实际历史值，因此清理后的逐项列表可能少于原汇总，不能再仅靠剩余列表重算原报告。这些报告不保留项目正文、预算值或网址；不新建含删除目标身份的审计副本。来源级等待时间和不相关项目的复查进度不变。
+
+成功结果仅返回 `status: complete` 及 `candidates_deleted`、`ended_records_deleted`、`history_entries_redacted`、`recheck_cursors_deleted` 四个数量，不返回被删除内容或网址。未找到目标或重复删除是成功的零变更。CLI 成功返回 0，参数／存储错误返回 2。状态文件不存在时明确报错，不新建空库冒充删除成功。
+
+中途写入失败时整笔回滚并报错；进程在提交前退出，重开数据库恢复原状态后可以重试；提交后退出但没收到结果，也可以重复调用并通过 `list`／`ended` 核对。不自动提交未完成的删除请求。使用前应等待正在执行的采集结束，避免后续采集重新发现目标；多进程采集调度保护属于后续工单。本命令不清理用户另存的输出、备份或独立历史原型，也不承诺底层介质的取证擦除。
+
+定时调度和观察期汇总属于后续工单。当前数据是本地候选，不应直接作为已核实的推送清单。
 
 ## 验证
 
@@ -104,6 +124,8 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 
 复查测试覆盖搜索消失后的详情读取、跨重启轮转、共享预算、未知和失败状态保留、可靠关闭、网址变体排除、结束记录写入失败，以及真实子进程在写入结束记录后退出的恢复。以前的搜索专用用例显式设 `recheck_limit=0`，新用例覆盖开启复查后的完整运行。
 
+来源删除测试通过公开删除入口和完整采集运行检查：活跃／已结束项目清理、同网址追踪变体、不同身份参数和来源隔离、历史引用与复查游标清理、限流保留、重复删除、再次入库、CLI 参数及结果。数据库故障注入验证跨表回滚，真实子进程分别在事务中和提交后退出，重开状态后验证重试语义。
+
 项目搜索与详情参数依据 [Freelancer 官方 SDK 的 search_projects](https://github.com/freelancer/freelancer-sdk-python/blob/master/freelancersdk/resources/projects/projects.py)；本实现只使用项目搜索和项目详情的 GET 请求。
 
 2026-10-20 实网检查：两轮各一个请求、每轮最多两条。第一轮新增两条，第二轮新增零条、重复两条，数据库保留两条候选及两份运行报告。两轮都因样本上限标记为部分完成；没有验证多日稳定性或候选的绘画相关性。
@@ -115,5 +137,6 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 - [工单 02](.scratch/freelancer-continuous-intake/issues/02-bounded-failure-safe-runs.md)
 - [工单 03](.scratch/freelancer-continuous-intake/issues/03-incremental-change-and-recency.md)
 - [工单 04](.scratch/freelancer-continuous-intake/issues/04-status-recheck-and-ended-records.md)
+- [工单 05](.scratch/freelancer-continuous-intake/issues/05-source-deletion-requests.md)
 - [领域术语](CONTEXT.md)
 - [保留的历史原型](temp/prototype-opportunity-lab/README.md)

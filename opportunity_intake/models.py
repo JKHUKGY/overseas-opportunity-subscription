@@ -53,6 +53,15 @@ class SourceLimit:
     rate_limit_streak: int = 0
 
 
+@dataclass(frozen=True)
+class SourceDeletionResult:
+    candidates_deleted: int
+    ended_records_deleted: int = 0
+    history_entries_redacted: int = 0
+    recheck_cursors_deleted: int = 0
+    status: Literal["complete"] = "complete"
+
+
 @dataclass
 class RunReport:
     id: str

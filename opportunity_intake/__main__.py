@@ -12,11 +12,16 @@ from .source import FreelancerSource
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Freelancer 候选采集实验（单次只读运行）")
+    parser = argparse.ArgumentParser(description="Freelancer 候选采集实验与本地状态管理")
     commands = parser.add_subparsers(dest="command", required=True)
-    for command in ("run", "list", "runs", "ended"):
+    for command in ("run", "list", "runs", "ended", "delete-source"):
         action = commands.add_parser(command)
         action.add_argument("--state", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "freelancer.sqlite3")
+        if command == "delete-source":
+            action.add_argument("--source", required=True)
+            selector = action.add_mutually_exclusive_group(required=True)
+            selector.add_argument("--project-id")
+            selector.add_argument("--url")
         if command == "run":
             action.add_argument("--query", action="append", help="可重复指定；默认 illustration 和 portrait")
             action.add_argument("--limit", type=int, default=5)
@@ -38,6 +43,10 @@ def main() -> int:
         if not args.state.is_file():
             raise StorageError("State does not exist; run collection first")
         with SQLiteStore(args.state) as store:
+            if args.command == "delete-source":
+                result = store.delete_source_data(args.source, project_id=args.project_id, url=args.url)
+                print(json.dumps(asdict(result), ensure_ascii=False, indent=2))
+                return 0
             rows = store.candidates() if args.command == "list" else store.ended_records() if args.command == "ended" else store.runs()
         print(json.dumps(rows, ensure_ascii=False, indent=2, allow_nan=False))
         return 0
