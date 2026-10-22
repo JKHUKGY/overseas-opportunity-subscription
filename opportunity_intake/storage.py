@@ -109,6 +109,9 @@ class SQLiteStore:
                         if candidate["published_at"] is None:
                             candidate["published_at"] = saved.get("published_at")
                             candidate["published_at_read_at"] = saved.get("published_at_read_at")
+                        if candidate["url"] is None:
+                            candidate["url"] = saved.get("url")
+                            candidate["canonical_url"] = canonical_url(candidate["url"])
                         candidate["content_version"] = saved.get("content_version", 1)
                         for field in ("classification", "summary"):
                             candidate[field] = saved.get(field)

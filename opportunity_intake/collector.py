@@ -1,4 +1,4 @@
-"""One complete manual run: search, normalize, persist, report."""
+"""One complete manual run: recheck, search, normalize, persist, report."""
 
 from dataclasses import asdict
 from datetime import datetime, timedelta, timezone

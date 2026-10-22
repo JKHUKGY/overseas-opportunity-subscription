@@ -279,3 +279,18 @@ with InterruptedStore(Path(sys.argv[1])) as store:
             collect(Config(recheck_limit=0), store, RecheckSource([missing], {}), now=lambda: NOW)
             collect(Config(), store, RecheckSource([], {"42": listing(status="closed")}), now=lambda: NOW)
             self.assertEqual(store.ended_records()[0]["url"], "https://www.freelancer.com/projects/illustration/portrait-42")
+
+    def test_missing_url_on_later_reads_preserves_original_for_ended_exclusion(self) -> None:
+        with SQLiteStore(self.database) as store:
+            collect(Config(recheck_limit=0), store, RecheckSource([listing()], {}), now=lambda: NOW)
+            missing = listing()
+            missing.pop("seo_url")
+            collect(Config(queries=("portrait",)), store, RecheckSource([missing], {"42": missing}), now=lambda: NOW)
+            missing["frontend_project_status"] = "closed"
+            collect(Config(), store, RecheckSource([], {"42": missing}), now=lambda: NOW)
+            self.assertEqual(store.ended_records()[0]["url"], "https://www.freelancer.com/projects/illustration/portrait-42")
+            alias = listing(999)
+            alias["seo_url"] = "illustration/portrait-42?utm_source=return"
+            report = collect(Config(queries=("portrait",)), store, RecheckSource([alias], {}), now=lambda: NOW)
+            self.assertEqual(report.ended_record_hits, 1)
+            self.assertEqual(store.candidates(), [])
