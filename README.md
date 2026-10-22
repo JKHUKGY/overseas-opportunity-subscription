@@ -144,9 +144,19 @@ python3 -m opportunity_intake schedule stop
 
 `events` 保留认领、控制操作、重叠、来源等待、恢复完成和中断信息。到期后迟到至少一个完整间隔才触发时，先记录从原到期时间到实际触发时间的 `observation_gap`，再处理可能的限流推迟，避免覆盖已有缺口；不伪造漏掉的运行；若恢复时观察期已结束，缺口截至观察终点。`overdue_intervals` 是该缺口内完整间隔数，不是已执行次数或平台丢失项目数。暂停操作另有事件，可区分已知暂停与未观察期间；不能仅凭缺口认定设备关机。
 
-`schedule` 的退出码 0 表示控制或触发操作已处理，来源成功与否要查看嵌套 schedule 的 `last_result` 及对应运行报告；参数和存储错误为 2。计划和事件保存在 SQLite，不保存凭证或机会正文。各计划保留独立 ID 和历史数据，当前控制入口查看最近创建的计划；每日及观察期汇总留给第 07 张。
+`schedule` 的退出码 0 表示控制或触发操作已处理，来源成功与否要查看嵌套 schedule 的 `last_result` 及对应运行报告；参数和存储错误为 2。计划和事件保存在 SQLite，不保存凭证或机会正文。各计划保留独立 ID 和历史数据，当前控制入口查看最近创建的计划；每日及观察期汇总可通过 `report` 查看，包含各计划的历史事件。
 
 当前数据是本地候选，不应直接作为已核实的推送清单。
+
+## 观察期报告
+
+```bash
+python3 -m opportunity_intake report --start 2026-10-22T00:00:00+00:00 --end 2026-10-23T00:00:00+00:00
+```
+
+替换为实际观察起止；按 UTC 的运行开始时间统计每日及全期结果，并列出查询预算、实际搜索范围、失败、截断和调度缺口。报告只含匿名统计与运行诊断，当前详情仍从 `list` 查看。来源删除导致历史身份缺失时会标记无法精确重算唯一数。历史近期数量按最后观察时刻，当前候选近期数量按导出时刻，不能相互替代。
+
+[完整操作与统计口径说明](docs/observation-runbook.md)包含单次运行、抽查、有限期调度启停及汇总导出。自动化通过与单次实网成功均不代表多日稳定性；本次没有启动实际多日采集。
 
 ## 验证
 
@@ -180,5 +190,6 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 - [工单 04](.scratch/freelancer-continuous-intake/issues/04-status-recheck-and-ended-records.md)
 - [工单 05](.scratch/freelancer-continuous-intake/issues/05-source-deletion-requests.md)
 - [工单 06](.scratch/freelancer-continuous-intake/issues/06-bounded-scheduling-and-resume.md)
+- [工单 07](.scratch/freelancer-continuous-intake/issues/07-observation-report-and-verification.md)
 - [领域术语](CONTEXT.md)
 - [保留的历史原型](temp/prototype-opportunity-lab/README.md)

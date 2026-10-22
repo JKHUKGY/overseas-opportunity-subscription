@@ -11,6 +11,7 @@ from pathlib import Path
 from . import Config, SQLiteStore, StorageError, collect
 from .source import FreelancerSource
 from .scheduling import Scheduler
+from .reporting import observation_report
 
 
 def _add_collection_arguments(action: argparse.ArgumentParser, *, require_budgets: bool = False) -> None:
@@ -52,7 +53,7 @@ def _schedule_command(args: argparse.Namespace) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Freelancer 候选采集实验与本地状态管理")
     commands = parser.add_subparsers(dest="command", required=True)
-    for command in ("run", "list", "runs", "ended", "delete-source"):
+    for command in ("run", "list", "runs", "ended", "delete-source", "report"):
         action = commands.add_parser(command)
         action.add_argument("--state", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "freelancer.sqlite3")
         if command == "delete-source":
@@ -62,6 +63,9 @@ def main() -> int:
             selector.add_argument("--url")
         if command == "run":
             _add_collection_arguments(action)
+        if command == "report":
+            action.add_argument("--start", type=datetime.fromisoformat, required=True, help="含时区，包含起点")
+            action.add_argument("--end", type=datetime.fromisoformat, required=True, help="含时区，不含终点")
     schedule = commands.add_parser("schedule", help="持久计划与显式前台执行器")
     controls = schedule.add_subparsers(dest="action", required=True)
     for name in ("start", "status", "pause", "resume", "stop", "tick", "work"):
@@ -88,6 +92,10 @@ def main() -> int:
         if not args.state.is_file():
             raise StorageError("State does not exist; run collection first")
         with SQLiteStore(args.state) as store:
+            if args.command == "report":
+                observation = observation_report(store, start=args.start, end=args.end)
+                print(json.dumps(observation, ensure_ascii=False, indent=2, allow_nan=False))
+                return 0
             if args.command == "delete-source":
                 result = store.delete_source_data(args.source, project_id=args.project_id, url=args.url)
                 print(json.dumps(asdict(result), ensure_ascii=False, indent=2))

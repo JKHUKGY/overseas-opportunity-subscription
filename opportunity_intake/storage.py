@@ -307,6 +307,17 @@ class SQLiteStore:
     def runs(self) -> list[dict[str, Any]]:
         return self._read("SELECT payload FROM runs ORDER BY rowid")
 
+    def observation_snapshot(self) -> dict[str, list[dict[str, Any]]]:
+        """Read all report inputs from one SQLite snapshot, including old plans."""
+        db = self._connection()
+        try:
+            with db:
+                db.execute("BEGIN")
+                return {"runs": self.runs(), "candidates": self.candidates(),
+                        "schedules": self._read("SELECT payload FROM schedules ORDER BY rowid")}
+        except sqlite3.Error:
+            raise StorageError("Unable to read observation snapshot") from None
+
     def _read(self, query: str) -> list[dict[str, Any]]:
         try:
             return [json.loads(row[0]) for row in self._connection().execute(query)]
