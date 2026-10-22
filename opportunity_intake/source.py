@@ -44,6 +44,18 @@ class FreelancerSource:
         url = self._base_url + "?" + urlencode({
             "query": query, "limit": limit, "offset": offset, "full_description": "true",
         })
+        result = self._get(url, timeout)
+        if not isinstance(result.get("projects"), list):
+            raise SourceError("invalid_response")
+        return cast(list[dict[str, Any]], result["projects"])
+
+    def detail(self, project_id: str, timeout: float) -> dict[str, Any]:
+        if not project_id.isascii() or not project_id.isdigit():
+            raise SourceError("invalid_identity")
+        base = self._base_url.removesuffix("active/")
+        return self._get(base + project_id + "/?full_description=true", timeout)
+
+    def _get(self, url: str, timeout: float = 20) -> dict[str, Any]:
         config = 'header = "Accept: application/json"\n'
         if self._token:
             escaped = self._token.replace("\\", "\\\\").replace('"', '\\"')
@@ -79,6 +91,6 @@ class FreelancerSource:
         if not isinstance(payload, dict) or payload.get("status") != "success":
             raise SourceError("api_error")
         result = payload.get("result")
-        if not isinstance(result, dict) or not isinstance(result.get("projects"), list):
+        if not isinstance(result, dict):
             raise SourceError("invalid_response")
-        return cast(list[dict[str, Any]], result["projects"])
+        return result

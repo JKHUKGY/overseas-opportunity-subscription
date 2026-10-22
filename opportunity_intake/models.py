@@ -24,6 +24,7 @@ class Config:
     max_requests: int = 2
     request_timeout: float = 20.0
     max_seconds: float = 40.0
+    recheck_limit: int = 1
 
     def __post_init__(self) -> None:
         if not isinstance(self.queries, tuple) or not self.queries or any(
@@ -34,6 +35,8 @@ class Config:
             value = getattr(self, name)
             if type(value) is not int or value <= 0:
                 raise ValueError(name + " must be a positive integer")
+        if type(self.recheck_limit) is not int or self.recheck_limit < 0:
+            raise ValueError("recheck_limit must be a nonnegative integer")
         for name in ("request_timeout", "max_seconds"):
             value = getattr(self, name)
             try:
@@ -79,3 +82,11 @@ class RunReport:
     recent_window_end: Optional[str] = None
     statistics_timezone: str = "UTC"
     field_counts: dict[str, dict[str, int]] = field(default_factory=dict)
+    rechecks_attempted: int = 0
+    rechecks_succeeded: int = 0
+    rechecks_failed: int = 0
+    rechecks_unresolved: int = 0
+    pending_recheck_count: int = 0
+    confirmed_ended_count: int = 0
+    ended_record_hits: int = 0
+    recovered_deletions: int = 0

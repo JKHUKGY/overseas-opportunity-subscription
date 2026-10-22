@@ -5,16 +5,21 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from math import isfinite
 from time import monotonic
-from typing import Any, Callable, Optional, Protocol, Union
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from typing import Any, Callable, Optional, Protocol, TypeVar, Union
 from uuid import uuid4
 
+from .identity import canonical_url, project_url
 from .models import Config, RunReport, SourceLimit
 from .storage import SQLiteStore
 from .source import SourceError
 
 
+T = TypeVar("T")
+
+
 class ProjectSource(Protocol):
+    def detail(self, project_id: str, timeout: float) -> dict[str, Any]: ...
+
     def search(self, query: str, limit: int, offset: int, timeout: float) -> list[dict[str, Any]]: ...
 
 
@@ -68,13 +73,8 @@ def _candidate(project: dict[str, Any], checked_at: str, run_started: datetime) 
                 "future" if published_time > run_started else "older")
         except (OverflowError, ValueError, OSError):
             pass
-    slug = _text(project.get("seo_url"))
-    url = "https://www.freelancer.com/projects/" + slug.lstrip("/") if slug else None
-    canonical = url
-    if url:
-        parts = urlsplit(url)
-        query = urlencode([(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if not k.startswith("utm_")])
-        canonical = urlunsplit((parts.scheme, parts.netloc, parts.path, query, ""))
+    url = project_url(project)
+    canonical = canonical_url(url)
     budget = project.get("budget")
     budget = budget if isinstance(budget, dict) else {}
     budget_min, budget_max = _number(budget.get("minimum")), _number(budget.get("maximum"))
@@ -130,6 +130,8 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
     report.recent_window_end = started
     report.unfinished_run_ids = [run["id"] for run in store.runs() if run.get("status") == "running"]
     deadline = clock() + config.max_seconds
+    report.recovered_deletions = store.cleanup_ended()
+    report.pending_recheck_count = len(store.candidates())
     source_limit = store.source_limit()
     not_before = source_limit.next_allowed_at
     if not_before is not None and datetime.fromisoformat(not_before) > now():
@@ -141,47 +143,107 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
     store.commit_run([], report)
     seen: set[tuple[str, str]] = set()
     stop = False
+    attempted_ids: set[str] = set()
+
+    def read(kind: str, metadata: dict[str, Any], fetch: Callable[[float], T]) -> Optional[T]:
+        nonlocal stop, source_limit
+        remaining = deadline - clock()
+        if stop or report.requests_attempted >= config.max_requests or remaining <= 0:
+            report.truncated = True
+            stop = True
+            return None
+        request = dict(metadata, kind=kind, status="running", received_count=0)
+        report.requests.append(request)
+        report.requests_attempted += 1
+        if kind == "detail":
+            report.rechecks_attempted += 1
+        store.commit_run([], report)
+        remaining = deadline - clock()
+        if remaining <= 0:
+            report.requests_attempted -= 1
+            if kind == "detail":
+                report.rechecks_attempted -= 1
+            report.requests.pop()
+            report.truncated = True
+            stop = True
+            return None
+        try:
+            result = fetch(min(config.request_timeout, remaining))
+        except SourceError as error:
+            report.requests_failed += 1
+            if kind == "detail":
+                report.rechecks_failed += 1
+            report.errors.append({"kind": error.kind, "http_status": error.http_status})
+            request.update(status="failed", error_kind=error.kind, http_status=error.http_status)
+            if error.http_status == 429:
+                streak = min(source_limit.rate_limit_streak + 1, 7)
+                report.next_allowed_at = _retry_time(error.retry_after, now(), streak)
+                source_limit = SourceLimit(report.next_allowed_at, streak)
+            stop = True
+            return None
+        count = len(result) if isinstance(result, list) else 1
+        report.requests_succeeded += 1
+        report.received_count += count
+        if kind == "detail":
+            report.rechecks_succeeded += 1
+        request.update(status="success", received_count=count)
+        return result
+
+    for saved in store.recheck_candidates(config.recheck_limit):
+        if store.is_ended(saved["source"], saved["id"], saved["url"]):
+            report.ended_record_hits += 1
+            continue
+        def fetch_detail(timeout: float) -> dict[str, Any]:
+            raw = source.detail(saved["id"], timeout)
+            if not isinstance(raw, dict) or type(raw.get("id")) is not int or str(raw["id"]) != saved["id"]:
+                raise SourceError("invalid_response")
+            try:
+                return _candidate(raw, now().astimezone(timezone.utc).isoformat(), run_started)
+            except ValueError:
+                raise SourceError("invalid_record") from None
+
+        before = report.rechecks_attempted
+        candidate = read("detail", {"source": saved["source"], "id": saved["id"]}, fetch_detail)
+        if candidate is None:
+            if report.rechecks_attempted > before:
+                attempted_ids.add(saved["id"])
+                report.rechecks_unresolved += 1
+                store.commit_run([], report, source_limit, recheck_cursor=saved["id"], failed_recheck_at=now().isoformat())
+            break
+        attempted_ids.add(saved["id"])
+        candidate["last_status_attempt_at"] = candidate["last_read_at"]
+        reason = {"closed": "source_closed", "complete": "source_complete"}.get(candidate["frontend_status"])
+        if reason is not None:
+            ending = dict(saved, url=saved["url"] or candidate["url"])
+            store.record_ended(ending, candidate["last_read_at"], reason, report)
+            store.cleanup_ended()
+            continue
+        if candidate["frontend_status"] == "open":
+            candidate["status"] = "来源显示开放，未确认可承接"
+            candidate["last_status_verified_at"] = candidate["last_read_at"]
+        else:
+            candidate["status"] = "无法核实"
+            report.rechecks_unresolved += 1
+        seen.add((candidate["source"], candidate["id"]))
+        report.unique_count = len(seen)
+        store.commit_run([candidate], report, status_checked=True, recheck_cursor=saved["id"])
+
     for query in config.queries:
         if stop:
             break
         for page in range(config.pages):
-            remaining = deadline - clock()
-            if report.requests_attempted >= config.max_requests or remaining <= 0:
-                report.truncated = True
-                stop = True
+            projects = read("search", {"query": query, "offset": page * config.limit, "limit": config.limit},
+                            lambda timeout: source.search(query, config.limit, page * config.limit, timeout))
+            if projects is None:
                 break
-            report.requests_attempted += 1
-            request = {"query": query, "offset": page * config.limit, "limit": config.limit,
-                       "status": "running", "received_count": 0}
-            report.requests.append(request)
-            store.commit_run([], report)
-            remaining = deadline - clock()
-            if remaining <= 0:
-                report.requests_attempted -= 1
-                report.requests.pop()
-                report.truncated = True
-                stop = True
-                break
-            try:
-                projects = source.search(query, config.limit, page * config.limit, min(config.request_timeout, remaining))
-            except SourceError as error:
-                report.requests_failed += 1
-                report.errors.append({"kind": error.kind, "http_status": error.http_status})
-                request.update(status="failed", error_kind=error.kind, http_status=error.http_status)
-                if error.http_status == 429:
-                    streak = min(source_limit.rate_limit_streak + 1, 7)
-                    report.next_allowed_at = _retry_time(error.retry_after, now(), streak)
-                    source_limit = SourceLimit(report.next_allowed_at, streak)
-                stop = True
-                break
-            report.requests_succeeded += 1
-            report.received_count += len(projects)
-            request.update(status="success", received_count=len(projects))
             candidates = []
             for project in projects[:config.limit]:
                 try:
                     if not isinstance(project, dict):
                         raise ValueError("Invalid project record")
+                    if type(project.get("id")) is int and store.is_ended("Freelancer", str(project["id"]), project_url(project)):
+                        report.ended_record_hits += 1
+                        continue
                     candidates.append(_candidate(project, now().astimezone(timezone.utc).isoformat(), run_started))
                 except ValueError:
                     report.invalid_count += 1
@@ -192,13 +254,16 @@ def collect(config: Config, store: SQLiteStore, source: ProjectSource,
                 break
             if page == config.pages - 1 or len(projects) > config.limit:
                 report.truncated = True
+    report.pending_recheck_count = sum(row["id"] not in attempted_ids for row in store.candidates())
+    if config.recheck_limit and report.pending_recheck_count:
+        report.truncated = True
     if clock() >= deadline:
         report.truncated = True
     report.finished_at = now().isoformat()
     report.status = "success"
     if report.requests_failed:
         report.status = "partial" if report.requests_succeeded else "failed"
-    elif report.truncated or report.invalid_count:
+    elif report.truncated or report.invalid_count or report.rechecks_unresolved:
         report.status = "partial"
     if report.requests_succeeded and not report.requests_failed:
         source_limit = SourceLimit()

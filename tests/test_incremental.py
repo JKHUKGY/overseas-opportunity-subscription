@@ -22,7 +22,7 @@ class IncrementalTests(unittest.TestCase):
 
     def test_same_content_preserves_version_and_existing_processing_across_restart(self) -> None:
         with SQLiteStore(self.database) as store:
-            first = collect(Config(), store, Source([project()]), now=lambda: NOW)
+            first = collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             saved = store.candidates()[0]
             self.assertEqual(saved["content_version"], 1)
             self.assertEqual(saved["last_change"], "new")
@@ -32,7 +32,7 @@ class IncrementalTests(unittest.TestCase):
             with sqlite3.connect(str(self.database)) as setup:
                 setup.execute("UPDATE candidates SET payload = ?", (json.dumps(saved),))
         with SQLiteStore(self.database) as store:
-            repeated = collect(Config(), store, Source([project()]), now=lambda: NOW + timedelta(hours=1))
+            repeated = collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW + timedelta(hours=1))
             saved = store.candidates()[0]
             self.assertEqual(saved["content_version"], 1)
             self.assertEqual(saved["last_change"], "unchanged")
@@ -44,7 +44,7 @@ class IncrementalTests(unittest.TestCase):
 
     def test_changed_description_invalidates_processing_once_per_unique_candidate(self) -> None:
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             saved = store.candidates()[0]
             saved.update(processing_status="reviewed", classification="drawing", summary="Old summary",
                          last_status_verified_at=NOW.isoformat())
@@ -52,7 +52,7 @@ class IncrementalTests(unittest.TestCase):
                 setup.execute("UPDATE candidates SET payload = ?", (json.dumps(saved),))
             changed = project()
             changed["description"] = "Paid commission for a full character sheet."
-            report = collect(Config(), store, Source([changed]), now=lambda: NOW + timedelta(hours=1))
+            report = collect(Config(recheck_limit=0, ), store, Source([changed]), now=lambda: NOW + timedelta(hours=1))
             candidate = store.candidates()[0]
             self.assertEqual(candidate["content_version"], 2)
             self.assertEqual(candidate["last_change"], "changed")
@@ -76,10 +76,10 @@ class IncrementalTests(unittest.TestCase):
         ]
         for index, fields in enumerate(changes):
             with self.subTest(fields=fields), SQLiteStore(self.database.with_name(f"fields-{index}.sqlite3")) as store:
-                collect(Config(), store, Source([project()]), now=lambda: NOW)
+                collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
                 changed = project()
                 changed.update(fields)
-                report = collect(Config(), store, Source([changed]), now=lambda: NOW)
+                report = collect(Config(recheck_limit=0, ), store, Source([changed]), now=lambda: NOW)
                 self.assertEqual(store.candidates()[0]["content_version"], 2)
                 self.assertEqual(report.changed_count, 1)
 
@@ -92,7 +92,7 @@ class IncrementalTests(unittest.TestCase):
             item["time_submitted"] = value.timestamp() if isinstance(value, datetime) else value
             projects.append(item)
         with SQLiteStore(self.database) as store:
-            report = collect(Config(limit=10), store, Source(projects), now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, limit=10), store, Source(projects), now=lambda: NOW)
             saved = {row["id"]: row for row in store.candidates()}
             self.assertEqual([saved[str(i)]["recency"] for i in range(1, 7)],
                              ["recent", "older", "recent", "future", "unknown", "unknown"])
@@ -117,7 +117,7 @@ class IncrementalTests(unittest.TestCase):
         invalid = project(5)
         invalid.update(budget={"minimum": 200, "maximum": 100}, type="unrecognized")
         with SQLiteStore(self.database) as store:
-            report = collect(Config(limit=10), store, Source([fixed, hourly, unknown, partial, invalid]), now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, limit=10), store, Source([fixed, hourly, unknown, partial, invalid]), now=lambda: NOW)
             saved = {row["id"]: row for row in store.candidates()}
             self.assertEqual((saved["1"]["budget_min"], saved["1"]["budget_max"], saved["1"]["currency"], saved["1"]["pricing"]),
                              (50, 100, "USD", "fixed"))
@@ -143,30 +143,30 @@ class IncrementalTests(unittest.TestCase):
         newly_changed = project(43)
         newly_changed["description"] = "Second description in the same run."
 
-        class Overlapping:
+        class Overlapping(Source):
             def search(self, query: str, limit: int, offset: int, timeout: float) -> list[dict[str, Any]]:
                 return [project(), project(43)] if query == "illustration" else [changed, newly_changed, {"id": 44}]
 
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
-            report = collect(Config(), store, Overlapping(), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, ), store, Overlapping([]), now=lambda: NOW)
             self.assertEqual((report.new_count, report.unchanged_count, report.changed_count, report.unique_count), (2, 0, 1, 3))
             self.assertEqual(report.duplicate_count, 3)
             self.assertEqual(report.field_counts["description"], {"known": 2, "unknown": 1})
             saved = {row["id"]: row for row in store.candidates()}
             self.assertEqual((saved["42"]["content_version"], saved["43"]["content_version"]), (2, 2))
             self.assertEqual((saved["42"]["last_change"], saved["43"]["last_change"]), ("changed", "new"))
-            repeated = collect(Config(), store, Source([changed, newly_changed, {"id": 44}]), now=lambda: NOW)
+            repeated = collect(Config(recheck_limit=0, ), store, Source([changed, newly_changed, {"id": 44}]), now=lambda: NOW)
             self.assertEqual((repeated.new_count, repeated.unchanged_count, repeated.changed_count), (0, 3, 0))
 
     def test_source_publication_correction_does_not_reset_discovery_or_verification_time(self) -> None:
         original = project()
         original["time_submitted"] = (NOW - timedelta(days=10)).timestamp()
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([original]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([original]), now=lambda: NOW)
             corrected = project()
             corrected["time_submitted"] = (NOW - timedelta(hours=1)).timestamp()
-            report = collect(Config(), store, Source([corrected]), now=lambda: NOW + timedelta(hours=2))
+            report = collect(Config(recheck_limit=0, ), store, Source([corrected]), now=lambda: NOW + timedelta(hours=2))
             saved = store.candidates()[0]
             self.assertEqual(saved["published_at"], "2026-10-20T11:00:00+00:00")
             self.assertEqual(saved["first_seen_at"], "2026-10-20T12:00:00+00:00")
@@ -181,7 +181,7 @@ class IncrementalTests(unittest.TestCase):
         item["time_submitted"] = (NOW - timedelta(days=3)).timestamp()
         moments = iter([local, local + timedelta(minutes=1), local + timedelta(minutes=2)])
         with SQLiteStore(self.database) as store:
-            report = collect(Config(queries=("portrait",)), store, Source([item]), now=lambda: next(moments))
+            report = collect(Config(recheck_limit=0, queries=("portrait",)), store, Source([item]), now=lambda: next(moments))
             self.assertEqual(report.started_at, NOW.isoformat())
             self.assertEqual(report.recent_count, 1)
             self.assertEqual(store.candidates()[0]["recency_as_of"], NOW.isoformat())
@@ -195,7 +195,7 @@ class IncrementalTests(unittest.TestCase):
             item["time_submitted"] = value
             projects.append(item)
         with SQLiteStore(self.database) as store:
-            report = collect(Config(limit=10), store, Source(projects), now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, limit=10), store, Source(projects), now=lambda: NOW)
             self.assertEqual(report.recent_count, 0)
             self.assertEqual(report.field_counts["published_at"], {"unknown": 1, "invalid": 5})
             self.assertTrue(all(row["published_at"] is None for row in store.candidates()))
@@ -206,7 +206,7 @@ class IncrementalTests(unittest.TestCase):
         import sys
 
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             legacy = store.candidates()[0]
             for name in ("content_version", "last_change", "field_status", "recency", "recency_as_of"):
                 legacy.pop(name)
@@ -214,7 +214,7 @@ class IncrementalTests(unittest.TestCase):
             with sqlite3.connect(str(self.database)) as setup:
                 setup.execute("UPDATE candidates SET payload = ?", (json.dumps(legacy),))
         with SQLiteStore(self.database) as store:
-            report = collect(Config(), store, Source([project()]), now=lambda: NOW + timedelta(days=1))
+            report = collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW + timedelta(days=1))
             self.assertEqual(report.unchanged_count, 1)
             self.assertEqual(report.changed_count, 0)
         result = subprocess.run([sys.executable, "-m", "opportunity_intake", "list", "--state", str(self.database)],
@@ -231,12 +231,12 @@ class IncrementalTests(unittest.TestCase):
         original = project()
         original["time_submitted"] = (NOW - timedelta(hours=1)).timestamp()
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([original]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([original]), now=lambda: NOW)
             for offset, missing_time in enumerate((None, "invalid", float("inf")), 1):
                 with self.subTest(missing_time=missing_time):
                     later = project()
                     later["time_submitted"] = missing_time
-                    report = collect(Config(), store, Source([later]), now=lambda: NOW + timedelta(hours=offset))
+                    report = collect(Config(recheck_limit=0, ), store, Source([later]), now=lambda: NOW + timedelta(hours=offset))
                     saved = store.candidates()[0]
                     self.assertEqual(saved["published_at"], "2026-10-20T11:00:00+00:00")
                     self.assertEqual(saved["published_at_read_at"], NOW.isoformat())

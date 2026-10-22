@@ -11,7 +11,7 @@ from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from datetime import timedelta
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any, Iterator, Optional
 
 from opportunity_intake import Config, SQLiteStore, collect
 from opportunity_intake.source import FreelancerSource, SourceError
@@ -20,11 +20,13 @@ from tests.test_collection import NOW, Source, project
 
 @contextmanager
 def http_source(replies: list[tuple[int, dict[str, str], bytes]], *,
-                stall: bool = False, stall_body: bool = False) -> Iterator[FreelancerSource]:
+                stall: bool = False, stall_body: bool = False, paths: Optional[list[str]] = None) -> Iterator[FreelancerSource]:
     release = threading.Event()
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self) -> None:
+            if paths is not None:
+                paths.append(self.path)
             if stall:
                 release.wait()
                 return
@@ -75,15 +77,15 @@ class FailureTests(unittest.TestCase):
                 raise AssertionError("Source must not be accessed during cooldown")
 
         with SQLiteStore(self.database) as store:
-            limited = collect(Config(), store, Limited([]), now=lambda: NOW)
+            limited = collect(Config(recheck_limit=0, ), store, Limited([]), now=lambda: NOW)
             self.assertEqual(limited.next_allowed_at, "2026-10-20T12:02:00+00:00")
             self.assertEqual(limited.requests_attempted, 1)
         with SQLiteStore(self.database) as store:
-            skipped = collect(Config(), store, NoAccess([]), now=lambda: NOW + timedelta(seconds=119))
+            skipped = collect(Config(recheck_limit=0, ), store, NoAccess([]), now=lambda: NOW + timedelta(seconds=119))
             self.assertEqual(skipped.status, "skipped")
             self.assertEqual(skipped.requests_attempted, 0)
             self.assertEqual(store.runs()[-1]["next_allowed_at"], limited.next_allowed_at)
-            resumed = collect(Config(queries=("portrait",)), store, Source([project()]), now=lambda: NOW + timedelta(seconds=120))
+            resumed = collect(Config(recheck_limit=0, queries=("portrait",)), store, Source([project()]), now=lambda: NOW + timedelta(seconds=120))
             self.assertEqual(resumed.status, "success")
             self.assertIsNone(resumed.next_allowed_at)
             self.assertEqual(len(store.candidates()), 1)
@@ -91,7 +93,7 @@ class FailureTests(unittest.TestCase):
     def test_http_date_retry_after_is_respected_without_retaining_error_body(self) -> None:
         replies = [(429, {"Retry-After": "Tue, 20 Oct 2026 12:05:00 GMT"}, b"test-secret private error body")]
         with http_source(replies) as source, SQLiteStore(self.database) as store:
-            report = collect(Config(), store, source, now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
             self.assertEqual(report.next_allowed_at, "2026-10-20T12:05:00+00:00")
             self.assertNotIn("test-secret", json.dumps(store.runs()))
             self.assertNotIn("private error body", json.dumps(store.runs()))
@@ -108,7 +110,7 @@ class Interrupted:
             os._exit(77)
         return [project(42)]
 with SQLiteStore(Path(sys.argv[1])) as store:
-    collect(Config(queries=("portrait",), limit=1, pages=2), store, Interrupted(), now=lambda: NOW)
+    collect(Config(recheck_limit=0, queries=("portrait",), limit=1, pages=2), store, Interrupted(), now=lambda: NOW)
 """
         result = subprocess.run([sys.executable, "-c", script, str(self.database)], capture_output=True)
         self.assertEqual(result.returncode, 77, result.stderr)
@@ -119,7 +121,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
             self.assertIsNone(unfinished["finished_at"])
             self.assertEqual(unfinished["requests_succeeded"], 1)
             self.assertEqual(unfinished["requests"][-1]["status"], "running")
-            report = collect(Config(queries=("portrait",)), store, Source([project(42), project(43)]), now=lambda: NOW + timedelta(hours=1))
+            report = collect(Config(recheck_limit=0, queries=("portrait",)), store, Source([project(42), project(43)]), now=lambda: NOW + timedelta(hours=1))
             self.assertEqual(report.unfinished_run_ids, [unfinished["id"]])
             self.assertEqual((report.new_count, report.duplicate_count), (1, 1))
             self.assertEqual(len(store.candidates()), 2)
@@ -140,7 +142,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
 
         source = Timed()
         with SQLiteStore(self.database) as store:
-            report = collect(Config(queries=("portrait",), limit=1, pages=10, max_requests=10, request_timeout=4, max_seconds=5),
+            report = collect(Config(recheck_limit=0, queries=("portrait",), limit=1, pages=10, max_requests=10, request_timeout=4, max_seconds=5),
                              store, source, now=lambda: NOW, clock=lambda: source.elapsed)
             self.assertEqual(source.timeouts, [4, 2])
             self.assertEqual(report.status, "partial")
@@ -148,7 +150,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
             self.assertEqual(len(store.candidates()), 2)
             self.assertEqual(report.requests_attempted, 2)
             source = Timed()
-            report = collect(Config(queries=("portrait",), limit=1, pages=10, max_requests=1),
+            report = collect(Config(recheck_limit=0, queries=("portrait",), limit=1, pages=10, max_requests=1),
                              store, source, now=lambda: NOW, clock=lambda: source.elapsed)
             self.assertEqual(report.requests_attempted, 1)
             self.assertTrue(report.truncated)
@@ -163,7 +165,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
 
         source = Timed([])
         with SQLiteStore(self.database) as store:
-            report = collect(Config(queries=("portrait",), max_seconds=1), store, source, now=lambda: NOW, clock=lambda: source.elapsed)
+            report = collect(Config(recheck_limit=0, queries=("portrait",), max_seconds=1), store, source, now=lambda: NOW, clock=lambda: source.elapsed)
             self.assertEqual(report.status, "partial")
             self.assertTrue(report.truncated)
             self.assertEqual(len(store.candidates()), 1)
@@ -175,9 +177,9 @@ with SQLiteStore(Path(sys.argv[1])) as store:
         for index, (status, body, kind) in enumerate(cases):
             with self.subTest(status=status, kind=kind), http_source([(status, {}, body)]) as source:
                 with SQLiteStore(self.database.with_name(f"error-{index}.sqlite3")) as store:
-                    collect(Config(), store, Source([project()]), now=lambda: NOW)
+                    collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
                     previous = store.candidates()
-                    report = collect(Config(), store, source, now=lambda: NOW)
+                    report = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
                     self.assertEqual(report.status, "failed")
                     self.assertEqual(report.requests_attempted, 1)
                     self.assertEqual(report.requests_failed, 1)
@@ -189,14 +191,14 @@ with SQLiteStore(Path(sys.argv[1])) as store:
     def test_zero_partial_and_invalid_records_preserve_successful_data(self) -> None:
         valid = json.dumps({"status": "success", "result": {"projects": [project(43), None, {"id": True}]}}).encode()
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             before = store.candidates()
-            zero = collect(Config(), store, Source([]), now=lambda: NOW)
+            zero = collect(Config(recheck_limit=0, ), store, Source([]), now=lambda: NOW)
             self.assertEqual(zero.status, "success")
             self.assertEqual(zero.received_count, 0)
             self.assertEqual(store.candidates(), before)
             with http_source([(200, {}, valid), (500, {}, b"private")]) as source:
-                partial = collect(Config(), store, source, now=lambda: NOW)
+                partial = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
             self.assertEqual(partial.status, "partial")
             self.assertEqual((partial.requests_succeeded, partial.requests_failed, partial.invalid_count), (1, 1, 2))
             self.assertEqual(partial.errors, [{"kind": "http_error", "http_status": 500}])
@@ -212,7 +214,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
                     return [project()]
 
             with self.subTest(kind=kind), SQLiteStore(self.database) as store:
-                report = collect(Config(queries=("portrait",), limit=1, pages=2), store, Failing([]), now=lambda: NOW)
+                report = collect(Config(recheck_limit=0, queries=("portrait",), limit=1, pages=2), store, Failing([]), now=lambda: NOW)
                 self.assertEqual(report.status, "partial")
                 self.assertEqual(report.errors, [{"kind": kind, "http_status": None}])
                 self.assertEqual(len(store.candidates()), 1)
@@ -226,30 +228,30 @@ with SQLiteStore(Path(sys.argv[1])) as store:
         current = NOW
         with SQLiteStore(self.database) as store:
             for delay in (60, 120, 240, 480, 960, 1920, 3600, 3600):
-                report = collect(Config(), store, Limited([]), now=lambda: current)
+                report = collect(Config(recheck_limit=0, ), store, Limited([]), now=lambda: current)
                 current += timedelta(seconds=delay)
                 self.assertEqual(report.next_allowed_at, current.isoformat())
                 self.assertEqual(report.requests_attempted, 1)
-            collect(Config(), store, Source([]), now=lambda: current)
-            report = collect(Config(), store, Limited([]), now=lambda: current)
+            collect(Config(recheck_limit=0, ), store, Source([]), now=lambda: current)
+            report = collect(Config(recheck_limit=0, ), store, Limited([]), now=lambda: current)
             self.assertEqual(report.next_allowed_at, (current + timedelta(seconds=60)).isoformat())
 
     def test_numeric_and_missing_retry_after_from_http(self) -> None:
         for index, (headers, delay) in enumerate([({"Retry-After": "37"}, 37), ({}, 60)]):
             with http_source([(429, headers, b"private")]) as source:
                 with SQLiteStore(self.database.with_name(f"limit-{index}.sqlite3")) as store:
-                    report = collect(Config(), store, source, now=lambda: NOW)
+                    report = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
                     self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=delay)).isoformat())
                     self.assertEqual(report.status, "failed")
 
     def test_existing_processing_state_survives_refresh(self) -> None:
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             candidate = store.candidates()[0]
             candidate.update(processing_status="reviewed", status="已结束", last_status_verified_at=NOW.isoformat())
             with sqlite3.connect(str(self.database)) as setup:
                 setup.execute("UPDATE candidates SET payload = ?", (json.dumps(candidate),))
-            collect(Config(), store, Source([project()]), now=lambda: NOW + timedelta(hours=1))
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW + timedelta(hours=1))
             updated = store.candidates()[0]
             for field in ("first_seen_at", "processing_status", "status", "last_status_verified_at"):
                 self.assertEqual(updated[field], candidate[field])
@@ -257,14 +259,14 @@ with SQLiteStore(Path(sys.argv[1])) as store:
 
     def test_actual_http_timeout_is_bounded_and_reported(self) -> None:
         with http_source([], stall=True) as source, SQLiteStore(self.database) as store:
-            report = collect(Config(request_timeout=0.1), store, source, now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, request_timeout=0.1), store, source, now=lambda: NOW)
             self.assertEqual(report.status, "failed")
             self.assertEqual(report.errors, [{"kind": "timeout", "http_status": None}])
             self.assertEqual(report.requests_attempted, 1)
 
     def test_existing_version_one_database_is_migrated_without_losing_data(self) -> None:
         with SQLiteStore(self.database) as store:
-            collect(Config(), store, Source([project()]), now=lambda: NOW)
+            collect(Config(recheck_limit=0, ), store, Source([project()]), now=lambda: NOW)
             candidates, runs = store.candidates(), store.runs()
         with sqlite3.connect(str(self.database)) as legacy:
             legacy.execute("DROP TABLE source_limits")
@@ -272,7 +274,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
         with SQLiteStore(self.database) as store:
             self.assertEqual(store.candidates(), candidates)
             self.assertEqual(store.runs(), runs)
-            report = collect(Config(), store, Source([]), now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, ), store, Source([]), now=lambda: NOW)
             self.assertEqual(report.status, "success")
 
     def test_invalid_limits_reject_complete_cli_run_without_creating_state(self) -> None:
@@ -289,17 +291,17 @@ with SQLiteStore(Path(sys.argv[1])) as store:
     def test_http_looking_error_body_cannot_override_rate_limit_headers(self) -> None:
         replies = [(429, {"Retry-After": "120"}, b"HTTP/1.1 503 private proxy error body")]
         with http_source(replies) as source, SQLiteStore(self.database) as store:
-            report = collect(Config(), store, source, now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
             self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
             self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())
 
     def test_rate_limit_headers_survive_oversized_error_body(self) -> None:
         with http_source([(429, {"Retry-After": "120"}, b"x" * 2097153)]) as source:
             with SQLiteStore(self.database) as store:
-                report = collect(Config(), store, source, now=lambda: NOW)
+                report = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW)
                 self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
                 self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())
-                skipped = collect(Config(), store, source, now=lambda: NOW + timedelta(seconds=119))
+                skipped = collect(Config(recheck_limit=0, ), store, source, now=lambda: NOW + timedelta(seconds=119))
                 self.assertEqual(skipped.status, "skipped")
                 self.assertEqual(skipped.requests_attempted, 0)
 
@@ -308,7 +310,7 @@ with SQLiteStore(Path(sys.argv[1])) as store:
         malformed["description"] = "bad surrogate: \ud800"
         body = json.dumps({"status": "success", "result": {"projects": [project(), malformed]}}).encode()
         with http_source([(200, {}, body)]) as source, SQLiteStore(self.database) as store:
-            report = collect(Config(queries=("portrait",)), store, source, now=lambda: NOW)
+            report = collect(Config(recheck_limit=0, queries=("portrait",)), store, source, now=lambda: NOW)
             self.assertEqual(report.status, "partial")
             self.assertEqual(report.invalid_count, 1)
             self.assertEqual([row["id"] for row in store.candidates()], ["42"])
@@ -316,6 +318,6 @@ with SQLiteStore(Path(sys.argv[1])) as store:
     def test_rate_limit_headers_survive_body_timeout(self) -> None:
         with http_source([(429, {"Retry-After": "120"}, b"body")], stall_body=True) as source:
             with SQLiteStore(self.database) as store:
-                report = collect(Config(request_timeout=0.1), store, source, now=lambda: NOW)
+                report = collect(Config(recheck_limit=0, request_timeout=0.1), store, source, now=lambda: NOW)
                 self.assertEqual(report.errors, [{"kind": "http_error", "http_status": 429}])
                 self.assertEqual(report.next_allowed_at, (NOW + timedelta(seconds=120)).isoformat())

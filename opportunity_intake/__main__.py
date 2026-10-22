@@ -14,7 +14,7 @@ from .source import FreelancerSource
 def main() -> int:
     parser = argparse.ArgumentParser(description="Freelancer 候选采集实验（单次只读运行）")
     commands = parser.add_subparsers(dest="command", required=True)
-    for command in ("run", "list", "runs"):
+    for command in ("run", "list", "runs", "ended"):
         action = commands.add_parser(command)
         action.add_argument("--state", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "freelancer.sqlite3")
         if command == "run":
@@ -24,11 +24,12 @@ def main() -> int:
             action.add_argument("--max-requests", type=int, default=2)
             action.add_argument("--request-timeout", type=float, default=20)
             action.add_argument("--max-seconds", type=float, default=40)
+            action.add_argument("--recheck-limit", type=int, default=1, help="maximum stored candidates to recheck; 0 disables rechecks")
     args = parser.parse_args()
     try:
         if args.command == "run":
             config = Config(tuple(args.query or ("illustration", "portrait")), args.limit,
-                            args.pages, args.max_requests, args.request_timeout, args.max_seconds)
+                            args.pages, args.max_requests, args.request_timeout, args.max_seconds, args.recheck_limit)
             source = FreelancerSource(os.environ.get("FLN_OAUTH_TOKEN", ""))
             with SQLiteStore(args.state) as store:
                 report = collect(config, store, source)
@@ -37,7 +38,7 @@ def main() -> int:
         if not args.state.is_file():
             raise StorageError("State does not exist; run collection first")
         with SQLiteStore(args.state) as store:
-            rows = store.candidates() if args.command == "list" else store.runs()
+            rows = store.candidates() if args.command == "list" else store.ended_records() if args.command == "ended" else store.runs()
         print(json.dumps(rows, ensure_ascii=False, indent=2, allow_nan=False))
         return 0
     except (ValueError, StorageError, OSError) as error:
