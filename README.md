@@ -1,6 +1,6 @@
 # 海外绘画约稿机会采集实验
 
-当前实现：工单 01–05，手动读取 Freelancer 候选、持久保存和去重，识别内容变化与近期候选，轮转复查已存项目，排除确认结束的机会，支持按来源删除要求清理关联数据，并在失败、限流或进程中断时保全已完成进度。运行依赖 Python 3.9+ 和 curl；运行时无需安装 Python 第三方包。
+当前实现：工单 01–06，手动读取 Freelancer 候选、持久保存和去重，识别内容变化与近期候选，轮转复查已存项目，排除确认结束的机会，支持来源删除及有界定时执行，并在失败、限流或进程中断时保全已完成进度。运行依赖 macOS／Linux、Python 3.9+ 和 curl（进程锁使用本地文件系统的 flock）；运行时无需安装 Python 第三方包。
 
 ## 使用
 
@@ -31,7 +31,7 @@ python3 -m opportunity_intake run --query illustration --limit 2 --max-requests 
 
 “必要正文”在本工单中具体使用来源返回的 `description`，缺失时使用 `preview_description`；不会下载完整网页、附件或扩展需求方资料。最近成功状态核验时间只由可明确解释的详情状态更新；搜索和无法核实的响应不会伪造这一时间。地域资格标记为“地域未说明”，未作申请资格核验。
 
-相同来源及 ID 更新同一候选，保留首次发现时间。搜索保留已有接单状态和核验时间；详情复查可以更新状态。整理输入未变时保留已有处理状态；输入变化时使旧整理结果失效。每次成功请求的候选与运行进度在同一个 SQLite 事务内提交；某一批写入失败只回滚该批，不清空此前成功保存的数据。旧版本数据库会自动从 schema 1／2 升到 3，保留候选及报告；无法识别或损坏的状态会明确报错。
+相同来源及 ID 更新同一候选，保留首次发现时间。搜索保留已有接单状态和核验时间；详情复查可以更新状态。整理输入未变时保留已有处理状态；输入变化时使旧整理结果失效。每次成功请求的候选与运行进度在同一个 SQLite 事务内提交；某一批写入失败只回滚该批，不清空此前成功保存的数据。旧版本数据库会自动从 schema 1／2／3 升到 4，保留候选及报告；无法识别或损坏的状态会明确报错。
 
 报告中 `received_count` 是实际返回条目数（每次成功详情读取计一条），`unique_count` 是本轮实际保存的有效候选的不同 ID 数，`new_count` 是新入库数，`duplicate_count` 是有效条目中已存在或同轮重复的次数，`invalid_count` 是本轮处理范围内身份无效的记录数。确认结束的详情以及命中结束记录的搜索条目不进入候选新增／变化／未变化统计。达到配置条数后的额外响应不入库。未知字段不等于无效身份；这些数量均不代表已经确认的约稿机会数。
 
@@ -65,9 +65,9 @@ python3 -m opportunity_intake run --query illustration --limit 2 --max-requests 
 | `skipped` | 尚在来源等待期，本轮没有访问来源 |
 | `running` | 已保存启动或进度记录，但尚无结束记录 |
 
-CLI 对成功／部分完成／跳过返回 0，来源失败返回 1，配置或存储错误返回 2。调用方应同时检查 JSON 状态及 `truncated`。搜索和详情请求共用总请求预算和来源读取窗口，每次超时取配置与剩余窗口的较小值；窗口用尽后不再发起请求。最后的本地持久化仍会完成，因此命令的总墙钟时间可能长于来源读取窗口。
+单次 `run` 对成功／部分完成／跳过返回 0，来源失败返回 1，配置或存储错误返回 2。调用方应同时检查 JSON 状态及 `truncated`。搜索和详情请求共用总请求预算和来源读取窗口，每次超时取配置与剩余窗口的较小值；窗口用尽后不再发起请求。最后的本地持久化仍会完成，因此命令的总墙钟时间可能长于来源读取窗口。
 
-运行开始及每次请求发出前都会保存进度；进程意外退出后，已完成批次仍然可读。下次运行的 `unfinished_run_ids` 列出没有结束记录的历史运行。这些记录可能属于意外中断，也可能属于另一个仍在执行的进程；本工单不实现并行调度和运行锁。恢复时重新读取来源，通过稳定 ID 去重，不假定失败页已经完成。
+运行开始及每次请求发出前都会保存进度；进程意外退出后，已完成批次仍然可读。下次运行的 `unfinished_run_ids` 列出没有结束记录的历史运行。这些记录可能属于意外中断，也可能属于另一个仍在执行的进程。现在同一状态文件的完整采集和来源删除共用进程锁；手动采集发生重叠时返回未写入数据库的 `skipped / state_busy`，不改写正在进行的运行。恢复时重新读取来源，通过稳定 ID 去重，不假定失败页已经完成。
 
 所有来源错误都会停止本轮后续请求并保留成功批次，401／403 不自动重试。错误报告区分 HTTP 状态、`timeout`、`transport_error`、`transport_unavailable`、`invalid_json`、`invalid_response` 和 `api_error`；单条坏记录计入 `invalid_count`，有效记录继续保存。
 
@@ -105,9 +105,48 @@ python3 -m opportunity_intake delete-source --source Freelancer --url 'https://w
 
 成功结果仅返回 `status: complete` 及 `candidates_deleted`、`ended_records_deleted`、`history_entries_redacted`、`recheck_cursors_deleted` 四个数量，不返回被删除内容或网址。未找到目标或重复删除是成功的零变更。CLI 成功返回 0，参数／存储错误返回 2。状态文件不存在时明确报错，不新建空库冒充删除成功。
 
-中途写入失败时整笔回滚并报错；进程在提交前退出，重开数据库恢复原状态后可以重试；提交后退出但没收到结果，也可以重复调用并通过 `list`／`ended` 核对。不自动提交未完成的删除请求。使用前应等待正在执行的采集结束，避免后续采集重新发现目标；多进程采集调度保护属于后续工单。本命令不清理用户另存的输出、备份或独立历史原型，也不承诺底层介质的取证擦除。
+中途写入失败时整笔回滚并报错；进程在提交前退出，重开数据库恢复原状态后可以重试；提交后退出但没收到结果，也可以重复调用并通过 `list`／`ended` 核对。不自动提交未完成的删除请求。来源删除与完整采集共用进程锁，忙碌时返回错误，可稍后重试；需要阻止定时采集马上重新发现目标时，先暂停计划并等待当前轮次结束。本命令不清理用户另存的输出、备份或独立历史原型，也不承诺底层介质的取证擦除。
 
-定时调度和观察期汇总属于后续工单。当前数据是本地候选，不应直接作为已核实的推送清单。
+### 有界定时运行
+
+`schedule start` 仅创建持久计划，不发起请求或后台任务。必须显式提供间隔（至少 1 秒）、每轮请求和耗时预算，以及最大次数或带时区的观察终点；两种上限同时提供时先到者生效。以下仅为命令示例，实际参数由运营者选择：
+
+```bash
+python3 -m opportunity_intake schedule start --interval-seconds 3600 --max-runs 3 --max-requests 3 --max-seconds 40
+python3 -m opportunity_intake schedule status
+# 显式启动前台执行器，按持久计划执行至暂停、停止或上限
+python3 -m opportunity_intake schedule work
+```
+
+各命令均支持 `--state`。`start` 可创建新状态文件；其余操作要求现有状态。可用 `--until '2026-11-01T00:00:00+00:00'` 设置观察终点，也可与 `--max-runs` 同时使用。搜索、分页、详情复查和每次请求超时参数与 `run` 一致。默认 `run` 仍只执行一次。
+
+前台执行器运行期间，可在另一终端控制计划：
+
+```bash
+python3 -m opportunity_intake schedule pause
+python3 -m opportunity_intake schedule resume
+python3 -m opportunity_intake schedule stop
+```
+
+暂停和停止不强行终止已认领的一轮，该轮按预算收尾；控制状态不会被收尾覆盖。执行器在暂停时退出，`resume` 只恢复计划状态，之后再次显式运行 `schedule work`。停止或完成的计划不能恢复；需显式新建计划才会获得新的观察次数。若仍有遗留的在途轮次，先用 `schedule tick` 核对恢复后再新建计划。
+
+`schedule tick` 检查并最多执行一轮：未到期返回 `not_due`，等待来源返回 `deferred`，执行后返回 `ran`，重叠返回 `overlap`，非活动计划返回其状态。`work` 在等待期间每秒检查控制状态；遇重叠会退出，计划和进度保留，可在现有操作结束后重新启动。Ctrl-C 退出执行器并返回 130，保留计划与已存进度；它不会悄悄把计划重置或启动替代后台任务。
+
+公开 Python 入口是 `Scheduler(store, now=..., clock=...)`，提供 `start(config, interval_seconds=..., max_runs=... / until=...)`、`status()`、`control("pause" / "resume" / "stop")`、`tick(source)` 和 `work(source, wait=...)`。调度直接调用已有 `collect`；测试替换时间、等待与来源，不替换业务实现。
+
+时间统一为 UTC。第一轮在执行器启动且条件满足时运行，后续间隔从上一轮实际结束时刻计算；来源等待时间更晚时推迟到那个时间。请求窗口收紧到观察终点的剩余时间，到期不再开始来源读取，本地保存仍可收尾。限流推迟和重叠跳过不消耗次数。
+
+状态中的 `runs_started` 是已持久认领的尝试数，包含中断尝试；`completed_runs` 是已写成结束报告的轮数，失败报告也算完成一轮。认领后、请求前中断时保守保留该次计数，以免反复重启绕过上限。`inflight_run_id` 指向尚待核对的运行；`last_run_id`／`last_result`、`next_run_at`、`until` 显示最近结果、计划时刻和观察终点。非 active 状态不会因为保留了 next_run_at 而自动执行。
+
+同一数据库的调度触发共用一个进程锁，完整采集和来源删除共用另一个；进程退出后操作系统自动释放锁。数据库旁的两个空 `.lock` 文件可以保留，它们的存在不代表任务仍在运行，不应在执行期间删除。该实现面向同机本地存储，没有配置系统开机自启、云部署或分布式调度。
+
+重启后先核对在途运行：若结束报告已写成，补记调度完成且不重跑；若未写成，事件记为 `interrupted_run`，保留原采集报告缺少结束记录的事实，并在剩余次数和时间允许时继续。因而历史报告的 running 标记不证明当前还有活进程，应结合调度恢复事件查看。
+
+`events` 保留认领、控制操作、重叠、来源等待、恢复完成和中断信息。到期后迟到至少一个完整间隔才触发时，记录从原到期时间到实际触发时间的 `observation_gap`，不伪造漏掉的运行；若恢复时观察期已结束，缺口截至观察终点。`overdue_intervals` 是该缺口内完整间隔数，不是已执行次数或平台丢失项目数。暂停操作另有事件，可区分已知暂停与未观察期间；不能仅凭缺口认定设备关机。
+
+`schedule` 的退出码 0 表示控制或触发操作已处理，来源成功与否要查看嵌套 schedule 的 `last_result` 及对应运行报告；参数和存储错误为 2。计划和事件保存在 SQLite，不保存凭证或机会正文。各计划保留独立 ID 和历史数据，当前控制入口查看最近创建的计划；每日及观察期汇总留给第 07 张。
+
+当前数据是本地候选，不应直接作为已核实的推送清单。
 
 ## 验证
 
@@ -126,6 +165,8 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 
 来源删除测试通过公开删除入口和完整采集运行检查：活跃／已结束项目清理、同网址追踪变体、不同身份参数和来源隔离、历史引用与复查游标清理、限流保留、重复删除、再次入库、CLI 参数及结果。数据库故障注入验证跨表回滚，真实子进程分别在事务中和提交后退出，重开状态后验证重试语义。
 
+调度测试覆盖跨重启次数上限、暂停／恢复／停止、观察终点收紧请求窗口、过期恢复缺口、限流推迟、可控等待的前台执行器、真实跨进程重叠、进程退出释放锁及批次恢复、结束报告已保存而调度写入失败后的核对。CLI 控制测试不发起网络读取。本次没有创建实际多日计划或启动实网定时采集。
+
 项目搜索与详情参数依据 [Freelancer 官方 SDK 的 search_projects](https://github.com/freelancer/freelancer-sdk-python/blob/master/freelancersdk/resources/projects/projects.py)；本实现只使用项目搜索和项目详情的 GET 请求。
 
 2026-10-20 实网检查：两轮各一个请求、每轮最多两条。第一轮新增两条，第二轮新增零条、重复两条，数据库保留两条候选及两份运行报告。两轮都因样本上限标记为部分完成；没有验证多日稳定性或候选的绘画相关性。
@@ -138,5 +179,6 @@ temp/implementation-tools/bin/mypy opportunity_intake tests
 - [工单 03](.scratch/freelancer-continuous-intake/issues/03-incremental-change-and-recency.md)
 - [工单 04](.scratch/freelancer-continuous-intake/issues/04-status-recheck-and-ended-records.md)
 - [工单 05](.scratch/freelancer-continuous-intake/issues/05-source-deletion-requests.md)
+- [工单 06](.scratch/freelancer-continuous-intake/issues/06-bounded-scheduling-and-resume.md)
 - [领域术语](CONTEXT.md)
 - [保留的历史原型](temp/prototype-opportunity-lab/README.md)

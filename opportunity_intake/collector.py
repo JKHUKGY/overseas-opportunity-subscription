@@ -119,13 +119,23 @@ def _candidate(project: dict[str, Any], checked_at: str, run_started: datetime) 
 
 def collect(config: Config, store: SQLiteStore, source: ProjectSource,
             *, now: Callable[[], datetime] = utc_now,
-            clock: Callable[[], float] = monotonic) -> RunReport:
+            clock: Callable[[], float] = monotonic, run_id: Optional[str] = None) -> RunReport:
+    with store.operation_lock("collection") as acquired:
+        if not acquired:
+            current = now().isoformat()
+            return RunReport(str(uuid4()), current, current, asdict(config), status="skipped", skip_reason="state_busy")
+        return _collect(config, store, source, now=now, clock=clock, run_id=run_id)
+
+
+def _collect(config: Config, store: SQLiteStore, source: ProjectSource,
+            *, now: Callable[[], datetime] = utc_now,
+            clock: Callable[[], float] = monotonic, run_id: Optional[str] = None) -> RunReport:
     run_started = now()
     if run_started.utcoffset() is None:
         raise ValueError("Run time must include a timezone")
     run_started = run_started.astimezone(timezone.utc)
     started = run_started.isoformat()
-    report = RunReport(str(uuid4()), started, None, asdict(config), status="running")
+    report = RunReport(run_id or str(uuid4()), started, None, asdict(config), status="running")
     report.recent_window_start = (run_started - timedelta(days=3)).isoformat()
     report.recent_window_end = started
     report.unfinished_run_ids = [run["id"] for run in store.runs() if run.get("status") == "running"]

@@ -4,11 +4,12 @@ import json
 import sqlite3
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Callable, ContextManager, Literal, Optional
 from urllib.parse import urlsplit
 
 from .identity import canonical_url
-from .models import ChangeKind, RunReport, SourceDeletionResult, SourceLimit
+from .locking import exclusive
+from .models import ChangeKind, Config, RunReport, ScheduleState, SourceDeletionResult, SourceLimit
 
 
 class StorageError(Exception):
@@ -17,6 +18,7 @@ class StorageError(Exception):
 
 class SQLiteStore:
     def __init__(self, path: Path) -> None:
+        self.path = path.resolve()
         path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         existed = path.exists()
         self._db: Optional[sqlite3.Connection] = None
@@ -33,7 +35,7 @@ class SQLiteStore:
             if db.execute("PRAGMA quick_check").fetchone() != ("ok",):
                 raise StorageError("State integrity check failed")
             version = db.execute("PRAGMA user_version").fetchone()
-            if version not in ((1,), (2,), (3,)):
+            if version not in ((1,), (2,), (3,), (4,)):
                 raise StorageError("Unrecognized state schema; refusing to reset it")
             db.execute("SELECT source, id, payload FROM candidates LIMIT 0")
             db.execute("SELECT id, payload FROM runs LIMIT 0")
@@ -48,6 +50,11 @@ class SQLiteStore:
                     db.execute("CREATE TABLE IF NOT EXISTS ended_records (source TEXT, id TEXT, canonical_url TEXT, payload TEXT NOT NULL, PRIMARY KEY(source, id))")
                     db.execute("CREATE INDEX IF NOT EXISTS ended_by_url ON ended_records(source, canonical_url)")
                     db.execute("PRAGMA user_version = 3")
+            if version in ((1,), (2,), (3,)):
+                with db:
+                    db.execute("CREATE TABLE IF NOT EXISTS schedules (id TEXT PRIMARY KEY, payload TEXT NOT NULL)")
+                    db.execute("PRAGMA user_version = 4")
+            db.execute("SELECT id, payload FROM schedules LIMIT 0")
             db.execute("SELECT source, payload FROM source_limits LIMIT 0")
             db.execute("SELECT source, cursor FROM recheck_state LIMIT 0")
             db.execute("SELECT source, id, canonical_url, payload FROM ended_records LIMIT 0")
@@ -62,6 +69,34 @@ class SQLiteStore:
         if self._db is None:
             raise StorageError("Collection state is closed")
         return self._db
+
+    def operation_lock(self, kind: Literal["collection", "schedule"]) -> ContextManager[bool]:
+        return exclusive(self.path.with_name(self.path.name + "." + kind + ".lock"))
+
+    def schedule(self) -> Optional[ScheduleState]:
+        rows = self._read("SELECT payload FROM schedules ORDER BY rowid DESC LIMIT 1")
+        if not rows:
+            return None
+        data = rows[0]
+        data["config"]["queries"] = tuple(data["config"]["queries"])
+        data["config"] = Config(**data["config"])
+        return ScheduleState(**data)
+
+    def update_schedule(self, update: Callable[[Optional[ScheduleState]], ScheduleState]) -> ScheduleState:
+        db = self._connection()
+        try:
+            with db:
+                db.execute("BEGIN IMMEDIATE")
+                previous = self.schedule()
+                before = asdict(previous) if previous is not None else None
+                state = update(previous)
+                if before == asdict(state):
+                    return state
+                db.execute("INSERT INTO schedules VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload",
+                           (state.id, json.dumps(asdict(state), ensure_ascii=False, allow_nan=False)))
+            return state
+        except sqlite3.Error:
+            raise StorageError("Unable to update schedule; transaction rolled back") from None
 
     def source_limit(self) -> SourceLimit:
         rows = self._read("SELECT payload FROM source_limits WHERE source = 'Freelancer'")
@@ -199,6 +234,13 @@ class SQLiteStore:
 
     def delete_source_data(self, source: str, *, project_id: Optional[str] = None,
                            url: Optional[str] = None) -> SourceDeletionResult:
+        with self.operation_lock("collection") as acquired:
+            if not acquired:
+                raise StorageError("Collection state is busy; retry deletion after the active operation")
+            return self._delete_source_data(source, project_id=project_id, url=url)
+
+    def _delete_source_data(self, source: str, *, project_id: Optional[str] = None,
+                            url: Optional[str] = None) -> SourceDeletionResult:
         if (project_id is None) == (url is None):
             raise ValueError("Specify exactly one project ID or URL")
         for value in (source, project_id if project_id is not None else url):

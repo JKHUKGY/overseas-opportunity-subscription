@@ -99,3 +99,27 @@ class RunReport:
     confirmed_ended_count: int = 0
     ended_record_hits: int = 0
     recovered_deletions: int = 0
+
+
+@dataclass
+class ScheduleState:
+    id: str
+    config: Config
+    interval_seconds: float
+    started_at: str
+    next_run_at: str
+    max_runs: Optional[int] = None
+    until: Optional[str] = None
+    status: Literal["active", "paused", "stopped", "completed"] = "active"
+    runs_started: int = 0
+    completed_runs: int = 0
+    inflight_run_id: Optional[str] = None
+    last_run_id: Optional[str] = None
+    last_result: Optional[str] = None
+    events: list[dict[str, Any]] = field(default_factory=list)
+
+
+@dataclass
+class TickResult:
+    status: str
+    schedule: ScheduleState
