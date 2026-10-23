@@ -1,0 +1,874 @@
+{
+  "max_listing_pages": 12,
+  "max_unique_detail_pages": 100,
+  "top_level_page_reads": 111,
+  "resource_request_count": "Not measured; browsers also request page assets.",
+  "events": [
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job",
+      "observed_at": "2026-10-23T02:16:41.693Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "observed_at": "2026-10-23T02:16:43.505Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "observed_at": "2026-10-23T02:16:50.566Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "observed_at": "2026-10-23T02:16:52.037Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "observed_at": "2026-10-23T02:16:53.563Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "observed_at": "2026-10-23T02:16:58.328Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "observed_at": "2026-10-23T02:17:00.489Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "observed_at": "2026-10-23T02:17:01.896Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "observed_at": "2026-10-23T02:17:07.987Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "observed_at": "2026-10-23T02:17:09.488Z",
+      "rows": 15
+    },
+    {
+      "kind": "listing",
+      "url": "https://www.truelancer.com/programming-freelancer-job?page=11&keyword=programming",
+      "observed_at": "2026-10-23T02:17:10.920Z",
+      "rows": 15
+    },
+    {
+      "kind": "detail",
+      "id": "662148",
+      "url": "https://www.truelancer.com/freelance-project/embedded-systems-engineer-for-gps-motorsport-timing-device-662148",
+      "observed_at": "2026-10-23T02:17:45.195Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "661026",
+      "url": "https://www.truelancer.com/freelance-project/just247pipes-expert-needed-for-ai-agent-pipeline-development-661026",
+      "observed_at": "2026-10-23T02:17:46.160Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "661635",
+      "url": "https://www.truelancer.com/freelance-project/freelance-embedded-engineer-for-stm32g031-firmware-661635",
+      "observed_at": "2026-10-23T02:17:47.225Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "660311",
+      "url": "https://www.truelancer.com/freelance-project/i-am-looking-for-a-roblox-luau-developer-for-a-simulator-style-game-660311",
+      "observed_at": "2026-10-23T02:17:48.126Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "659450",
+      "url": "https://www.truelancer.com/freelance-project/excel-macros-automation-and-vba-assignment-help-659450",
+      "observed_at": "2026-10-23T02:17:49.242Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "657914",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-swing-trading-system-with-zerodha-657914",
+      "observed_at": "2026-10-23T02:17:50.260Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "657805",
+      "url": "https://www.truelancer.com/freelance-project/plc-hmi-programming-engineer-for-delta-plc-mumbai-or-pune-and-hyderabad-657805",
+      "observed_at": "2026-10-23T02:17:50.983Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "657521",
+      "url": "https://www.truelancer.com/freelance-project/automated-job-application-workflow-development-657521",
+      "observed_at": "2026-10-23T02:17:52.237Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "657062",
+      "url": "https://www.truelancer.com/freelance-project/ai-bot-developer-for-advanced-ai-solutions-657062",
+      "observed_at": "2026-10-23T02:17:53.210Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "656850",
+      "url": "https://www.truelancer.com/freelance-project/experienced-allen-bradley-plc-programmer-needed-656850",
+      "observed_at": "2026-10-23T02:17:54.112Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "655698",
+      "url": "https://www.truelancer.com/freelance-project/remote-software-developer-for-project-based-role-655698",
+      "observed_at": "2026-10-23T02:18:01.563Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "655913",
+      "url": "https://www.truelancer.com/freelance-project/siemens-plc-programming-and-automation-expert-needed-655913",
+      "observed_at": "2026-10-23T02:18:02.474Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "655203",
+      "url": "https://www.truelancer.com/freelance-project/expert-sap-abap-developer-for-ricefw-project-655203",
+      "observed_at": "2026-10-23T02:18:03.378Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "653011",
+      "url": "https://www.truelancer.com/freelance-project/agentic-ai-engineer-for-multi-agent-system-development-653011",
+      "observed_at": "2026-10-23T02:18:04.323Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "650968",
+      "url": "https://www.truelancer.com/freelance-project/experienced-sketchup-programmer-needed-650968",
+      "observed_at": "2026-10-23T02:18:05.203Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "650726",
+      "url": "https://www.truelancer.com/freelance-project/modification-of-allen-bradley-compactlogix-plc-and-hmi-650726",
+      "observed_at": "2026-10-23T02:18:06.346Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "649361",
+      "url": "https://www.truelancer.com/freelance-project/ai-agentic-coding-evaluator-software-engineering-llm-behavior-analyst-649361",
+      "observed_at": "2026-10-23T02:18:07.442Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "649154",
+      "url": "https://www.truelancer.com/freelance-project/python-game-developer-with-panda3d-expertise-649154",
+      "observed_at": "2026-10-23T02:18:08.380Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "644813",
+      "url": "https://www.truelancer.com/freelance-project/advanced-c-backend-developer-with-graph-rest-api-expertise-644813",
+      "observed_at": "2026-10-23T02:18:09.276Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "644005",
+      "url": "https://www.truelancer.com/freelance-project/chatgpt-programming-and-integration-services-644005",
+      "observed_at": "2026-10-23T02:18:10.233Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "643877",
+      "url": "https://www.truelancer.com/freelance-project/pic-programming-assignment-completion-643877",
+      "observed_at": "2026-10-23T02:18:15.104Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "643004",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-calculator-app-643004",
+      "observed_at": "2026-10-23T02:18:16.018Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "642923",
+      "url": "https://www.truelancer.com/freelance-project/streamlit-weather-analytics-dashboard-with-real-time-api-642923",
+      "observed_at": "2026-10-23T02:18:17.072Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "642709",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-ec-to-ecp-replication-642709",
+      "observed_at": "2026-10-23T02:18:17.961Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "642328",
+      "url": "https://www.truelancer.com/freelance-project/c-to-do-list-management-system-642328",
+      "observed_at": "2026-10-23T02:18:18.861Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "642170",
+      "url": "https://www.truelancer.com/freelance-project/flutter-developer-needed-for-taxi-app-development-642170",
+      "observed_at": "2026-10-23T02:18:19.787Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "639336",
+      "url": "https://www.truelancer.com/freelance-project/embedded-electronics-engineer-for-jacquard-control-system-639336",
+      "observed_at": "2026-10-23T02:18:20.700Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "638909",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-saas-platform-fix-deployment-638909",
+      "observed_at": "2026-10-23T02:18:21.600Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "637338",
+      "url": "https://www.truelancer.com/freelance-project/fix-ui-crash-bug-in-kotlin-library-android-app-637338",
+      "observed_at": "2026-10-23T02:18:22.595Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "636150",
+      "url": "https://www.truelancer.com/freelance-project/python-and-terraform-expert-needed-for-immediate-start-636150",
+      "observed_at": "2026-10-23T02:18:23.487Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "635614",
+      "url": "https://www.truelancer.com/freelance-project/ir-sensor-setup-and-arduino-coding-for-neuroscience-experiment-635614",
+      "observed_at": "2026-10-23T02:18:32.054Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "632831",
+      "url": "https://www.truelancer.com/freelance-project/custom-esc-development-and-integration-632831",
+      "observed_at": "2026-10-23T02:18:32.916Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "632380",
+      "url": "https://www.truelancer.com/freelance-project/real-time-vehicle-path-estimation-module-development-632380",
+      "observed_at": "2026-10-23T02:18:33.997Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "631681",
+      "url": "https://www.truelancer.com/freelance-project/develop-ar-device-with-esp32-like-projector-keyboard-631681",
+      "observed_at": "2026-10-23T02:18:35.089Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "631385",
+      "url": "https://www.truelancer.com/freelance-project/experienced-python-developer-for-real-time-crypto-trading-system-631385",
+      "observed_at": "2026-10-23T02:18:36.021Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "631101",
+      "url": "https://www.truelancer.com/freelance-project/embedded-hardware-and-firmware-developer-for-industrial-products-631101",
+      "observed_at": "2026-10-23T02:18:37.096Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "630457",
+      "url": "https://www.truelancer.com/freelance-project/industrial-automation-engineer-for-siemens-s7-400h-integration-630457",
+      "observed_at": "2026-10-23T02:18:38.030Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "630189",
+      "url": "https://www.truelancer.com/freelance-project/aspnet-and-mobile-app-developers-needed-630189",
+      "observed_at": "2026-10-23T02:18:39.037Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "629561",
+      "url": "https://www.truelancer.com/freelance-project/gis-specialist-for-automated-feature-extraction-from-lidar-629561",
+      "observed_at": "2026-10-23T02:18:40.192Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "629571",
+      "url": "https://www.truelancer.com/freelance-project/gui-tool-for-ann-regression-and-nsga-ii-optimization-629571",
+      "observed_at": "2026-10-23T02:18:41.188Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "628529",
+      "url": "https://www.truelancer.com/freelance-project/python-algo-trader-for-futu-api-strategy-628529",
+      "observed_at": "2026-10-23T02:18:46.167Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "628258",
+      "url": "https://www.truelancer.com/freelance-project/rpg-game-development-628258",
+      "observed_at": "2026-10-23T02:18:47.198Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "627518",
+      "url": "https://www.truelancer.com/freelance-project/payroll-software-developer-for-security-agency-627518",
+      "observed_at": "2026-10-23T02:18:47.925Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "627215",
+      "url": "https://www.truelancer.com/freelance-project/experienced-odoo-sh-v19-developer-for-accounting-module-627215",
+      "observed_at": "2026-10-23T02:18:48.671Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "626837",
+      "url": "https://www.truelancer.com/freelance-project/visual-avatar-work-as-ai-agent-626837",
+      "observed_at": "2026-10-23T02:18:49.544Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "626774",
+      "url": "https://www.truelancer.com/freelance-project/freelance-software-developer-for-fleet-management-platform-626774",
+      "observed_at": "2026-10-23T02:18:50.738Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "625444",
+      "url": "https://www.truelancer.com/freelance-project/plc-porgrammer-for-industrial-washing-line-625444",
+      "observed_at": "2026-10-23T02:18:51.677Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "625486",
+      "url": "https://www.truelancer.com/freelance-project/ai-automation-expert-for-workflow-chatbot-integration-625486",
+      "observed_at": "2026-10-23T02:18:52.619Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "625451",
+      "url": "https://www.truelancer.com/freelance-project/microsoft-access-database-development-625451",
+      "observed_at": "2026-10-23T02:18:53.645Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "624662",
+      "url": "https://www.truelancer.com/freelance-project/ic-programming-for-toy-drone-development-624662",
+      "observed_at": "2026-10-23T02:18:54.564Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "624130",
+      "url": "https://www.truelancer.com/freelance-project/customized-firmware-development-for-pan2416av-pan7420s7fa-ics-624130",
+      "observed_at": "2026-10-23T02:18:58.109Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "622337",
+      "url": "https://www.truelancer.com/freelance-project/experienced-esp32-firmware-developer-for-iot-devices-622337",
+      "observed_at": "2026-10-23T02:18:59.159Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "621796",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-needed-to-fix-trading-bot-621796",
+      "observed_at": "2026-10-23T02:19:00.164Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "621480",
+      "url": "https://www.truelancer.com/freelance-project/looking-for-an-expert-mt5-programmer-with-strong-mathematical-skills-621480",
+      "observed_at": "2026-10-23T02:19:01.164Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "621294",
+      "url": "https://www.truelancer.com/freelance-project/hardware-firmware-embedded-engineer-621294",
+      "observed_at": "2026-10-23T02:19:01.844Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "621203",
+      "url": "https://www.truelancer.com/freelance-project/frontend-website-and-app-developer-621203",
+      "observed_at": "2026-10-23T02:19:02.823Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "620274",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-rap-and-private-cloud-620274",
+      "observed_at": "2026-10-23T02:19:03.768Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "617050",
+      "url": "https://www.truelancer.com/freelance-project/i-need-someone-to-create-a-navigationinformation-menu-for-archviz-vr-in-unreal-engine-5-617050",
+      "observed_at": "2026-10-23T02:19:04.717Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "616470",
+      "url": "https://www.truelancer.com/freelance-project/a-small-product-with-atmega328p-micro-controller-1-day-programming-efforts-sufficient-616470",
+      "observed_at": "2026-10-23T02:19:05.597Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "616390",
+      "url": "https://www.truelancer.com/freelance-project/advanced-development-skills-required-full-scratch-development-stripe-payment-seo-support-616390",
+      "observed_at": "2026-10-23T02:19:06.516Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "616078",
+      "url": "https://www.truelancer.com/freelance-project/ai-voice-assistant-using-esp32-616078",
+      "observed_at": "2026-10-23T02:19:12.875Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "614974",
+      "url": "https://www.truelancer.com/freelance-project/python-fastapi-backend-developer-614974",
+      "observed_at": "2026-10-23T02:19:13.655Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "614285",
+      "url": "https://www.truelancer.com/freelance-project/redesign-lead-generation-landing-page-614285",
+      "observed_at": "2026-10-23T02:19:14.694Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "613677",
+      "url": "https://www.truelancer.com/freelance-project/qa-automation-testing-613677",
+      "observed_at": "2026-10-23T02:19:15.650Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "613494",
+      "url": "https://www.truelancer.com/freelance-project/upgrade-pcb-and-software-613494",
+      "observed_at": "2026-10-23T02:19:16.524Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "613358",
+      "url": "https://www.truelancer.com/freelance-project/looking-for-api-automation-expert-with-rest-assured-java-postman-pogo-classes-experience-613358",
+      "observed_at": "2026-10-23T02:19:17.445Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "613294",
+      "url": "https://www.truelancer.com/freelance-project/writing-an-algorithm-to-communicate-2-control-panels-to-simulate-a-hybrid-inverter-613294",
+      "observed_at": "2026-10-23T02:19:18.349Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "576752",
+      "url": "https://www.truelancer.com/freelance-project/a-mobile-app-developer-576752",
+      "observed_at": "2026-10-23T02:19:19.320Z",
+      "blocked": false,
+      "has_description": false
+    },
+    {
+      "kind": "detail",
+      "id": "610383",
+      "url": "https://www.truelancer.com/freelance-project/im-looking-for-a-seasoned-developer-to-take-full-ownership-of-a-macos-desktop-application-610383",
+      "observed_at": "2026-10-23T02:19:20.613Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "608274",
+      "url": "https://www.truelancer.com/freelance-project/unity-game-developer-required-608274",
+      "observed_at": "2026-10-23T02:19:21.314Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "607470",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-btp-rap-607470",
+      "observed_at": "2026-10-23T02:19:35.223Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "607305",
+      "url": "https://www.truelancer.com/freelance-project/unity-3d-battle-game-development-project-607305",
+      "observed_at": "2026-10-23T02:19:36.365Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "606766",
+      "url": "https://www.truelancer.com/freelance-project/cnc-programming-fanuc-robodrill-606766",
+      "observed_at": "2026-10-23T02:19:37.299Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "605546",
+      "url": "https://www.truelancer.com/freelance-project/gl10-plc-programming-communication-build-communicate-to-raspberry-pi-4-605546",
+      "observed_at": "2026-10-23T02:19:38.255Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "599963",
+      "url": "https://www.truelancer.com/freelance-project/professional-in-ada-programming-language-599963",
+      "observed_at": "2026-10-23T02:19:39.233Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "599099",
+      "url": "https://www.truelancer.com/freelance-project/reacttypescript-front-end-599099",
+      "observed_at": "2026-10-23T02:19:40.204Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "598505",
+      "url": "https://www.truelancer.com/freelance-project/plc-programming-for-boiler-598505",
+      "observed_at": "2026-10-23T02:19:41.546Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "597591",
+      "url": "https://www.truelancer.com/freelance-project/social-chat-application-597591",
+      "observed_at": "2026-10-23T02:19:42.445Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "592485",
+      "url": "https://www.truelancer.com/freelance-project/applied-time-series-analysis-project-with-rstudio-592485",
+      "observed_at": "2026-10-23T02:19:43.422Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "591770",
+      "url": "https://www.truelancer.com/freelance-project/data-engineer-for-product-analytics-591770",
+      "observed_at": "2026-10-23T02:19:44.333Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "591096",
+      "url": "https://www.truelancer.com/freelance-project/semi-autonomous-mobile-robot-development-591096",
+      "observed_at": "2026-10-23T02:19:50.418Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "589453",
+      "url": "https://www.truelancer.com/freelance-project/3d-simulation-of-solar-cell-with-comsol-program-589453",
+      "observed_at": "2026-10-23T02:19:51.394Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "589272",
+      "url": "https://www.truelancer.com/freelance-project/batch-generation-of-sky-maps-using-stellarium-589272",
+      "observed_at": "2026-10-23T02:19:53.086Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "589084",
+      "url": "https://www.truelancer.com/freelance-project/python-sqlalchemy-microservices-aws-lambda-api-programming-589084",
+      "observed_at": "2026-10-23T02:19:53.989Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "587758",
+      "url": "https://www.truelancer.com/freelance-project/need-a-developer-for-soon-to-be-launched-rental-marketplace-based-on-wordpress-587758",
+      "observed_at": "2026-10-23T02:19:54.930Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "586506",
+      "url": "https://www.truelancer.com/freelance-project/need-an-experienced-shopify-developer-for-our-project-only-india-586506",
+      "observed_at": "2026-10-23T02:19:55.867Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "582424",
+      "url": "https://www.truelancer.com/freelance-project/conversion-of-cuda-based-github-code-to-google-colab-582424",
+      "observed_at": "2026-10-23T02:19:56.935Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "581316",
+      "url": "https://www.truelancer.com/freelance-project/i-need-to-fix-the-file-it-used-to-work-and-now-it-does-not-start-i-made-a-site-to-order-581316",
+      "observed_at": "2026-10-23T02:19:57.965Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "578876",
+      "url": "https://www.truelancer.com/freelance-project/need-a-android-app-developer-with-kotlin-and-springboot-578876",
+      "observed_at": "2026-10-23T02:19:59.212Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "578332",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-expert-developer-578332",
+      "observed_at": "2026-10-23T02:20:00.136Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "578011",
+      "url": "https://www.truelancer.com/freelance-project/stm32-firmware-development-for-adaptive-motorcycle-steering-damper-578011",
+      "observed_at": "2026-10-23T02:20:04.895Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "577672",
+      "url": "https://www.truelancer.com/freelance-project/waste-sorting-using-arduino-577672",
+      "observed_at": "2026-10-23T02:20:06.076Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "576238",
+      "url": "https://www.truelancer.com/freelance-project/need-an-e-commerce-website-developers-for-various-projects-576238",
+      "observed_at": "2026-10-23T02:20:07.353Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "576062",
+      "url": "https://www.truelancer.com/freelance-project/embedded-developer-for-esp32-based-quadcopter-flight-control-576062",
+      "observed_at": "2026-10-23T02:20:08.600Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "575894",
+      "url": "https://www.truelancer.com/freelance-project/sr-qa-automation-engineer-575894",
+      "observed_at": "2026-10-23T02:20:09.550Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "575691",
+      "url": "https://www.truelancer.com/freelance-project/it-is-an-email-address-validation-service-interface-of-a-lead-management-application-575691",
+      "observed_at": "2026-10-23T02:20:10.498Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "575688",
+      "url": "https://www.truelancer.com/freelance-project/i-need-help-for-plc-program-and-hmi-siemens-step-7-wincc-flexible-575688",
+      "observed_at": "2026-10-23T02:20:11.603Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "574379",
+      "url": "https://www.truelancer.com/freelance-project/design-embedded-circuits-and-programming-574379",
+      "observed_at": "2026-10-23T02:20:12.511Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "574604",
+      "url": "https://www.truelancer.com/freelance-project/parametric-fanuc-programming-574604",
+      "observed_at": "2026-10-23T02:20:13.457Z",
+      "blocked": false,
+      "has_description": true
+    },
+    {
+      "kind": "detail",
+      "id": "573779",
+      "url": "https://www.truelancer.com/freelance-project/need-a-android-app-developer-573779",
+      "observed_at": "2026-10-23T02:20:14.470Z",
+      "blocked": false,
+      "has_description": true
+    }
+  ]
+}

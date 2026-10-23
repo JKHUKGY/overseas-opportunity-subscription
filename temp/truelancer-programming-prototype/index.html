@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- PROTOTYPE: reuse the existing candidate browser to test a real Truelancer snapshot. -->
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Truelancer 编程项目 · 本地原型</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="prototype.css">
+  <script src="data.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="index.html"><span class="brand-symbol">拾</span><span>机会观察室<small>OPPORTUNITY LAB</small></span></a>
+  <div class="side-label">TRUELANCER · 一次性原型</div>
+  <div class="nav-item active"><span>▦</span> 编程项目 <b id="nav-count">—</b></div>
+  <a class="nav-item" href="truelancer-snapshot.json" download><span>↓</span> 下载这次快照</a>
+  <button class="nav-item" id="show-evidence"><span>◷</span> 查看测试记录</button>
+  <section class="experiment"><span class="eyebrow">本次验证</span><h3>真实数据，实际筛选</h3><p>看看公开项目能否支撑一个实用的个人选单页面。</p><div class="sample-progress"><span id="progress-bar"></span></div><div class="progress-caption" id="progress-caption">读取本地快照中</div></section>
+  <div class="side-bottom"><span class="status-dot"></span> 本地个人测试<p>来源 Truelancer · 公开页面<br>静态快照 · 未启动持续采集</p></div>
+</aside>
+<main>
+  <header class="topbar"><span>来源实验 <span class="slash">/</span> Truelancer</span><span class="local-badge">PROTOTYPE · LOCAL ONLY</span></header>
+  <section class="heading"><div><span class="eyebrow">REAL PROJECTS, ONE SNAPSHOT</span><h1>找到值得细看的编程项目<span class="title-dot">.</span></h1><p>阅读中文摘要，核对预算与地区要求，再去原帖了解详情。</p></div><button id="refresh" class="button secondary">↻ 刷新本地快照</button></section>
+  <section class="metrics" aria-label="测试统计">
+    <div><span>保留项目</span><strong id="total-count">—</strong><small>100 个详情页逐条核查</small></div>
+    <div><span>最近 30 天发布</span><strong id="recent-count">—</strong><small>相对于本次快照时间</small></div>
+    <div><span>有地区或现场要求</span><strong id="region-count">—</strong><small>包含明确限制与优先条件</small></div>
+    <div><span>已检查详情页</span><strong id="checked-count">—</strong><small id="collected-time">—</small></div>
+  </section>
+  <div class="snapshot-notice" id="snapshot-note"></div>
+  <section class="workspace">
+    <div class="list-pane">
+      <div class="list-heading"><h2>候选项目 <span id="result-count">—</span></h2><span class="source-label">Truelancer</span></div>
+      <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="search" type="search" placeholder="搜索中文摘要、英文标题、技能或 ID" aria-label="搜索项目"><kbd>⌘ K</kbd></label>
+      <div class="filters">
+        <select id="category" aria-label="开发类别"><option value="">全部类别</option></select>
+        <select id="age" aria-label="发布时间"><option value="">全部发布时间</option><option value="30">近 30 天</option><option value="90">近 90 天</option><option value="365">近一年</option><option value="older">一年以前</option></select>
+        <select id="region" aria-label="地区要求"><option value="">全部地区要求</option><option value="unspecified">地域未说明</option><option value="restricted">有明确地区限制</option><option value="preferred">有地区优先条件</option><option value="onsite">涉及现场工作</option><option value="specified">明确列出多个地区</option></select>
+        <select id="pricing" aria-label="计价方式"><option value="">全部计价方式</option><option value="fixed">固定价</option><option value="hourly">按小时</option></select>
+        <select id="currency" aria-label="原始币种"><option value="">全部币种</option><option value="₹">₹ 印度卢比</option><option value="$">$ 符号（代码未披露）</option></select>
+        <select id="status" aria-label="平台状态"><option value="">全部平台状态</option><option value="Active">Active</option><option value="Active & Freezed">Active & Freezed</option></select>
+      </div>
+      <div class="filter-row"><select id="sort" aria-label="排序"><option value="newest">最新发布在前</option><option value="oldest">最早发布在前</option></select><button id="reset" class="text-button">重置筛选</button></div>
+      <div class="results" id="results" aria-live="polite"></div>
+      <div class="pagination"><span id="page-caption"></span><div><button id="prev" aria-label="上一页">←</button><span id="page-number"></span><button id="next" aria-label="下一页">→</button></div></div>
+    </div>
+    <article class="detail-pane" id="detail" aria-label="项目详情"></article>
+  </section>
+  <footer><span>快照仅覆盖本次访问的公开项目；中文摘要为概括，完整需求请查看原帖。</span><span>Active ≠ 已确认仍可接单</span></footer>
+</main>
+<dialog id="evidence"><div class="dialog-top"><div><span class="eyebrow">BOUNDED EXPERIMENT</span><h2>这次测试取得了什么？</h2></div><button id="close-evidence" class="icon-button" aria-label="关闭测试记录">×</button></div><div id="evidence-body"></div></dialog>
+</body></html>

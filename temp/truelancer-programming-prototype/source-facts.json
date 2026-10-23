@@ -1,0 +1,2851 @@
+{
+  "started_at": "2026-10-23T02:16:34.466Z",
+  "finished_at": "2026-10-23T02:20:57.945Z",
+  "records": [
+    {
+      "id": "662148",
+      "title": "Embedded Systems Engineer for GPS Motorsport Timing Device",
+      "url": "https://www.truelancer.com/freelance-project/embedded-systems-engineer-for-gps-motorsport-timing-device-662148",
+      "observed_at": "2026-10-23T02:17:45.195Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 51000",
+      "estimated_hours": null,
+      "list_budget_raw": "$520",
+      "published": {
+        "datetime": "1792066521000",
+        "relative": "8 days ago",
+        "title": "2026-10-15T05:15:21-07:00"
+      },
+      "skills": [
+        "Electronics",
+        "Embedded Systems",
+        "Microcontroller Programming",
+        "PCB Design"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Embedded Systems Engineer to develop a GPS-synchronized motorsport timing device. The device must feature a digital clock, automatic vehicle detection using two sensors at start and finish points, and deliver high-precision timing accurate to the microsecond level. The project encompasses hardware design, PCB development, firmware programming, GPS integration, and the construction of one fully functional prototype. Project Scope & Key Tasks: Design and develop embedded hardware including PCB layout for the timing device. Integrate GPS module for accurate time synchronization. Impleme"
+    },
+    {
+      "id": "661026",
+      "title": "Just247Pipes Expert Needed for AI Agent Pipeline Development",
+      "url": "https://www.truelancer.com/freelance-project/just247pipes-expert-needed-for-ai-agent-pipeline-development-661026",
+      "observed_at": "2026-10-23T02:17:46.160Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 1000",
+      "estimated_hours": null,
+      "list_budget_raw": "$1000",
+      "published": {
+        "datetime": "1791309433000",
+        "relative": "16 days ago",
+        "title": "2026-10-06T10:57:13-07:00"
+      },
+      "skills": [
+        "Python",
+        "AI Automation",
+        "AI Pipelines"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Just247Pipes developer to help transform our daily automation pipelines into a team of AI agents. Project includes building agents to handle routine tasks such as reading emails, data entry, sending reports, chat assistants for customer support, sales, and internal queries, as well as agents that score, route, recommend, and explain their decisions. Additionally, you will develop custom pipelines tailored to our specific processes. Requirements: Proven hands-on experience with Just247Pipes (please share examples of pipelines you've built) Strong skills in RAG and LLM technologies (Op"
+    },
+    {
+      "id": "661635",
+      "title": "Freelance Embedded Engineer for STM32G031 Firmware",
+      "url": "https://www.truelancer.com/freelance-project/freelance-embedded-engineer-for-stm32g031-firmware-661635",
+      "observed_at": "2026-10-23T02:17:47.225Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 5000",
+      "estimated_hours": null,
+      "list_budget_raw": "$51",
+      "published": {
+        "datetime": "1791725895000",
+        "relative": "12 days ago",
+        "title": "2026-10-11T06:38:15-07:00"
+      },
+      "skills": [
+        "Arduino",
+        "Embedded C",
+        "Embedded Systems",
+        "PCB Design",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled freelance embedded engineer based in Bangalore to develop and flash firmware for the STM32G031 microcontroller. The project involves firmware development, debugging, and flashing to STM32G031 devices. Recommended Tools & Technology: STM32CubeIDE, ST-Link Programmer, Embedded C, STM32CubeMX. I am looking for a freelance embedded firmware engineer in Bangalore to write firmware for, and flash, a compact electronic device. The project is confidential; I will share the full specification and schematics after an NDA. Project summary (generic) - Product: 3D Electronic Device, 4-layer round PCB,"
+    },
+    {
+      "id": "660311",
+      "title": "I am looking for a Roblox Luau developer for a simulator style game",
+      "url": "https://www.truelancer.com/freelance-project/i-am-looking-for-a-roblox-luau-developer-for-a-simulator-style-game-660311",
+      "observed_at": "2026-10-23T02:17:48.126Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 50",
+      "estimated_hours": null,
+      "list_budget_raw": "$50",
+      "published": {
+        "datetime": "1790814099000",
+        "relative": "22 days ago",
+        "title": "2026-09-30T17:21:39-07:00"
+      },
+      "skills": [
+        "Engineering",
+        "Game Design",
+        "Game Development"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Roblox Game Development Specification — “Steal an Egg Brainrot” I am looking for a versatile Roblox developer (Luau) who can handle both map creation (building the zones) and programming all systems for a Simulator-style game: “Steal an Egg Brainrot.” "
+    },
+    {
+      "id": "659450",
+      "title": "Excel Macros Automation and VBA Assignment Help",
+      "url": "https://www.truelancer.com/freelance-project/excel-macros-automation-and-vba-assignment-help-659450",
+      "observed_at": "2026-10-23T02:17:49.242Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$5",
+      "published": {
+        "datetime": "1790213128000",
+        "relative": "a month ago",
+        "title": "2026-09-23T18:25:28-07:00"
+      },
+      "skills": [
+        "Excel",
+        "Accounts Receivable Management",
+        "Excel VBA",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an expert in Excel Macros automation and VBA to assist with an assignment.The project involves creating and automating macros using VBA to streamline Excel tasks efficiently.Ideal candidate should have strong experience in Excel VBA programming and automation techniques."
+    },
+    {
+      "id": "657914",
+      "title": "Python Developer for Swing Trading System with Zerodha",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-swing-trading-system-with-zerodha-657914",
+      "observed_at": "2026-10-23T02:17:50.260Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 100000",
+      "estimated_hours": null,
+      "list_budget_raw": "$1020",
+      "published": {
+        "datetime": "1788981174000",
+        "relative": "a month ago",
+        "title": "2026-09-09T12:12:54-07:00"
+      },
+      "skills": [
+        "Python"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": "Freelancers only from India can apply for this project.",
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Python developer to build a long-only swing-trading system for Indian equities. This system will hold trades for approximately 4–20 trading days and is not intended for intraday trading.Project Scope & Key Tasks:1. Review and suggest improvements for an existing company-selection and ranking module. The implementation of recommendations will be handled by the original coder of that module.2. Develop, backtest, and compare multiple swing-trading strategies using historical intraday data. This includes implementing risk management, portfolio controls, and a comprehensive results dashbo"
+    },
+    {
+      "id": "657805",
+      "title": "PLC & HMI Programming Engineer for Delta PLC Mumbai or Pune and Hyderabad",
+      "url": "https://www.truelancer.com/freelance-project/plc-hmi-programming-engineer-for-delta-plc-mumbai-or-pune-and-hyderabad-657805",
+      "observed_at": "2026-10-23T02:17:50.983Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 15000",
+      "estimated_hours": null,
+      "list_budget_raw": "$153",
+      "published": {
+        "datetime": "1788929177000",
+        "relative": "a month ago",
+        "title": "2026-09-08T21:46:17-07:00"
+      },
+      "skills": [
+        "PLC SCADA",
+        "PLC Programming"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": "Freelancers only from India can apply for this project.",
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for an experienced PLC programming engineer skilled in Delta PLC and HMI programming.The candidate will be required to visit the site in Mumbai or Pune, upload the program, and perform on-site testing to ensure proper functionality.Strong knowledge of Delta PLC systems and hands-on experience with HMI programming is essential."
+    },
+    {
+      "id": "657521",
+      "title": "Automated Job Application Workflow Development",
+      "url": "https://www.truelancer.com/freelance-project/automated-job-application-workflow-development-657521",
+      "observed_at": "2026-10-23T02:17:52.237Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 100",
+      "estimated_hours": null,
+      "list_budget_raw": "$100",
+      "published": {
+        "datetime": "1788718212000",
+        "relative": "2 months ago",
+        "title": "2026-09-06T11:10:12-07:00"
+      },
+      "skills": [
+        "Web Scraping",
+        "Python",
+        "Data Entry"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled developer to create an automated job application workflow bot that streamlines the entire job application process from uploading job lists to follow-up tracking.Project Scope & Key Tasks:- Upload and parse job lists from Excel, CSV, or pasted links capturing company, job title, location, salary, URL, and status.- Upload master documents including resume, cover letter, and LinkedIn profile details.- Retrieve and extract full job descriptions from job URLs, capturing requirements, responsibilities, skills, education, certifications, and ATS keywords.- Analyze job descriptions against the ma"
+    },
+    {
+      "id": "657062",
+      "title": "AI Bot Developer for Advanced AI Solutions",
+      "url": "https://www.truelancer.com/freelance-project/ai-bot-developer-for-advanced-ai-solutions-657062",
+      "observed_at": "2026-10-23T02:17:53.210Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 10",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1788394594000",
+        "relative": "2 months ago",
+        "title": "2026-09-02T17:16:34-07:00"
+      },
+      "skills": [
+        "Javascript",
+        "Python",
+        "Artificial Intelligence",
+        "SEO",
+        "Social Media Management"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a creative AI Bot Developer to design and build modern AI solutions that help businesses save time, enhance customer service, automate tasks, and increase sales.Project Scope & Key Tasks:- Develop project-based AI bots using cutting-edge technologies including ChatGPT, OpenAI API, AI agents, multi-agent workflows, RAG knowledge-base chatbots, and Voice AI agents.- Create bots for platforms such as WhatsApp, websites, email, and social media.- Implement workflow automation using tools like n8n, Make, Zapier, or similar.- Utilize programming languages such as Python and JavaScript, integrate APIs, ma"
+    },
+    {
+      "id": "656850",
+      "title": "Experienced Allen Bradley PLC Programmer Needed",
+      "url": "https://www.truelancer.com/freelance-project/experienced-allen-bradley-plc-programmer-needed-656850",
+      "observed_at": "2026-10-23T02:17:54.112Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$500",
+      "published": {
+        "datetime": "1788276263000",
+        "relative": "2 months ago",
+        "title": "2026-09-01T08:24:23-07:00"
+      },
+      "skills": [
+        "Cisco Certified Design Associate CCDA",
+        "PLC SCADA",
+        "PLC Programming",
+        "PLC Programming",
+        "Allen Bradley PLC"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for a skilled professional with experience in Allen Bradley PLC programming.The candidate should be proficient in programming, troubleshooting, and maintaining Allen Bradley PLC systems."
+    },
+    {
+      "id": "655698",
+      "title": "Remote Software Developer for Project Based Role",
+      "url": "https://www.truelancer.com/freelance-project/remote-software-developer-for-project-based-role-655698",
+      "observed_at": "2026-10-23T02:18:01.563Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 17/ Hour",
+      "estimated_hours": "19",
+      "list_budget_raw": "$17/ Hr",
+      "published": {
+        "datetime": "1787477464000",
+        "relative": "2 months ago",
+        "title": "2026-08-23T02:31:04-07:00"
+      },
+      "skills": [
+        "Javascript",
+        "Java",
+        "Python",
+        "Software Developer"
+      ],
+      "listing_page": 1,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a remote software developer to join our team on a project basis.The ideal candidate should have good problem-solving skills, strong communication and teamwork abilities, and be comfortable working independently in a remote environment.Applicants must have solid knowledge of at least one programming language and be able to understand projects, make decisions, and move work forward without constant supervision.Familiarity with AI tools is a plus, but candidates should be able to work independently without relying solely on AI.Location eligibility includes candidates from the European Union, United Ki"
+    },
+    {
+      "id": "655913",
+      "title": "Siemens PLC Programming and Automation Expert Needed",
+      "url": "https://www.truelancer.com/freelance-project/siemens-plc-programming-and-automation-expert-needed-655913",
+      "observed_at": "2026-10-23T02:18:02.474Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 5000",
+      "estimated_hours": null,
+      "list_budget_raw": "$51",
+      "published": {
+        "datetime": "1787649859000",
+        "relative": "2 months ago",
+        "title": "2026-08-25T02:24:19-07:00"
+      },
+      "skills": [
+        "Game Design",
+        "Game Development",
+        "PLC Programming",
+        "Siemens NX"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for an experienced professional skilled in Siemens PLC programming, HMI development, and automation systems.The ideal candidate should have hands-on experience with Siemens PLCs and be proficient in designing and implementing automation solutions.Experience with HMI interfaces and integration with PLCs is essential."
+    },
+    {
+      "id": "655203",
+      "title": "Expert SAP ABAP Developer for RICEFW Project",
+      "url": "https://www.truelancer.com/freelance-project/expert-sap-abap-developer-for-ricefw-project-655203",
+      "observed_at": "2026-10-23T02:18:03.378Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 500/ Hour",
+      "estimated_hours": "1",
+      "list_budget_raw": "$5/ Hr",
+      "published": {
+        "datetime": "1787132515000",
+        "relative": "2 months ago",
+        "title": "2026-08-19T02:41:55-07:00"
+      },
+      "skills": [
+        "Performance Tuning",
+        "Project Management",
+        "SAP ABAP"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an expert SAP ABAP developer to assist with project development, complex debugging, and managing the full lifecycle of RICEFW (Reports, Interfaces, Conversions, Enhancements, Forms, and Workflows) objects.The ideal candidate will have extensive experience in SAP ABAP programming, strong problem-solving skills, and the ability to define the scope, deliverables, and requirements for SAP development projects.Responsibilities include collaborating on project scope definition, developing and debugging ABAP code, and ensuring quality delivery of RICEFW objects throughout the project lifecycle."
+    },
+    {
+      "id": "653011",
+      "title": "Agentic AI Engineer for Multi Agent System Development",
+      "url": "https://www.truelancer.com/freelance-project/agentic-ai-engineer-for-multi-agent-system-development-653011",
+      "observed_at": "2026-10-23T02:18:04.323Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1785569663000",
+        "relative": "3 months ago",
+        "title": "2026-08-01T00:34:23-07:00"
+      },
+      "skills": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "AI Agent Workflows"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Agentic AI Engineer to design and develop a sophisticated multi-agent system. The ideal candidate will have expertise in artificial intelligence, multi-agent architectures, and system integration to build autonomous agents that collaborate effectively to achieve complex tasks.Project Scope & Key Tasks:- Design and implement a multi-agent system architecture tailored to project requirements.- Develop autonomous agents with capabilities for communication, coordination, and decision-making.- Integrate AI algorithms and machine learning models to enhance agent intelligence and adaptabili"
+    },
+    {
+      "id": "650968",
+      "title": "Experienced SketchUp Programmer Needed",
+      "url": "https://www.truelancer.com/freelance-project/experienced-sketchup-programmer-needed-650968",
+      "observed_at": "2026-10-23T02:18:05.203Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 300",
+      "estimated_hours": null,
+      "list_budget_raw": "$3",
+      "published": {
+        "datetime": "1784182814000",
+        "relative": "3 months ago",
+        "title": "2026-07-15T23:20:14-07:00"
+      },
+      "skills": [
+        "3D Modeling",
+        "3D Rendering",
+        "SketchUp",
+        "SketchUp",
+        "SEO"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an experienced SketchUp programmer to assist with SketchUp related projects.Please have expertise in SketchUp programming and related 3D modeling skills."
+    },
+    {
+      "id": "650726",
+      "title": "Modification of Allen Bradley CompactLogix PLC and HMI",
+      "url": "https://www.truelancer.com/freelance-project/modification-of-allen-bradley-compactlogix-plc-and-hmi-650726",
+      "observed_at": "2026-10-23T02:18:06.346Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 5000",
+      "estimated_hours": null,
+      "list_budget_raw": "$51",
+      "published": {
+        "datetime": "1784009740000",
+        "relative": "3 months ago",
+        "title": "2026-07-13T23:15:40-07:00"
+      },
+      "skills": [
+        "Energy Engineering",
+        "PLC SCADA",
+        "PLC Programming"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We require an experienced professional to support for modify an existing program in Allen-Bradley CompactLogix PLC and HMI systems.The project involves updating and optimizing the current PLC logic and HMI interface to meet new operational requirements.Expertise in Allen-Bradley CompactLogix programming and HMI configuration is essential."
+    },
+    {
+      "id": "649361",
+      "title": "AI Agentic Coding Evaluator Software Engineering & LLM Behavior Analyst",
+      "url": "https://www.truelancer.com/freelance-project/ai-agentic-coding-evaluator-software-engineering-llm-behavior-analyst-649361",
+      "observed_at": "2026-10-23T02:18:07.442Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 3/ Hour",
+      "estimated_hours": "5",
+      "list_budget_raw": "$3/ Hr",
+      "published": {
+        "datetime": "1783050046000",
+        "relative": "4 months ago",
+        "title": "2026-07-02T20:40:46-07:00"
+      },
+      "skills": [
+        "Python",
+        "QA Engineering"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Job SummaryEvaluate and compare the behavior of large language models (LLMs) performing real-world software engineering tasks. This role combines software engineering knowledge with behavioral evaluation to assess how AI systems investigate, reason about, modify, and communicate during coding workflows. The primary objective is to evaluate model behavior rather than software correctness, while leveraging software engineering expertise to understand the technical context.Key ResponsibilitiesEvaluate complete coding transcripts from two AI models independently solving the same software engineering task.Analyze how "
+    },
+    {
+      "id": "649154",
+      "title": "Python Game Developer with Panda3D Expertise",
+      "url": "https://www.truelancer.com/freelance-project/python-game-developer-with-panda3d-expertise-649154",
+      "observed_at": "2026-10-23T02:18:08.380Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 5000/ Hour",
+      "estimated_hours": "20",
+      "list_budget_raw": "$51/ Hr",
+      "published": {
+        "datetime": "1782896864000",
+        "relative": "4 months ago",
+        "title": "2026-07-01T02:07:44-07:00"
+      },
+      "skills": [
+        "Python",
+        "Git",
+        "Game Programming",
+        "SEO",
+        "SEO Keyword Research"
+      ],
+      "listing_page": 2,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=2&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Job DescriptionJob Title: Python Game Developer (Panda3D)Job Type: ContractLocation: RemoteJob Summary: In this role, you'll apply your expertise to help train next-generation AI systems. Your work will shape how models learn, reason, and perform through high-quality, real-world input. No prior experience in AI is required — your domain knowledge is what matters.Key Responsibilities:• Design, develop, and optimize 3D game simulations and environments using Panda3D for AI training applications.• Collaborate with multidisciplinary teams to transform requirements into technical solutions.• Implement, maintain, and d"
+    },
+    {
+      "id": "644813",
+      "title": "Advanced C++ Backend Developer with Graph & REST API Expertise",
+      "url": "https://www.truelancer.com/freelance-project/advanced-c-backend-developer-with-graph-rest-api-expertise-644813",
+      "observed_at": "2026-10-23T02:18:09.276Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 3/ Hour",
+      "estimated_hours": "2",
+      "list_budget_raw": "$3/ Hr",
+      "published": {
+        "datetime": "1779980516000",
+        "relative": "5 months ago",
+        "title": "2026-05-28T08:01:56-07:00"
+      },
+      "skills": [
+        "Data Processing",
+        "API Development",
+        "C++",
+        "SEO",
+        "SEO Keyword Research"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Seeking an expert C++ developer proficient in modern C++ standards (C++11 to C++20) with deep knowledge of templates, metaprogramming, STL internals, smart pointers, RAII, move semantics, and memory management.Must have strong experience in multithreading, concurrency, mutexes, atomics, condition variables, lambda expressions, exception safety, virtual functions, polymorphism, design patterns, OOP, and SOLID principles.Expertise in data structures and algorithms including trees, binary search trees, AVL/red-black trees, heaps, hash maps, tries, linked lists, dynamic programming, graph algorithms (BFS, DFS, Dijkst"
+    },
+    {
+      "id": "644005",
+      "title": "ChatGPT Programming and Integration Services",
+      "url": "https://www.truelancer.com/freelance-project/chatgpt-programming-and-integration-services-644005",
+      "observed_at": "2026-10-23T02:18:10.233Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$5",
+      "published": {
+        "datetime": "1779346290000",
+        "relative": "5 months ago",
+        "title": "2026-05-20T23:51:30-07:00"
+      },
+      "skills": [
+        "Javascript",
+        "Python",
+        "Artificial Intelligence",
+        "SEO",
+        "SEO Keyword Research"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced developer to provide ChatGPT programming and integration services for various projects. The ideal freelancer will have expertise in AI programming, natural language processing, and API integration to help implement and customize ChatGPT solutions tailored to project requirements.Project Scope & Key Tasks:Develop and integrate ChatGPT-based conversational AI into client projects.Customize ChatGPT responses and behavior according to project needs.Implement API connections and ensure seamless communication between ChatGPT and other systems.Test and optimize ChatGPT performance for accur"
+    },
+    {
+      "id": "643877",
+      "title": "PIC Programming Assignment Completion",
+      "url": "https://www.truelancer.com/freelance-project/pic-programming-assignment-completion-643877",
+      "observed_at": "2026-10-23T02:18:15.104Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 900",
+      "estimated_hours": null,
+      "list_budget_raw": "$9",
+      "published": {
+        "datetime": "1779265178000",
+        "relative": "5 months ago",
+        "title": "2026-05-20T01:19:38-07:00"
+      },
+      "skills": [
+        "C Programming",
+        "PIC Programming"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I need assistance completing my PIC Programming assignment (3 assignments) which contains multiple coding questions.The deliverables should be arranged in the following order: Question → Code → Output Screenshot.take help from chatgpt or any ai Each program must be compiled and run successfully, with both the code and output attached.Only digital files are accepted (PDF format). No handwritten work is required.Deadline for submission is 30/05/2026. "
+    },
+    {
+      "id": "643004",
+      "title": "Python Developer for Calculator App",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-calculator-app-643004",
+      "observed_at": "2026-10-23T02:18:16.018Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 10",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1778674449000",
+        "relative": "5 months ago",
+        "title": "2026-05-13T05:14:09-07:00"
+      },
+      "skills": [
+        "Python",
+        "Desktop Applications",
+        "Drawing",
+        "Python",
+        "Calculator App"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an experienced Python developer to build a calculator application.The app should have a user-friendly interface and support basic arithmetic operations.Knowledge of Python programming and GUI frameworks is required."
+    },
+    {
+      "id": "642923",
+      "title": "Streamlit Weather Analytics Dashboard with Real Time API",
+      "url": "https://www.truelancer.com/freelance-project/streamlit-weather-analytics-dashboard-with-real-time-api-642923",
+      "observed_at": "2026-10-23T02:18:17.072Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 10",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1778633921000",
+        "relative": "5 months ago",
+        "title": "2026-05-12T17:58:41-07:00"
+      },
+      "skills": [
+        "Python",
+        "Data Analytics",
+        "AppDynamics",
+        "Weather Dashboard",
+        "Api Integration"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled developer to create a Streamlit-based Weather Analytics Dashboard with real-time API integration, data storage, and interactive charts.Project Scope & Key Tasks:Fetch real-time weather data using the OpenWeather API.Store the fetched data securely in a CSV file or a database for historical analysis.Display live weather metrics including temperature, humidity, pressure, and weather conditions.Visualize historical weather trends through interactive charts.Enable users to input any city to fetch current weather data.Support comparison of weather data across multiple cities.Ensure the dashboa"
+    },
+    {
+      "id": "642709",
+      "title": "SAP ABAP EC to ECP replication",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-ec-to-ecp-replication-642709",
+      "observed_at": "2026-10-23T02:18:17.961Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 1000/ Hour",
+      "estimated_hours": "7",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1778498657000",
+        "relative": "5 months ago",
+        "title": "2026-05-11T04:24:17-07:00"
+      },
+      "skills": [
+        "SAP",
+        "SAP ABAP"
+      ],
+      "listing_page": 3,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=3&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am looking for an experienced SAP freelancer to support an ongoing SAP project involving SuccessFactors integrations, ABAP developments, debugging, and enhancements.I am relatively new to SAP, so I need someone who can:Work independentlyHelp troubleshoot issuesGuide me through debugging and enhancementsExplain solutions in simple terms when neededScope of Work / Skills RequiredThe freelancer should have good hands-on experience in the following areas:EC to ECP Point-to-Point ReplicationEmployee Central (EC) to Employee Central Payroll (ECP) integrationReplication monitoring and troubleshootingABAP DevelopmentCo"
+    },
+    {
+      "id": "642328",
+      "title": "C++ To Do List Management System",
+      "url": "https://www.truelancer.com/freelance-project/c-to-do-list-management-system-642328",
+      "observed_at": "2026-10-23T02:18:18.861Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 10",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1778254942000",
+        "relative": "5 months ago",
+        "title": "2026-05-08T08:42:22-07:00"
+      },
+      "skills": [
+        "C++ Programming",
+        "Data Structures",
+        "Object Oriented Programming OOP"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "A simple and interactive To-Do List application developed using C++ .The program allows users to manage their daily tasks through a console-based interface..Add new tasks .View all tasks .Mark tasks as completed .Delete tasks .User-friendly menu system.Dynamic task storage using vectors .Structured programming using functions and structs .This project demonstrates fundamentals of C++ programming :.Object and data management .Functions .Loops and Conditions .Vectors .Structs .User input handling "
+    },
+    {
+      "id": "642170",
+      "title": "Flutter Developer Needed for Taxi App Development",
+      "url": "https://www.truelancer.com/freelance-project/flutter-developer-needed-for-taxi-app-development-642170",
+      "observed_at": "2026-10-23T02:18:19.787Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 30/ Hour",
+      "estimated_hours": "30",
+      "list_budget_raw": "$30/ Hr",
+      "published": {
+        "datetime": "1778157829000",
+        "relative": "6 months ago",
+        "title": "2026-05-07T05:43:49-07:00"
+      },
+      "skills": [
+        "Python",
+        "Git",
+        "Flutter"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "app detail link: https://omg10.com/4/10946285We are looking for an experienced Flutter developer to work on our taxi app project.The ideal candidate will have strong skills in Flutter development and mobile app deployment.Project Scope & Key Tasks:- Develop and maintain the taxi app using Flutter.- Integrate necessary APIs and payment gateways.- Ensure smooth user experience and app performance.- Collaborate on app testing and bug fixing.Recommended Tools & Technology:- Flutter SDK- Dart programming language- Firebase or other backend services- Version control tools like Git"
+    },
+    {
+      "id": "639336",
+      "title": "Embedded Electronics Engineer for Jacquard Control System",
+      "url": "https://www.truelancer.com/freelance-project/embedded-electronics-engineer-for-jacquard-control-system-639336",
+      "observed_at": "2026-10-23T02:18:20.700Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 20000",
+      "estimated_hours": null,
+      "list_budget_raw": "$204",
+      "published": {
+        "datetime": "1776426050000",
+        "relative": "6 months ago",
+        "title": "2026-04-17T04:40:50-07:00"
+      },
+      "skills": [
+        "Embedded C",
+        "Embedded Systems",
+        "Electronics"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Embedded Electronics Engineer to develop a 672-hook electronic jacquard control system.Machine configuration:- Total hooks: 672- 1 module = 8 hooks / dori- Total modules = 84- Layout = 12 modules x 7 rowsThe engineer should design and develop the embedded control logic for real-time hook control, module-wise output control, mapping logic, loom synchronization, and solenoid driver interfacing.Main work includes:- Embedded controller logic development- Real-time timing and synchronization with loom- Hook and module mapping logic- Solenoid / selector driver interfacing- Sensor / encoder"
+    },
+    {
+      "id": "638909",
+      "title": "Python Developer for SaaS Platform Fix & Deployment",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-for-saas-platform-fix-deployment-638909",
+      "observed_at": "2026-10-23T02:18:21.600Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$500",
+      "published": {
+        "datetime": "1776149948000",
+        "relative": "6 months ago",
+        "title": "2026-04-13T23:59:08-07:00"
+      },
+      "skills": [
+        "Python",
+        "Sinatra",
+        "Amazon Web Services",
+        "Google Cloud Platform",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Python developer to assist with fixing and deploying our existing SaaS platform, Zniper, which analyzes real estate investment opportunities using Zillow data.Project Scope & Key Tasks:Fix data synchronization issues by resolving errors in the current dataset and ensuring the data pipeline connects properly with Zillow API or the existing setup.Review and fix scheduled jobs on Google Cloud to ensure automation runs smoothly.Debug and fix the existing Stripe payment integration to guarantee seamless payment and subscription flows.Support deployment of the working version live and cond"
+    },
+    {
+      "id": "637338",
+      "title": "Fix UI Crash Bug in Kotlin Library Android App",
+      "url": "https://www.truelancer.com/freelance-project/fix-ui-crash-bug-in-kotlin-library-android-app-637338",
+      "observed_at": "2026-10-23T02:18:22.595Z",
+      "source_status": "Active & Freezed",
+      "pricing": "fixed",
+      "budget_raw": "₹ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$5",
+      "published": {
+        "datetime": "1775100019000",
+        "relative": "7 months ago",
+        "title": "2026-04-01T20:20:19-07:00"
+      },
+      "skills": [
+        "Android App Development",
+        "Android SDK",
+        "Kotlin",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for a highly skilled Android developer to fix a small but critical UI crash bug in our Library Application developed in Kotlin.The ideal candidate should have strong experience in Android development and Kotlin programming to quickly identify and resolve the issue."
+    },
+    {
+      "id": "636150",
+      "title": "Python and Terraform Expert Needed for Immediate Start",
+      "url": "https://www.truelancer.com/freelance-project/python-and-terraform-expert-needed-for-immediate-start-636150",
+      "observed_at": "2026-10-23T02:18:23.487Z",
+      "source_status": "Freezed and Awarded",
+      "pricing": "fixed",
+      "budget_raw": "$ 300",
+      "estimated_hours": null,
+      "list_budget_raw": "$300",
+      "published": {
+        "datetime": "1774363694000",
+        "relative": "7 months ago",
+        "title": "2026-03-24T07:48:14-07:00"
+      },
+      "skills": [
+        "Python",
+        "Cloud",
+        "Terraform",
+        "SEO",
+        "SEO Keyword Research"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": "Freelancers only from Nepal can apply for this project.",
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an expert in Python and Terraform to join our project immediately.The ideal candidate should have strong experience in Python programming and Terraform infrastructure as code.This is a fixed project with an urgent hiring timeline."
+    },
+    {
+      "id": "635614",
+      "title": "IR Sensor Setup and Arduino Coding for Neuroscience Experiment",
+      "url": "https://www.truelancer.com/freelance-project/ir-sensor-setup-and-arduino-coding-for-neuroscience-experiment-635614",
+      "observed_at": "2026-10-23T02:18:32.054Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 1000/ Hour",
+      "estimated_hours": "3",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1773986002000",
+        "relative": "7 months ago",
+        "title": "2026-03-19T22:53:22-07:00"
+      },
+      "skills": [
+        "Arduino",
+        "Automation",
+        "DevExpress Reporting",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am a PhD student working on a neuroscience-related experiment and need assistance in setting up a simple IR sensor system.Requirements include IR sensor setup (beam break/motion detection), Arduino connection and coding, and output signal via LED, buzzer, or basic data recording.The project involves circuit design, wiring, Arduino programming, testing, and ensuring the system works properly.Preference for someone located in Hyderabad for offline help, but students and freelancers are welcome.Budget is ₹500 – ₹2000, negotiable based on work. Timeline is 1–3 days, flexible. Component costs will be covered separat"
+    },
+    {
+      "id": "632831",
+      "title": "Custom ESC Development and Integration",
+      "url": "https://www.truelancer.com/freelance-project/custom-esc-development-and-integration-632831",
+      "observed_at": "2026-10-23T02:18:32.916Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 1000",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1771926098000",
+        "relative": "8 months ago",
+        "title": "2026-02-24T01:41:38-08:00"
+      },
+      "skills": [
+        "SonarQube",
+        "Mechanical Engineering",
+        "Model Sheet Design",
+        "Algorithm Development",
+        "SonarQube"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for a skilled professional to develop and customize an Electronic Speed Controller (ESC) tailored to specific requirements. The project involves designing, programming, and testing a customized ESC solution."
+    },
+    {
+      "id": "632380",
+      "title": "Real Time Vehicle Path Estimation Module Development",
+      "url": "https://www.truelancer.com/freelance-project/real-time-vehicle-path-estimation-module-development-632380",
+      "observed_at": "2026-10-23T02:18:33.997Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 30000",
+      "estimated_hours": null,
+      "list_budget_raw": "$306",
+      "published": {
+        "datetime": "1771591855000",
+        "relative": "8 months ago",
+        "title": "2026-02-20T04:50:55-08:00"
+      },
+      "skills": [
+        "Python",
+        "Engineering",
+        "Algorithm",
+        "Data Engineering",
+        "Vehicle Path Estimation",
+        "Sensor Fusion"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced developer to create a real-time vehicle path estimation module using GPS and IMU data for a driver operating inside a campus open area. The project involves integrating GPS and Inertial Measurement Unit (IMU) sensor data to accurately estimate and track the vehicle's path in real-time. The solution should handle sensor fusion, data filtering, and provide a reliable path output suitable for navigation or monitoring purposes. Project Scope & Key Tasks: Design and develop a module that fuses GPS and IMU data for accurate path estimation. Implement real-time data processing and filtering"
+    },
+    {
+      "id": "631681",
+      "title": "Develop AR Device with ESP32 like Projector Keyboard",
+      "url": "https://www.truelancer.com/freelance-project/develop-ar-device-with-esp32-like-projector-keyboard-631681",
+      "observed_at": "2026-10-23T02:18:35.089Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 2000",
+      "estimated_hours": null,
+      "list_budget_raw": "$20",
+      "published": {
+        "datetime": "1771107725000",
+        "relative": "8 months ago",
+        "title": "2026-02-14T14:22:05-08:00"
+      },
+      "skills": [
+        "Engineering",
+        "Arduino",
+        "Virtual Reality",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 4,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=4&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an experienced developer to create a simple Augmented Reality (AR) device using ESP32 microcontroller, similar to a projector keyboard. The project involves hardware integration, firmware development, Expertise in embedded systems, ESP32 programming, and AR device development is required."
+    },
+    {
+      "id": "631385",
+      "title": "Experienced Python Developer for Real Time Crypto Trading System",
+      "url": "https://www.truelancer.com/freelance-project/experienced-python-developer-for-real-time-crypto-trading-system-631385",
+      "observed_at": "2026-10-23T02:18:36.021Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 5000",
+      "estimated_hours": null,
+      "list_budget_raw": "$51",
+      "published": {
+        "datetime": "1770882178000",
+        "relative": "8 months ago",
+        "title": "2026-02-11T23:42:58-08:00"
+      },
+      "skills": [
+        "Python",
+        "Algorithm",
+        "Data Science",
+        "SEO",
+        "SEO Keyword Research"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced Python developer to enhance and optimize our advanced real-time cryptocurrency trading system. The ideal candidate will have strong skills in Python programming, real-time data processing, and experience with trading systems or financial applications. Responsibilities include improving system performance, implementing new features, and ensuring reliability and scalability."
+    },
+    {
+      "id": "631101",
+      "title": "Embedded Hardware and Firmware Developer for Industrial Products",
+      "url": "https://www.truelancer.com/freelance-project/embedded-hardware-and-firmware-developer-for-industrial-products-631101",
+      "observed_at": "2026-10-23T02:18:37.096Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 30000",
+      "estimated_hours": null,
+      "list_budget_raw": "$306",
+      "published": {
+        "datetime": "1770709697000",
+        "relative": "8 months ago",
+        "title": "2026-02-09T23:48:17-08:00"
+      },
+      "skills": [
+        "Embedded C",
+        "Embedded Systems",
+        "Mechanical Engineering",
+        "Embedded Systems",
+        "SEO"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced embedded hardware and firmware developer to work on industrial and medical products. The ideal candidate should have expertise in all or any one of the following embedded systems design, hardware development, and firmware programming. Projects will involve developing and optimizing embedded solutions tailored for industrial and medical applications."
+    },
+    {
+      "id": "630457",
+      "title": "Industrial Automation Engineer for Siemens S7 400H Integration",
+      "url": "https://www.truelancer.com/freelance-project/industrial-automation-engineer-for-siemens-s7-400h-integration-630457",
+      "observed_at": "2026-10-23T02:18:38.030Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 200",
+      "estimated_hours": null,
+      "list_budget_raw": "$200",
+      "published": {
+        "datetime": "1770279796000",
+        "relative": "9 months ago",
+        "title": "2026-02-05T00:23:16-08:00"
+      },
+      "skills": [
+        "Automation",
+        "PLC SCADA",
+        "PLC Programming",
+        "SCADA",
+        "Industrial Automation",
+        "Siemens S7-400H"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled Industrial Automation Freelancer to handle the technical integration of new Power Monitoring Units (PMUs) into an existing redundant PLC system at the FM07-FTZ East & West sites. The project involves replacing existing ISKRA 2005 meters with ABB M4M 30 units and integrating them into a Siemens SIMATIC S7-400H redundant architecture via ET 200SP RIO stations. Scope of Work: 1. Hardware Configuration & Physical Integration: Update the S7-400H hardware configuration to include new CM PtP (RS-485) communication modules on ET 200SP RIO racks. Integrate the new PMUs into an existing RS-485 Modb"
+    },
+    {
+      "id": "630189",
+      "title": "ASP.NET and Mobile App Developers Needed",
+      "url": "https://www.truelancer.com/freelance-project/aspnet-and-mobile-app-developers-needed-630189",
+      "observed_at": "2026-10-23T02:18:39.037Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 25000",
+      "estimated_hours": null,
+      "list_budget_raw": "$255",
+      "published": {
+        "datetime": "1770090731000",
+        "relative": "9 months ago",
+        "title": "2026-02-02T19:52:11-08:00"
+      },
+      "skills": [
+        "Android App Development",
+        "ASP.NET",
+        "IOS Development",
+        "SEO",
+        "Digital Marketing"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for experienced developers skilled in ASP.NET and mobile application development. The ideal candidates should have expertise in building robust web applications using ASP.NET and developing mobile apps for platforms such as Android and iOS. If you have strong programming skills and a proven track record in these technologies, please apply."
+    },
+    {
+      "id": "629561",
+      "title": "GIS Specialist for Automated Feature Extraction from LiDAR",
+      "url": "https://www.truelancer.com/freelance-project/gis-specialist-for-automated-feature-extraction-from-lidar-629561",
+      "observed_at": "2026-10-23T02:18:40.192Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 700",
+      "estimated_hours": null,
+      "list_budget_raw": "$700",
+      "published": {
+        "datetime": "1769649655000",
+        "relative": "9 months ago",
+        "title": "2026-01-28T17:20:55-08:00"
+      },
+      "skills": [
+        "Python",
+        "3D Modelling",
+        "Data Analytics",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled GIS specialist to perform automated feature extraction on 1 million points of LiDAR data using Whitebox Tools. The project requires expertise in Python scripting and generating KML outputs. Additionally, the extraction should include calculation of the Skyview Factor as part of the analysis. Project Scope & Key Tasks: - Develop and implement automated workflows for feature extraction from large-scale LiDAR datasets. - Utilize Whitebox Tools for geospatial analysis and processing. - Calculate Skyview Factor metrics accurately from the LiDAR data. - Generate and deliver results in KML forma"
+    },
+    {
+      "id": "629571",
+      "title": "GUI Tool for ANN Regression and NSGA II Optimization",
+      "url": "https://www.truelancer.com/freelance-project/gui-tool-for-ann-regression-and-nsga-ii-optimization-629571",
+      "observed_at": "2026-10-23T02:18:41.188Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 6000",
+      "estimated_hours": null,
+      "list_budget_raw": "$61",
+      "published": {
+        "datetime": "1769662778000",
+        "relative": "9 months ago",
+        "title": "2026-01-28T20:59:38-08:00"
+      },
+      "skills": [
+        "Python",
+        "Animation",
+        "UI Design",
+        "Artificial Neural Networks",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking a skilled developer to create a generic, reusable script and a user-friendly GUI tool to reproduce and validate results from a research paper involving Artificial Neural Networks (ANN) and NSGA-II multi-objective optimization. Project Scope & Key Tasks: Develop an ANN regression model using experimental or DOE-based data (up to 81 experiments). Train the ANN using the Levenberg–Marquardt (LM) algorithm minimizing Mean Square Error (MSE). Implement early stopping criteria based on validation error to avoid overfitting. Perform data normalization and split data into training, validation, and testing "
+    },
+    {
+      "id": "628529",
+      "title": "Python Algo Trader for Futu API Strategy",
+      "url": "https://www.truelancer.com/freelance-project/python-algo-trader-for-futu-api-strategy-628529",
+      "observed_at": "2026-10-23T02:18:46.167Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 1000",
+      "estimated_hours": null,
+      "list_budget_raw": "$1000",
+      "published": {
+        "datetime": "1768977952000",
+        "relative": "9 months ago",
+        "title": "2026-01-20T22:45:52-08:00"
+      },
+      "skills": [
+        "Python",
+        "Algorithm",
+        "Data Science",
+        "Algorithmic Trading",
+        "Futu API"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an experienced algorithmic trader to develop a Python script implementing a trading strategy. The code will be integrated with the Futu API for automated trading on futures markets. Candidate must have expertise in Python programming, algorithmic trading, and experience working with trading APIs. Needs to be ing Hong Kong"
+    },
+    {
+      "id": "628258",
+      "title": "RPG Game Development",
+      "url": "https://www.truelancer.com/freelance-project/rpg-game-development-628258",
+      "observed_at": "2026-10-23T02:18:47.198Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 10/ Hour",
+      "estimated_hours": "10",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1768808559000",
+        "relative": "9 months ago",
+        "title": "2026-01-18T23:42:39-08:00"
+      },
+      "skills": [
+        "Game Design",
+        "Game Development",
+        "Game Programming",
+        "Game Development",
+        "SEO"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for a skilled developer named William to create an engaging RPG game. The project involves full game development including design, programming, and implementation of game mechanics."
+    },
+    {
+      "id": "627518",
+      "title": "Payroll Software Developer for Security Agency",
+      "url": "https://www.truelancer.com/freelance-project/payroll-software-developer-for-security-agency-627518",
+      "observed_at": "2026-10-23T02:18:47.925Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 20000",
+      "estimated_hours": null,
+      "list_budget_raw": "$204",
+      "published": {
+        "datetime": "1768303551000",
+        "relative": "9 months ago",
+        "title": "2026-01-13T03:25:51-08:00"
+      },
+      "skills": [
+        "Accounting",
+        "Microsoft Excel",
+        "Project Management",
+        "SEO",
+        "SEO Audit"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced developer to create a comprehensive payroll software tailored specifically for a security agency. The software should efficiently manage employee salaries, attendance, tax deductions, bonuses, and generate detailed payroll reports. Project Scope & Key Tasks: - Design and develop a secure, user-friendly payroll system customized for security personnel. - Implement modules for attendance tracking, salary calculation, tax and statutory deductions, and bonus management. - Ensure compliance with relevant labor laws and tax regulations. - Integrate role-based access control to maintain dat"
+    },
+    {
+      "id": "627215",
+      "title": "Experienced Odoo SH V19 Developer for Accounting Module",
+      "url": "https://www.truelancer.com/freelance-project/experienced-odoo-sh-v19-developer-for-accounting-module-627215",
+      "observed_at": "2026-10-23T02:18:48.671Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$500",
+      "published": {
+        "datetime": "1768127095000",
+        "relative": "9 months ago",
+        "title": "2026-01-11T02:24:55-08:00"
+      },
+      "skills": [
+        "Python",
+        "Accounting",
+        "Financial Accounting",
+        "Odoo",
+        "Odoo Development",
+        "Accounting Software"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are a consulting service company seeking a highly skilled developer with strong experience in Odoo SH V19, particularly focusing on the accounting module. The ideal candidate must have a minimum of 4 years of hands-on experience working with Odoo, demonstrating deep knowledge and expertise in Odoo's accounting functionalities. Project Scope & Key Tasks: Develop, customize, and optimize Odoo SH V19 accounting modules to meet our business requirements. Integrate accounting workflows and ensure compliance with financial standards. Provide ongoing support and troubleshooting for accounting-related features. Collab"
+    },
+    {
+      "id": "626837",
+      "title": "Visual Avatar work as AI agent",
+      "url": "https://www.truelancer.com/freelance-project/visual-avatar-work-as-ai-agent-626837",
+      "observed_at": "2026-10-23T02:18:49.544Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 1000",
+      "estimated_hours": null,
+      "list_budget_raw": "$10",
+      "published": {
+        "datetime": "1767851843000",
+        "relative": "9 months ago",
+        "title": "2026-01-07T21:57:23-08:00"
+      },
+      "skills": [
+        "Python",
+        "Machine Learning"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an expert developer or team to build a real-time, full-body visual AI agent system for live video streaming. This platform must be built entirely on open-source technologies—no commercial or paid APIs are permitted. The core function of this agent is to generate a live video stream featuring a full-body AI avatar that speaks a provided script. Key Requirements & Functionality Full-Body Avatar Synthesis: The system must generate a live, full-body avatar (not just a talking head) from a single provided avatar photo. The avatar needs realistic movements, gestures, and accurate lip-syncing when speakin"
+    },
+    {
+      "id": "626774",
+      "title": "Freelance Software Developer for Fleet Management Platform",
+      "url": "https://www.truelancer.com/freelance-project/freelance-software-developer-for-fleet-management-platform-626774",
+      "observed_at": "2026-10-23T02:18:50.738Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 100",
+      "estimated_hours": null,
+      "list_budget_raw": "$100",
+      "published": {
+        "datetime": "1767796752000",
+        "relative": "10 months ago",
+        "title": "2026-01-07T06:39:12-08:00"
+      },
+      "skills": [
+        "HTML5",
+        "AngularJS",
+        "Python"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking skilled freelance developers to contribute to a modern fleet management platform designed to manage, monitor, and digitize vehicle fleets. The platform includes a web-based dashboard for fleet managers and a mobile-first application for drivers featuring digital checklists, damage reports, and incident documentation. Project Scope & Key Tasks: Backend (Python / FastAPI / PostgreSQL): Develop and maintain RESTful APIs using FastAPI, implement business logic and workflows, perform database modeling, queries, migrations, and optimization with PostgreSQL, manage authentication and role-based access con"
+    },
+    {
+      "id": "625444",
+      "title": "PLC Porgrammer for Industrial Washing Line",
+      "url": "https://www.truelancer.com/freelance-project/plc-porgrammer-for-industrial-washing-line-625444",
+      "observed_at": "2026-10-23T02:18:51.677Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 8/ Hour",
+      "estimated_hours": "80",
+      "list_budget_raw": "$8/ Hr",
+      "published": {
+        "datetime": "1766838596000",
+        "relative": "10 months ago",
+        "title": "2025-12-27T04:29:56-08:00"
+      },
+      "skills": [
+        "PLC SCADA",
+        "PLC Programming",
+        "PLC Programming",
+        "Industrial Automation"
+      ],
+      "listing_page": 5,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=5&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced PLC programmer to develop control software for an industrial parts/basket handling system integrated with a multi-tank washing process. The system transfers baskets between one load/unload position and four process stations (tanks), managing sequencing, interlocks, and recovery from “all stations occupied” conditions. The project will use Siemens TIA Portal for PLC programming. Estimated work duration is 2 weeks. More details will be provided privately. Please provide your daily rate."
+    },
+    {
+      "id": "625486",
+      "title": "AI Automation Expert for Workflow & Chatbot Integration",
+      "url": "https://www.truelancer.com/freelance-project/ai-automation-expert-for-workflow-chatbot-integration-625486",
+      "observed_at": "2026-10-23T02:18:52.619Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 8/ Hour",
+      "estimated_hours": "20",
+      "list_budget_raw": "$8/ Hr",
+      "published": {
+        "datetime": "1766863100000",
+        "relative": "10 months ago",
+        "title": "2025-12-27T11:18:20-08:00"
+      },
+      "skills": [
+        "Python",
+        "SEO",
+        "SEO Backlinking"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an AI automation expert with extensive experience in platforms such as n8n, Zapier, and Make.com, as well as chatbot and AI voice assistant integration. The ideal candidate should be proficient in using various types of nodes and have strong expertise in API integration between multiple applications to automate workflows efficiently. Basic coding skills in Python are a plus, enabling customization and advanced automation capabilities. Knowledge of social media marketing platforms is also advantageous to enhance integration and automation related to marketing efforts. Project Scope & Key Tasks: Desi"
+    },
+    {
+      "id": "625451",
+      "title": "Microsoft Access Database Development",
+      "url": "https://www.truelancer.com/freelance-project/microsoft-access-database-development-625451",
+      "observed_at": "2026-10-23T02:18:53.645Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 50000",
+      "estimated_hours": null,
+      "list_budget_raw": "$510",
+      "published": {
+        "datetime": "1766841499000",
+        "relative": "10 months ago",
+        "title": "2025-12-27T05:18:19-08:00"
+      },
+      "skills": [
+        "FileMaker",
+        "ADO.NET",
+        "Database Management",
+        "Microsoft Access",
+        "Database Development"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for an experienced Microsoft Access developer to design and develop a custom database tailored to our specific requirements. The ideal candidate should have strong skills in Microsoft Access development, database design, and VBA programming to create efficient and user-friendly solutions."
+    },
+    {
+      "id": "624662",
+      "title": "IC Programming for Toy Drone Development",
+      "url": "https://www.truelancer.com/freelance-project/ic-programming-for-toy-drone-development-624662",
+      "observed_at": "2026-10-23T02:18:54.564Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1766213424000",
+        "relative": "10 months ago",
+        "title": "2025-12-19T22:50:24-08:00"
+      },
+      "skills": [
+        "SonarQube",
+        "ANSI C",
+        "Arduino",
+        "Algorithm Development",
+        "Digital Marketing"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced developer to write program code for the integrated circuit (IC) used in a toy drone. The code should enable the IC to perform all necessary functions as specified for the toy drone. All relevant details related to the IC and supporting documents will be provided to the selected freelancer. The ideal candidate should have expertise in embedded systems programming and experience with IC programming for drones or similar devices."
+    },
+    {
+      "id": "624130",
+      "title": "Customized Firmware Development for PAN2416AV & PAN7420S7FA ICs",
+      "url": "https://www.truelancer.com/freelance-project/customized-firmware-development-for-pan2416av-pan7420s7fa-ics-624130",
+      "observed_at": "2026-10-23T02:18:58.109Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1765866863000",
+        "relative": "10 months ago",
+        "title": "2025-12-15T22:34:23-08:00"
+      },
+      "skills": [
+        "ANSI C",
+        "DevExpress Reporting",
+        "Device Driver Development",
+        "Embedded C",
+        "Firmware Development"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We require a skilled developer to create customized code files for the PAN2416AV transmitter IC and PAN7420S7FA receiver IC used in a toy drone. All datasheets and instruction manuals are available to guide the programming and hardware integration process. The goal is to develop firmware that enables the toy drone to operate effectively using these ICs."
+    },
+    {
+      "id": "622337",
+      "title": "Experienced ESP32 Firmware Developer for IoT Devices",
+      "url": "https://www.truelancer.com/freelance-project/experienced-esp32-firmware-developer-for-iot-devices-622337",
+      "observed_at": "2026-10-23T02:18:59.159Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 500",
+      "estimated_hours": null,
+      "list_budget_raw": "$500",
+      "published": {
+        "datetime": "1764706049000",
+        "relative": "a year ago",
+        "title": "2025-12-02T12:07:29-08:00"
+      },
+      "skills": [
+        "C++ Programming",
+        "ESP32",
+        "Embedded Systems"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are seeking an experienced ESP32 programmer who can develop, optimize, and maintain firmware for IoT devices built on the ESP32 platform. The ideal candidate has hands-on experience with real-world deployments, strong debugging skills, and the ability to integrate embedded systems with cloud platforms such as AWS IoT, Azure IoT, or custom MQTT brokers. Responsibilities: Develop and maintain firmware for ESP32 (ESP-IDF / Arduino framework). Implement Wi-Fi, BLE, MQTT, HTTP/HTTPS, and secure communication protocols. Integrate sensors, actuators, RFID readers, edge readers, and other peripherals (I²C, SPI, UART, "
+    },
+    {
+      "id": "621796",
+      "title": "Python Developer Needed to Fix Trading Bot",
+      "url": "https://www.truelancer.com/freelance-project/python-developer-needed-to-fix-trading-bot-621796",
+      "observed_at": "2026-10-23T02:19:00.164Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 100",
+      "estimated_hours": null,
+      "list_budget_raw": "$100",
+      "published": {
+        "datetime": "1764386617000",
+        "relative": "a year ago",
+        "title": "2025-11-28T19:23:37-08:00"
+      },
+      "skills": [
+        "Python",
+        "Data Analytics",
+        "Payment Gateway Integration",
+        "Python",
+        "Trading Bot"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for an experienced Python developer to debug and fix issues in my existing Python-based trading bot. The ideal candidate should have strong knowledge of Python programming and experience with trading algorithms or financial data processing. Responsibilities include identifying bugs, optimizing code, and ensuring the bot runs smoothly and efficiently."
+    },
+    {
+      "id": "621480",
+      "title": "Looking for an Expert MT5 Programmer with Strong Mathematical Skills",
+      "url": "https://www.truelancer.com/freelance-project/looking-for-an-expert-mt5-programmer-with-strong-mathematical-skills-621480",
+      "observed_at": "2026-10-23T02:19:01.164Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 50",
+      "estimated_hours": null,
+      "list_budget_raw": "$50",
+      "published": {
+        "datetime": "1764179521000",
+        "relative": "a year ago",
+        "title": "2025-11-26T09:52:01-08:00"
+      },
+      "skills": [
+        "Software Testing",
+        "C Programming",
+        "MetaTrader 4 MT4"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Description: We are seeking a highly skilled MetaTrader 5 (MT5) programmer to develop advanced trading experts (EAs) and indicators. The ideal candidate must: Have extensive experience in MQL5 programming. Be strong in mathematics and quantitative analysis. Be able to develop complex algorithms, trading strategies, and automated solutions. Understand risk management, money management, and optimization techniques. Deliver clean, well-documented, and efficient code. Have a proven track record of successful MT5 expert advisors or indicators. Additional Requirements: Ability to implement custom mathematical models in"
+    },
+    {
+      "id": "621294",
+      "title": "Hardware / Firmware / Embedded Engineer",
+      "url": "https://www.truelancer.com/freelance-project/hardware-firmware-embedded-engineer-621294",
+      "observed_at": "2026-10-23T02:19:01.844Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 1000000",
+      "estimated_hours": null,
+      "list_budget_raw": "$10200",
+      "published": {
+        "datetime": "1764082827000",
+        "relative": "a year ago",
+        "title": "2025-11-25T07:00:27-08:00"
+      },
+      "skills": [
+        "Embedded Systems",
+        "Microcontroller Programming",
+        "PCB Design",
+        "Sensor Data Annotation"
+      ],
+      "listing_page": 6,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=6&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Kalkini Technologies is at the forefront of wearable technology, developing a next-generation smart ring that seamlessly integrates health monitoring, emergency alerts, and contactless payments into a sleek, elegant accessory. We are redefining how people interact with technology, creating devices that empower users to live safer, healthier, and more connected lives. Key Responsibilities: Design, develop, and validate embedded hardware and firmware for wearable devices. Develop and optimize low-power, high-performance firmware for microcontrollers, sensors, and connectivity modules. Integrate and manage sensors f"
+    },
+    {
+      "id": "621203",
+      "title": "Frontend website and App Developer",
+      "url": "https://www.truelancer.com/freelance-project/frontend-website-and-app-developer-621203",
+      "observed_at": "2026-10-23T02:19:02.823Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 200",
+      "estimated_hours": null,
+      "list_budget_raw": "$200",
+      "published": {
+        "datetime": "1764016126000",
+        "relative": "a year ago",
+        "title": "2025-11-24T12:28:46-08:00"
+      },
+      "skills": [
+        "Website Development"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Programming language: Typescript Frontend: Next.JS Design: TailwindCss - ShadCn UI Backend: NestJs Database: Prisma - MongoDB Main setup: TurpoRepo-monorepo Mobile development: ReactNative - NativeWind"
+    },
+    {
+      "id": "620274",
+      "title": "SAP ABAP RAP and Private Cloud",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-rap-and-private-cloud-620274",
+      "observed_at": "2026-10-23T02:19:03.768Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 1000/ Hour",
+      "estimated_hours": "8",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1763419508000",
+        "relative": "a year ago",
+        "title": "2025-11-17T14:45:08-08:00"
+      },
+      "skills": [
+        "Advanced Business Application Programming ABAP",
+        "Private Clouds"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "SAP Development and Integration Consultant · Experience monitoring and developing SAP PO interfaces (SOAP, REST, File, AS2) on NetWeaver 7.5 · Configuring EDI in SAP PO and ECC (partner profiles, logical ports, IDocs) · Experience with SAP Integration Suite (API, Event Mesh) · SAP BTP development (CAP, Fiori Elements) · RAP (RESTful ABAP Programming Model) experience · ABAP development in S/4HANA with Eclipse/ADT · ABAP Cloud development following Clean Core and RISE with SAP · Creating and maintaining CDS Views with OData · Advanced ABAP debugging (user-exits, BADIs, enhancements) · Monitoring, analysis, reporti"
+    },
+    {
+      "id": "617050",
+      "title": "I need someone to create a navigation/information menu for archviz vr in unreal engine 5",
+      "url": "https://www.truelancer.com/freelance-project/i-need-someone-to-create-a-navigationinformation-menu-for-archviz-vr-in-unreal-engine-5-617050",
+      "observed_at": "2026-10-23T02:19:04.717Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 260",
+      "estimated_hours": null,
+      "list_budget_raw": "$260",
+      "published": {
+        "datetime": "1761678759000",
+        "relative": "a year ago",
+        "title": "2025-10-28T12:12:39-07:00"
+      },
+      "skills": [
+        "C++",
+        "Game Development",
+        "Unreal Engine"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are looking for a skilled developer to create a navigation/information menu for a VR and Windows architectural visualization (archviz) project using Unreal Engine 5. The ideal candidate will have VR development experience and a strong understanding of user interface design in Unreal Engine. Deliverables The programming for the navigation menu (the design already exists) Ensure seamless integration with existing archviz project Optimize menu for VR interaction "
+    },
+    {
+      "id": "616470",
+      "title": "A small product with ATMEGA328P micro controller. 1 day programming efforts sufficient.",
+      "url": "https://www.truelancer.com/freelance-project/a-small-product-with-atmega328p-micro-controller-1-day-programming-efforts-sufficient-616470",
+      "observed_at": "2026-10-23T02:19:05.597Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1761369694000",
+        "relative": "a year ago",
+        "title": "2025-10-24T22:21:34-07:00"
+      },
+      "skills": [
+        "C Programming"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We are developing a small product with ATMEGA328 Micro-controller card. Display : 6 digit LED SSD 9 key keypad Two digital outputs for controlling pumps. One analog input for reading pressure. All hardware is ready. Need professional services for writing program."
+    },
+    {
+      "id": "616390",
+      "title": "Advanced development skills required | Full scratch development | Stripe payment, SEO support",
+      "url": "https://www.truelancer.com/freelance-project/advanced-development-skills-required-full-scratch-development-stripe-payment-seo-support-616390",
+      "observed_at": "2026-10-23T02:19:06.516Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 150",
+      "estimated_hours": null,
+      "list_budget_raw": "$150",
+      "published": {
+        "datetime": "1761312670000",
+        "relative": "a year ago",
+        "title": "2025-10-24T06:31:10-07:00"
+      },
+      "skills": [
+        "Laravel",
+        "ReactJS"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "[Details, Purpose, and Background] We are planning to launch a new official website for a participatory service that will enable event organizers across Japan to host and manage events in their respective regions. For this project, we are seeking someone who can handle everything from UI design to feature construction and development. [Development Scope and Main Features] ▼For Participants (No Registration or Login Required) * Home Page (Brand Introduction + Region Selection: Filterable from Prefecture to City/Ward/County) * Event List (Filterable by Region, Date, and Theme) * Event Details Page (Date/Time/Locati"
+    },
+    {
+      "id": "616078",
+      "title": "AI Voice Assistant using ESP32",
+      "url": "https://www.truelancer.com/freelance-project/ai-voice-assistant-using-esp32-616078",
+      "observed_at": "2026-10-23T02:19:12.875Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 300",
+      "estimated_hours": null,
+      "list_budget_raw": "$300",
+      "published": {
+        "datetime": "1761118827000",
+        "relative": "a year ago",
+        "title": "2025-10-22T00:40:27-07:00"
+      },
+      "skills": [
+        "Computer Hardware Design"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Project Description We are looking for an experienced Embedded Systems Engineer / IoT Developer to design and develop an AI-based Voice Assistant built around the ESP32 microcontroller. The goal is to create a working prototype capable of receiving and processing voice commands, performing basic speech recognition, and responding through audio output. The device should be able to handle tasks such as playing audio, controlling IoT devices, or responding to simple user queries. Requirements Strong experience with ESP32 programming (Arduino IDE or ESP-IDF). Knowledge of I2S microphones (e.g., INMP441) and I2S ampli"
+    },
+    {
+      "id": "614974",
+      "title": "Python FastApi Backend Developer",
+      "url": "https://www.truelancer.com/freelance-project/python-fastapi-backend-developer-614974",
+      "observed_at": "2026-10-23T02:19:13.655Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 1000/ Hour",
+      "estimated_hours": "120",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1760422067000",
+        "relative": "a year ago",
+        "title": "2025-10-13T23:07:47-07:00"
+      },
+      "skills": [
+        "Python"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "* Strong expertise in **Python** with async/await * Proven experience building and scaling **FastAPI** applications * Deep knowledge of **MongoDB** and query optimization * Strong grasp of **authentication/security** (JWT, OAuth) * Background task processing with **Celery** * Experience with **asynchronous programming** and event loops"
+    },
+    {
+      "id": "614285",
+      "title": "Redesign lead generation landing page",
+      "url": "https://www.truelancer.com/freelance-project/redesign-lead-generation-landing-page-614285",
+      "observed_at": "2026-10-23T02:19:14.694Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 40",
+      "estimated_hours": null,
+      "list_budget_raw": "$40",
+      "published": {
+        "datetime": "1760020443000",
+        "relative": "a year ago",
+        "title": "2025-10-09T07:34:03-07:00"
+      },
+      "skills": [
+        "Website Design",
+        "UI Design",
+        "UX Design",
+        "Landing Page",
+        "Web Forms",
+        "Lead Generation"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Please read this entire post before responding or submitting a proposal. We are looking for someone to redesign a lead generation landing page; ComprehensiveHomeWarranty.com. We are looking for a cleaner design and a more compelling user experience. Specifically we want it to convert better than what we have now. It can be a single page form or multi-step, but we want it to be clean, compelling and maximize conversions. If you have direct experience designing and programming lead generation landing pages, we invite you to submit a proposal. Your proposal must include at least three examples of recent lead generat"
+    },
+    {
+      "id": "613677",
+      "title": "QA AUTOMATION TESTING",
+      "url": "https://www.truelancer.com/freelance-project/qa-automation-testing-613677",
+      "observed_at": "2026-10-23T02:19:15.650Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 25000",
+      "estimated_hours": null,
+      "list_budget_raw": "$255",
+      "published": {
+        "datetime": "1759746066000",
+        "relative": "a year ago",
+        "title": "2025-10-06T03:21:06-07:00"
+      },
+      "skills": [
+        "Javascript",
+        "Java",
+        "Python",
+        "C Sharp"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "QA Automation experienced Senior Software Development Engineer in Test (SDET) to join our dynamic quality assurance team. 5 - 8 years of experience in test automation, with a strong focus on Cypress, JavaScript, and Playwright. Need API testing, Selenium,Cucumber, Knowledge of at least one programming language (Java, Python, JavaScript, etc.). Experience with other programming languages and frameworks such as Selenium, Rest Assured, Python or Java etc. Knowledge of containerization technologies like Docker. Experience with mobile application testing. Technical Skills Programming Languages: JavaScript, TypeScript "
+    },
+    {
+      "id": "613494",
+      "title": "Upgrade pcb and software",
+      "url": "https://www.truelancer.com/freelance-project/upgrade-pcb-and-software-613494",
+      "observed_at": "2026-10-23T02:19:16.524Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 2500",
+      "estimated_hours": null,
+      "list_budget_raw": "$2500",
+      "published": {
+        "datetime": "1759602750000",
+        "relative": "a year ago",
+        "title": "2025-10-04T11:32:30-07:00"
+      },
+      "skills": [
+        "Software Development",
+        "C++ Programming",
+        "PCB Design"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We have a project with several points: We have a project with several points: Unify a power board, a control board, and several motor control drivers (currently three) on a single PCB of specific dimensions, communicating with each other via I2C. This will update outdated components and generate files for production and assembly. Modify existing software to add data collection and automatic reporting options. Create a control PCB for two joysticks and an encoder that connects to an ITX board containing the control and inspection software. Optimize and unify C++ control programming for sending and receiving data b"
+    },
+    {
+      "id": "613358",
+      "title": "Looking for API automation expert with REST Assured, Java, Postman & POGO classes experience!",
+      "url": "https://www.truelancer.com/freelance-project/looking-for-api-automation-expert-with-rest-assured-java-postman-pogo-classes-experience-613358",
+      "observed_at": "2026-10-23T02:19:17.445Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 2000",
+      "estimated_hours": null,
+      "list_budget_raw": "$20",
+      "published": {
+        "datetime": "1759512400000",
+        "relative": "a year ago",
+        "title": "2025-10-03T10:26:40-07:00"
+      },
+      "skills": [
+        "Java",
+        "Testing",
+        "Automated Testing",
+        "Mainframe"
+      ],
+      "listing_page": 7,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=7&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am looking for a skilled freelancer who is highly confident in REST Assured API automation testing with Java. The ideal candidate should have strong hands-on experience with the REST Assured framework, Java programming, API testing, scripting, and automation best practices. You should be capable of designing and executing robust test cases, writing maintainable automation scripts, and ensuring reliability in API validation. If you have proven expertise in this area and can showcase relevant past work, I would be happy to connect with you for this project."
+    },
+    {
+      "id": "613294",
+      "title": "Writing an algorithm to communicate 2 control panels to simulate a hybrid inverter.",
+      "url": "https://www.truelancer.com/freelance-project/writing-an-algorithm-to-communicate-2-control-panels-to-simulate-a-hybrid-inverter-613294",
+      "observed_at": "2026-10-23T02:19:18.349Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1759486741000",
+        "relative": "a year ago",
+        "title": "2025-10-03T03:19:01-07:00"
+      },
+      "skills": [
+        "Automation",
+        "Electrical Engineering",
+        "PLC Programming"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We have 2 panels (siemens and delta). One of them acts as a battery BMS, while the other acts like a switching control board. based on the input from different DC power supply and load. this involves taking data from sensors, applying the BMS algorithm and taking data from external equipment and controlling the contactors based on the second algorithm. Most of the programming is done. Finalization and optimization needs to be done."
+    },
+    {
+      "id": "576752",
+      "title": "A mobile app developer",
+      "url": "https://www.truelancer.com/freelance-project/a-mobile-app-developer-576752",
+      "observed_at": "2026-10-23T02:19:19.320Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 700",
+      "estimated_hours": null,
+      "list_budget_raw": "$700",
+      "published": {
+        "datetime": "1740261852000",
+        "relative": "2 years ago",
+        "title": "2025-02-22T22:04:12+00:00"
+      },
+      "skills": [
+        "Mobile AppAndroid App DevelopmentMobile App TestingMobile Development Framework"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": false,
+      "blocked": false,
+      "description_excerpt": ""
+    },
+    {
+      "id": "610383",
+      "title": "I’m looking for a seasoned developer to take full ownership of a macOS desktop application",
+      "url": "https://www.truelancer.com/freelance-project/im-looking-for-a-seasoned-developer-to-take-full-ownership-of-a-macos-desktop-application-610383",
+      "observed_at": "2026-10-23T02:19:20.613Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 600000",
+      "estimated_hours": null,
+      "list_budget_raw": "$6120",
+      "published": {
+        "datetime": "1757968687000",
+        "relative": "a year ago",
+        "title": "2025-09-15T13:38:07-07:00"
+      },
+      "skills": [
+        "AngularJS",
+        "Software Development",
+        "NodeJS",
+        "ExpressJS"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "\"We are looking for a skilled Software Developer to join us on a long-term basis. The role pays $8,000 per month with a minimum of 40 hours required per month ($80/hr). The work involves conceiving, specifying, designing, programming, documenting, testing, and bug fixing applications, frameworks, or other software components. Strong knowledge of React and Node.js is required, with TypeScript experience considered a plus. Basic English is necessary for communication, which will primarily be handled via our ticketing system and email. Please review our company specifications and answer a few questions so we can ens"
+    },
+    {
+      "id": "608274",
+      "title": "Unity Game Developer Required",
+      "url": "https://www.truelancer.com/freelance-project/unity-game-developer-required-608274",
+      "observed_at": "2026-10-23T02:19:21.314Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 425",
+      "estimated_hours": null,
+      "list_budget_raw": "$425",
+      "published": {
+        "datetime": "1756891640000",
+        "relative": "a year ago",
+        "title": "2025-09-03T02:27:20-07:00"
+      },
+      "skills": [
+        "Graphic Design",
+        "C Programming",
+        "3D Animation",
+        "2D Animation"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We're looking for an experienced Unity Developer with programming or animation skills to work remotely 2-3 days per week. We are always looking for new guys, send us your CV. Starting at $ 425 a month."
+    },
+    {
+      "id": "607470",
+      "title": "sap ABAP + BTP + RAP",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-btp-rap-607470",
+      "observed_at": "2026-10-23T02:19:35.223Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 80000",
+      "estimated_hours": null,
+      "list_budget_raw": "$816",
+      "published": {
+        "datetime": "1756525077000",
+        "relative": "a year ago",
+        "title": "2025-08-29T20:37:57-07:00"
+      },
+      "skills": [
+        "SAP ABAP"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Are you a skilled SAP ABAP developer with hands-on experience in SAP BTP and RAP (Restful ABAP Programming Model)? We're looking for a passionate professional to join our growing team!"
+    },
+    {
+      "id": "607305",
+      "title": "Unity 3D Battle Game Development Project",
+      "url": "https://www.truelancer.com/freelance-project/unity-3d-battle-game-development-project-607305",
+      "observed_at": "2026-10-23T02:19:36.365Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 300",
+      "estimated_hours": null,
+      "list_budget_raw": "$300",
+      "published": {
+        "datetime": "1756433364000",
+        "relative": "a year ago",
+        "title": "2025-08-28T19:09:24-07:00"
+      },
+      "skills": [
+        "3D Design",
+        "Game Development",
+        "Unity"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Project Overview I am looking for an experienced Unity 3D Game Developer (or team) to design and develop a battle-action game with multiple levels, vehicles, weapons, and AI systems. The game should be immersive, action-packed, and story-driven, with realistic environments and combat experiences. The storyline spans across 10 levels, each with unique objectives and increasing difficulty. The player will control soldiers, armed vehicles, and airplanes while engaging in missions such as rescuing civilians, border defense, stealth attacks, drone destruction, and aerial combat. Game Storyline & Levels Level 1: A bus "
+    },
+    {
+      "id": "606766",
+      "title": "CNC programming Fanuc Robodrill",
+      "url": "https://www.truelancer.com/freelance-project/cnc-programming-fanuc-robodrill-606766",
+      "observed_at": "2026-10-23T02:19:37.299Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 3/ Hour",
+      "estimated_hours": "20",
+      "list_budget_raw": "$3/ Hr",
+      "published": {
+        "datetime": "1756214803000",
+        "relative": "a year ago",
+        "title": "2025-08-26T06:26:43-07:00"
+      },
+      "skills": [
+        "CNC Programming"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am looking for a CNC programmer experienced with Mastercam to prepare machining programs for a Fanuc Robodrill 3-axis machining center. Input files: STEP (.stp) models of the parts will be provided. Output required: Mastercam file (.MCAM – version 2025 or earlier). Machine: Fanuc Robodrill, 3-axis. Please include in your proposal: Estimated time required to program a typical part from a STEP file. Experience with similar Robodrill programming projects. Important: I already have the correct post-processor for my machine, so I only need the Mastercam project file. Looking forward to receiving your proposals. Best"
+    },
+    {
+      "id": "605546",
+      "title": "GL10 PLC programming communication build, communicate to raspberry pi 4,",
+      "url": "https://www.truelancer.com/freelance-project/gl10-plc-programming-communication-build-communicate-to-raspberry-pi-4-605546",
+      "observed_at": "2026-10-23T02:19:38.255Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 1000/ Hour",
+      "estimated_hours": "2",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1755689378000",
+        "relative": "a year ago",
+        "title": "2025-08-20T04:29:38-07:00"
+      },
+      "skills": [
+        "PLC Programming"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Camera Ptz project. Using Raspberry, GL10 plc, SV660N servo. PlC programming, building communication."
+    },
+    {
+      "id": "599963",
+      "title": "Professional in ADA programming language",
+      "url": "https://www.truelancer.com/freelance-project/professional-in-ada-programming-language-599963",
+      "observed_at": "2026-10-23T02:19:39.233Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 1000",
+      "estimated_hours": null,
+      "list_budget_raw": "$1000",
+      "published": {
+        "datetime": "1753094090000",
+        "relative": "a year ago",
+        "title": "2025-07-21T03:34:50-07:00"
+      },
+      "skills": [
+        "Python",
+        "C++ Programming"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Oil depots,An experienced and detail-oriented programmer responsible for designing and developing a robust ADA compliance system. The role involved creating an accessible digital platform that ensures compliance with ADA standards, enabling equitable access to users across all digital interfaces."
+    },
+    {
+      "id": "599099",
+      "title": "React/Typescript Front End",
+      "url": "https://www.truelancer.com/freelance-project/reacttypescript-front-end-599099",
+      "observed_at": "2026-10-23T02:19:40.204Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 25000",
+      "estimated_hours": null,
+      "list_budget_raw": "$255",
+      "published": {
+        "datetime": "1752684433000",
+        "relative": "a year ago",
+        "title": "2025-07-16T09:47:13-07:00"
+      },
+      "skills": [
+        "UX Design",
+        "ReactJS"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I need 1 developer for a contract work: React (important) Typescript (important) - more programming languages better. UI/UX (need to show us previous work in best case) Full Stack experience Client Server Communication (Sockets, REST) Also important (secondary) as we are small and everyone will do a little bit everything: Cloud Computing (concepts, software architecture, platform architecture, scaling, databases) One of GCP, AWS, AZURE (GCP preferred ofcourse) SQL, Nosql Microservices"
+    },
+    {
+      "id": "598505",
+      "title": "PLC Programming for boiler",
+      "url": "https://www.truelancer.com/freelance-project/plc-programming-for-boiler-598505",
+      "observed_at": "2026-10-23T02:19:41.546Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "₹ 500/ Hour",
+      "estimated_hours": "160",
+      "list_budget_raw": "$5/ Hr",
+      "published": {
+        "datetime": "1752470062000",
+        "relative": "a year ago",
+        "title": "2025-07-13T22:14:22-07:00"
+      },
+      "skills": [
+        "PLC Programming"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "We need a PLC programmer having experience in boilers. The requirement is for one project , which may take 1-2 months. The candidate is preferred from Tamil Nadu, Karnataka or Andhra Pradesh."
+    },
+    {
+      "id": "597591",
+      "title": "Social chat application",
+      "url": "https://www.truelancer.com/freelance-project/social-chat-application-597591",
+      "observed_at": "2026-10-23T02:19:42.445Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 600",
+      "estimated_hours": null,
+      "list_budget_raw": "$600",
+      "published": {
+        "datetime": "1752018126000",
+        "relative": "a year ago",
+        "title": "2025-07-08T16:42:06-07:00"
+      },
+      "skills": [
+        "IOS Development",
+        "Mobile App Development"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I have a social media app project, and the app is currently in the design phase—the user interface (UI) is fully ready. I am looking for a skilled programmer to take on the project from scratch until it is published. ⸻ ✅ Required Tasks: 1. Programming the core functionality of the app (Backend + Firebase or whatever you deem appropriate). 2. Linking the designed interface with the functionality required to fully operate the app. 3. Comprehensive testing of the app on iOS and Android. 4. Publishing the app to the App Store and Google Play. 5. Submitting the full source code after publishing. 6. Adhering to all App"
+    },
+    {
+      "id": "592485",
+      "title": "Applied Time Series Analysis Project With RStudio",
+      "url": "https://www.truelancer.com/freelance-project/applied-time-series-analysis-project-with-rstudio-592485",
+      "observed_at": "2026-10-23T02:19:43.422Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 40",
+      "estimated_hours": null,
+      "list_budget_raw": "$40",
+      "published": {
+        "datetime": "1749576397000",
+        "relative": "a year ago",
+        "title": "2025-06-10T10:26:37-07:00"
+      },
+      "skills": [
+        "Econometrics",
+        "Economic Analysis",
+        "R Studio",
+        "Econometrics",
+        "Time Series Ana"
+      ],
+      "listing_page": 8,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=8&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "The task is the project in the field of Financial Econometrics and Applied Time Series Analysis. You will need R programming language knowledge as well as R-Studio (free to download) to work on the task. You will have to work on ONE problem from Part I and on ONE problem from Part II. So two tasks in total. You are free to choose any task you want. All tasks are available in the attached PDF file. You can look online for suitable, publically available datasets to use in your analyses. A dataset is suitable, if it (approximately) meets the assumptions of the model you are going to work with, for example stationari"
+    },
+    {
+      "id": "591770",
+      "title": "Data Engineer for Product Analytics",
+      "url": "https://www.truelancer.com/freelance-project/data-engineer-for-product-analytics-591770",
+      "observed_at": "2026-10-23T02:19:44.333Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 50/ Hour",
+      "estimated_hours": "40",
+      "list_budget_raw": "$50/ Hr",
+      "published": {
+        "datetime": "1749134673000",
+        "relative": "a year ago",
+        "title": "2025-06-05T07:44:33-07:00"
+      },
+      "skills": [
+        "Python",
+        "Sql",
+        "Apache Spark",
+        "Data Science"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Data Engineer, Product Analytics Responsibilities: Conceptualize and own the data architecture for multiple large-scale projects, while evaluating design and operational cost-benefit tradeoffs within systems Create and contribute to frameworks that improve the efficacy of logging data, while working with data infrastructure to triage issues and resolve Collaborate with engineers, product managers, and data scientists to understand data needs, representing key data insights visually in a meaningful way Define and manage Service Level Agreements for all data sets in allocated areas of ownership Determine and implem"
+    },
+    {
+      "id": "591096",
+      "title": "Semi Autonomous Mobile Robot Development",
+      "url": "https://www.truelancer.com/freelance-project/semi-autonomous-mobile-robot-development-591096",
+      "observed_at": "2026-10-23T02:19:50.418Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 23000",
+      "estimated_hours": null,
+      "list_budget_raw": "$235",
+      "published": {
+        "datetime": "1748719124000",
+        "relative": "a year ago",
+        "title": "2025-05-31T12:18:44-07:00"
+      },
+      "skills": [
+        "Mechanical Design",
+        "Mechanical Engineering",
+        "Robot Framework",
+        "Robotics"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am looking for an experienced robotics engineer or team to design and build a functional mobile robot with a manipulator arm for the upcoming game in a school. This robot needs to be capable of performing specific tasks on a game field, including picking, placing, and navigating designated paths. Key Requirements & Specifications (Strictly Adhere to Competition Rulebook): The robot must be built according to the official rulebook . A PDF of the rulebook will be provided upon project acceptance. Robot Dimensions: Maximum Length: 500 mm Maximum Width: 500 mm Height: No restriction Extendable/Expandable parts must"
+    },
+    {
+      "id": "589453",
+      "title": "3D Simulation of Solar cell with COMSOL program",
+      "url": "https://www.truelancer.com/freelance-project/3d-simulation-of-solar-cell-with-comsol-program-589453",
+      "observed_at": "2026-10-23T02:19:51.394Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 100",
+      "estimated_hours": null,
+      "list_budget_raw": "$100",
+      "published": {
+        "datetime": "1747831211000",
+        "relative": "a year ago",
+        "title": "2025-05-21T05:40:11-07:00"
+      },
+      "skills": [
+        "COMSOL Multiphysics"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am a PhD Scholar I have to do a programming in COMSOL Multiphysics , which needs to be finished at the earliest , My Topic is 2D/3D simulation of Solar cells . This has to be submitted at least half portion by this Friday . Thank you"
+    },
+    {
+      "id": "589272",
+      "title": "Batch Generation of Sky Maps Using Stellarium",
+      "url": "https://www.truelancer.com/freelance-project/batch-generation-of-sky-maps-using-stellarium-589272",
+      "observed_at": "2026-10-23T02:19:53.086Z",
+      "source_status": "Freezed and Awarded",
+      "pricing": "fixed",
+      "budget_raw": "$ 100",
+      "estimated_hours": null,
+      "list_budget_raw": "$100",
+      "published": {
+        "datetime": "1747737943000",
+        "relative": "a year ago",
+        "title": "2025-05-20T03:45:43-07:00"
+      },
+      "skills": [
+        "Python",
+        "Digital Mapping"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Description: We are seeking an experienced freelancer to automate the generation of high-resolution sky maps using [Stellarium](https://stellarium.org/). The project involves scripting Stellarium to produce custom sky maps based on a list of date/location combinations. Project Details: Input: A CSV file containing a list of locations (latitude, longitude) and corresponding dates/times. Output: High-resolution image files (JPG) showing the sky view for each input entry, generated using Stellarium. Customization: The output sky maps should include configurable features (e.g., constellations, labels, grids, atmosphe"
+    },
+    {
+      "id": "589084",
+      "title": "Python, SQLAlchemy, Microservices, AWS Lambda, API programming",
+      "url": "https://www.truelancer.com/freelance-project/python-sqlalchemy-microservices-aws-lambda-api-programming-589084",
+      "observed_at": "2026-10-23T02:19:53.989Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 20000",
+      "estimated_hours": null,
+      "list_budget_raw": "$204",
+      "published": {
+        "datetime": "1747653112000",
+        "relative": "a year ago",
+        "title": "2025-05-19T04:11:52-07:00"
+      },
+      "skills": [
+        "Python",
+        "Sql",
+        "AWS Lambda"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Python, SQLAlchemy, Microservices, AWS Lambda, API programming. Backend API development. SQLAlchecny is must. Python with Django Flask experience is required."
+    },
+    {
+      "id": "587758",
+      "title": "Need a developer for soon to be launched rental marketplace based on wordpress",
+      "url": "https://www.truelancer.com/freelance-project/need-a-developer-for-soon-to-be-launched-rental-marketplace-based-on-wordpress-587758",
+      "observed_at": "2026-10-23T02:19:54.930Z",
+      "source_status": "Freezed and Awarded",
+      "pricing": "hourly",
+      "budget_raw": "$ 5/ Hour",
+      "estimated_hours": "30",
+      "list_budget_raw": "$5/ Hr",
+      "published": {
+        "datetime": "1747044669000",
+        "relative": "a year ago",
+        "title": "2025-05-12T03:11:09-07:00"
+      },
+      "skills": [
+        "PHP",
+        "Laravel",
+        "Wordpress"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "The project is 80% complete. There's already another team working on some tasks but I need another developer to finish few things and if we like working with each other then we can carry forward and you can support me in resolving the bugs post launch. About the website: This is a rental marketplace developed on top of Houzez theme. Overview I am seeking a reliable and skilled freelancer for an incremental, task-based project involving a highly customized WordPress rental website. Tasks will arise intermittently-there may be periods of activity followed by downtime, and then new tasks may emerge as the project ev"
+    },
+    {
+      "id": "586506",
+      "title": "Need an experienced Shopify Developer for our project! Only India",
+      "url": "https://www.truelancer.com/freelance-project/need-an-experienced-shopify-developer-for-our-project-only-india-586506",
+      "observed_at": "2026-10-23T02:19:55.867Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 12000",
+      "estimated_hours": null,
+      "list_budget_raw": "$122",
+      "published": {
+        "datetime": "1746428962000",
+        "relative": "a year ago",
+        "title": "2025-05-05T00:09:22-07:00"
+      },
+      "skills": [
+        "Website Design",
+        "Shopify",
+        "Shopify Templates",
+        "Web Design"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Shopify Developer Job Brief We are looking for Shopify developers who are comfortable programming on the Shopify platform. They should have development experience, in-depth understanding, and distinct perspectives of all things to specialize in all the Shopify projects. The chosen candidate should be able to create a bespoke development using the existing Shopify templates. Besides that, they must also know how to convert mock-ups and specifications into complete functional solutions. He/she must also know how to update and modify the existing websites to enhance the UX/UI design or add new features. They must al"
+    },
+    {
+      "id": "582424",
+      "title": "Conversion of CUDA Based Github Code to Google Colab",
+      "url": "https://www.truelancer.com/freelance-project/conversion-of-cuda-based-github-code-to-google-colab-582424",
+      "observed_at": "2026-10-23T02:19:56.935Z",
+      "source_status": "Freezed and Awarded",
+      "pricing": "fixed",
+      "budget_raw": "₹ 700",
+      "estimated_hours": null,
+      "list_budget_raw": "$7",
+      "published": {
+        "datetime": "1743558352000",
+        "relative": "2 years ago",
+        "title": "2025-04-01T18:45:52-07:00"
+      },
+      "skills": [
+        "Python",
+        "C Programming",
+        "C++ Programming",
+        "C++"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": true,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I have attached a research paper that is cuda based programming its solution is available at https://github.com/pgera/efg and datasets is also available in the above link . I want the implementation in Google Collab . Basically converting Github code to google Collab . "
+    },
+    {
+      "id": "581316",
+      "title": "I need to fix the file, it used to work and now it does not start, I made a site to order.",
+      "url": "https://www.truelancer.com/freelance-project/i-need-to-fix-the-file-it-used-to-work-and-now-it-does-not-start-i-made-a-site-to-order-581316",
+      "observed_at": "2026-10-23T02:19:57.965Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 700",
+      "estimated_hours": null,
+      "list_budget_raw": "$700",
+      "published": {
+        "datetime": "1742932897000",
+        "relative": "2 years ago",
+        "title": "2025-03-25T13:01:37-07:00"
+      },
+      "skills": [
+        "HTML",
+        "HTML5",
+        "Web Scraping",
+        "Python"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Hello everyone, I need your help. I recently ordered a website, and it worked perfectly before. Now, when I run npm start, it gives an error. I need someone to help fix this, as I’m not very familiar with programming. This needs to be done urgently. I’m willing to pay $700 for the job, or more if the issue is serious. this is a zip archive with code, you need to start it with npm start. https://www.filemail.com/d/qjlxqozpeosejsl"
+    },
+    {
+      "id": "578876",
+      "title": "Need a Android App developer with kotlin and springboot",
+      "url": "https://www.truelancer.com/freelance-project/need-a-android-app-developer-with-kotlin-and-springboot-578876",
+      "observed_at": "2026-10-23T02:19:59.212Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 10000",
+      "estimated_hours": null,
+      "list_budget_raw": "$102",
+      "published": {
+        "datetime": "1741588117000",
+        "relative": "2 years ago",
+        "title": "2025-03-09T23:28:37-07:00"
+      },
+      "skills": [
+        "Android App Development",
+        "Mobile App Development"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Key features to consider: Event Listing: Clear display of event details (title, date, time, location, description, categories) Filtering options (by date, genre, location) Search functionality Ticket Selection: Visual seating chart (if applicable) Different ticket types (general admission, VIP, early bird) Quantity selection Price display with potential discounts User Registration/Login: Secure user account creation Login with social media integration Profile management (personal details, payment information) Payment Gateway Integration: Secure payment processing with popular gateways (Stripe, PayPal) Multiple pa"
+    },
+    {
+      "id": "578332",
+      "title": "SAP ABAP Expert Developer",
+      "url": "https://www.truelancer.com/freelance-project/sap-abap-expert-developer-578332",
+      "observed_at": "2026-10-23T02:20:00.136Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 30/ Hour",
+      "estimated_hours": "20",
+      "list_budget_raw": "$30/ Hr",
+      "published": {
+        "datetime": "1741248710000",
+        "relative": "2 years ago",
+        "title": "2025-03-06T00:11:50-08:00"
+      },
+      "skills": [
+        "SAP",
+        "SAP ABAP"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": "Freelancers only from Russian Federation can apply for this project.",
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Looking for a experienced SAP Developer to create a custom interface. Person should have a strong experience in SAP ABAP, Interface programming and database knowledge."
+    },
+    {
+      "id": "578011",
+      "title": "STM32 Firmware Development for Adaptive Motorcycle Steering Damper",
+      "url": "https://www.truelancer.com/freelance-project/stm32-firmware-development-for-adaptive-motorcycle-steering-damper-578011",
+      "observed_at": "2026-10-23T02:20:04.895Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 15000",
+      "estimated_hours": null,
+      "list_budget_raw": "$153",
+      "published": {
+        "datetime": "1741067258000",
+        "relative": "2 years ago",
+        "title": "2025-03-03T21:47:38-08:00"
+      },
+      "skills": [
+        "Embedded C",
+        "Embedded Systems"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Project Description: We are seeking an experienced STM32 firmware developer to design and implement a closed-loop control system for an adaptive motorcycle steering damper. The project involves developing real-time embedded software to process sensor inputs and control a magnetorheological (MR) damper to mitigate death wobble and tank slappers effectively. Key Responsibilities: Develop and optimize firmware for an STM32 microcontroller to interface with sensors (e.g., IMU, wheel speed sensors) and actuate the MR damper. Implement a control algorithm that dynamically adjusts damping based on real-time sensor data."
+    },
+    {
+      "id": "577672",
+      "title": "Waste Sorting using Arduino",
+      "url": "https://www.truelancer.com/freelance-project/waste-sorting-using-arduino-577672",
+      "observed_at": "2026-10-23T02:20:06.076Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 30",
+      "estimated_hours": null,
+      "list_budget_raw": "$30",
+      "published": {
+        "datetime": "1740836942000",
+        "relative": "2 years ago",
+        "title": "2025-03-01T05:49:02-08:00"
+      },
+      "skills": [
+        "Arduino"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I need help assembling and programming an Arduino-based project similar to the one in the attached image. I have all the required components, including: Arduino Uno Stepper motor with driver Servo motor Proximity sensor Rain sensor Buzzer Lithium 18650 batteries Additional modules & wiring Looking for someone experienced in Arduino programming and circuit connections who can complete this within 2 days. If you're available and can deliver quickly, please DM me with your experience and estimated cost."
+    },
+    {
+      "id": "576238",
+      "title": "Need an E Commerce Website developers for various projects",
+      "url": "https://www.truelancer.com/freelance-project/need-an-e-commerce-website-developers-for-various-projects-576238",
+      "observed_at": "2026-10-23T02:20:07.353Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 7000",
+      "estimated_hours": null,
+      "list_budget_raw": "$71",
+      "published": {
+        "datetime": "1739781407000",
+        "relative": "2 years ago",
+        "title": "2025-02-17T00:36:47-08:00"
+      },
+      "skills": [
+        "Wordpress",
+        "PrestaShop",
+        "Magento",
+        "ECommerce"
+      ],
+      "listing_page": 9,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=9&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Proven experience as an ecommerce web developer or similar role in building and maintaining ecommerce websites. Proficiency in front-end languages (HTML5, CSS3, JavaScript) and back-end programming (PHP, Node.js, Python). Experience working with ecommerce platforms (e.g., Shopify, Magento, WooCommerce) and CMS systems. Familiarity with databases (MySQL, MongoDB, etc.) and server-side scripting. Solid understanding of web design, UX/UI principles, and mobile-first responsive design. Knowledge of SEO best practices and ability to implement basic SEO optimizations. Strong troubleshooting and problem-solving skills. "
+    },
+    {
+      "id": "576062",
+      "title": "Embedded Developer for ESP32 Based Quadcopter Flight Control.",
+      "url": "https://www.truelancer.com/freelance-project/embedded-developer-for-esp32-based-quadcopter-flight-control-576062",
+      "observed_at": "2026-10-23T02:20:08.600Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 5000",
+      "estimated_hours": null,
+      "list_budget_raw": "$51",
+      "published": {
+        "datetime": "1739592781000",
+        "relative": "2 years ago",
+        "title": "2025-02-14T20:13:01-08:00"
+      },
+      "skills": [
+        "C++ Programming",
+        "Mechatronics",
+        "Microcontroller Programming"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am developing a low-cost quadcopter toy using ESP32, and I need an embedded systems expert to implement stepwise control development. The first milestone is to develop a PID-based stability controller that ensures the drone hovers steadily and only moves when given a command. Project Milestones: Implement PID-based Stability Control -Develop a basic flight controller on ESP32. -Use MPU6050 (or similar) for IMU sensor data. -Ensure the drone remains stable and hovers without unintended drift. -Allow movement only when commanded. Requirements: -Experience with ESP32-based drones or flight controllers. -Strong und"
+    },
+    {
+      "id": "575894",
+      "title": "Sr QA Automation Engineer",
+      "url": "https://www.truelancer.com/freelance-project/sr-qa-automation-engineer-575894",
+      "observed_at": "2026-10-23T02:20:09.550Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 150000",
+      "estimated_hours": null,
+      "list_budget_raw": "$1530",
+      "published": {
+        "datetime": "1739425724000",
+        "relative": "2 years ago",
+        "title": "2025-02-12T21:48:44-08:00"
+      },
+      "skills": [
+        "Java",
+        "Testing",
+        "Automated Testing",
+        "Selenium WebDriver"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Job Title: Senior QA Exp: 6-12 yrs Mandatory Skills: Java, Postman, Automation testing, Manual Testing, Selenium, Frontend testing, Backend testing Job Description: We are looking for a seasoned SDET to help us keep a check on the quality of products. If you are passionate about quality and want to help make an impact in our organization then we have a perfect role for you! Job Responsibilities: Automation Framework Development: Design, develop, and maintain reusable automation test scripts and frameworks using Java, Selenium Test Script Execution: Execute automated test scripts, analyze results, and troubleshoot"
+    },
+    {
+      "id": "575691",
+      "title": "It is an email address validation service interface of a lead management application",
+      "url": "https://www.truelancer.com/freelance-project/it-is-an-email-address-validation-service-interface-of-a-lead-management-application-575691",
+      "observed_at": "2026-10-23T02:20:10.498Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 80",
+      "estimated_hours": null,
+      "list_budget_raw": "$80",
+      "published": {
+        "datetime": "1739219099000",
+        "relative": "2 years ago",
+        "title": "2025-02-10T12:24:59-08:00"
+      },
+      "skills": [
+        "AngularJS",
+        "Python",
+        "Django",
+        "Microsoft SQL Server"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Objective: Validate email addresses in bulk, without errors and without service interruption. The service sends email addresses from the app A third-party online application validates these addresses. The service receives the validation status back with codes. The service updates the database. Need: Improve interface performance: Currently, email addresses are sent and received in batches of 100. The goal is thousands of email addresses. Management and collaboration tools Azure Devops Services MICROSOFT Teams Development environment Sending and receiving email addresses via API. The Python programming language Th"
+    },
+    {
+      "id": "575688",
+      "title": "I need help for PLC Program and HMI Siemens Step 7 & Wincc Flexible",
+      "url": "https://www.truelancer.com/freelance-project/i-need-help-for-plc-program-and-hmi-siemens-step-7-wincc-flexible-575688",
+      "observed_at": "2026-10-23T02:20:11.603Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 30",
+      "estimated_hours": null,
+      "list_budget_raw": "$30",
+      "published": {
+        "datetime": "1739217034000",
+        "relative": "2 years ago",
+        "title": "2025-02-10T11:50:34-08:00"
+      },
+      "skills": [
+        "PLC Programming"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "I am designing a water tank automation system. Water transfer from one tank to other tank. (Prefer Function block diagram programming, Language) Level Measurment Control Valve on-Off Timer and Alarm Function (in plc programm and hmi ) -HMI design FC, FB Block I need help for to understand and help for it. I dont need to do all program, i almost doing myself , i need help or some short task and guidance. Let me , I can explain and share ore details about it. About Payment can be talk and discuss as per task ."
+    },
+    {
+      "id": "574379",
+      "title": "Design embedded circuits and programming",
+      "url": "https://www.truelancer.com/freelance-project/design-embedded-circuits-and-programming-574379",
+      "observed_at": "2026-10-23T02:20:12.511Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "₹ 200000",
+      "estimated_hours": null,
+      "list_budget_raw": "$2040",
+      "published": {
+        "datetime": "1738204180000",
+        "relative": "2 years ago",
+        "title": "2025-01-29T18:29:40-08:00"
+      },
+      "skills": [
+        "Embedded Linux"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "It is an embedded based control system for medical applications. Person required with minimum 5 years experience in the field of embedded system development."
+    },
+    {
+      "id": "574604",
+      "title": "Parametric Fanuc programming",
+      "url": "https://www.truelancer.com/freelance-project/parametric-fanuc-programming-574604",
+      "observed_at": "2026-10-23T02:20:13.457Z",
+      "source_status": "Active",
+      "pricing": "fixed",
+      "budget_raw": "$ 1500",
+      "estimated_hours": null,
+      "list_budget_raw": "$1500",
+      "published": {
+        "datetime": "1738364191000",
+        "relative": "2 years ago",
+        "title": "2025-01-31T14:56:31-08:00"
+      },
+      "skills": [
+        "CNC Programming"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "Needs to get made 4-5 parametric Fanuc programs, 3 parameters which could bed changed in combination with material choice and thereby indirectly feed and speeds. Programs is to be used on a Puma 240"
+    },
+    {
+      "id": "573779",
+      "title": "Need a Android App developer",
+      "url": "https://www.truelancer.com/freelance-project/need-a-android-app-developer-573779",
+      "observed_at": "2026-10-23T02:20:14.470Z",
+      "source_status": "Active",
+      "pricing": "hourly",
+      "budget_raw": "$ 10/ Hour",
+      "estimated_hours": "5",
+      "list_budget_raw": "$10/ Hr",
+      "published": {
+        "datetime": "1737777741000",
+        "relative": "2 years ago",
+        "title": "2025-01-24T20:02:21-08:00"
+      },
+      "skills": [
+        "Android App Development",
+        "Mobile App Development"
+      ],
+      "listing_page": 10,
+      "listing_url": "https://www.truelancer.com/programming-freelancer-job?page=10&keyword=programming",
+      "location_banner": null,
+      "has_attachments": false,
+      "public_description_read": true,
+      "blocked": false,
+      "description_excerpt": "An Android developer designs, develops, and maintains applications for the Android platform. They’re deeply familiar with programming languages like Java and Kotlin, the Android Software Development Kit (SDK), and various Android development tools. Android developers also create user-friendly interfaces and optimize performance to deliver high-quality, efficient mobile apps powered by the Android operating system. A clear and compelling job description can help you attract and hire the best Android developers for your team. Revelo can help you find passionate software developers ready to contribute to the success"
+    }
+  ]
+}
