@@ -76,5 +76,8 @@ JS 语法检查通过；当前桌面页面无横向溢出，无浏览器错误�
 - `build_snapshot.py`：本地转换与中文摘要注释，**没有网络功能**；运行可重建 JSON 和 data.js。
 - `validation.json`、`ui-verification.json`：数据与浏览器验证记录。
 - `preview.png`：实际页面截图。
+- `remote-work-audit.md`、`remote-work-audit.json`：逐条复核线上工作方式；5 条明确远程、54 条可能线上、29 条需核对设备或现场条件。
 
-原型将保存在独立的 `prototype/truelancer-programming-snapshot` 本地分支，主分支代码不变；分支提交记录同时保存本次问题与结论。未向远端推送。
+原型保存在独立的 `prototype/truelancer-programming-snapshot` 分支；分支提交记录同时保存本次问题与结论。
+
+GitHub 目录：[Truelancer 原型与数据](https://github.com/JKHUKGY/overseas-opportunity-subscription/tree/prototype/truelancer-programming-snapshot/temp/truelancer-programming-prototype)。仓库为私有仓库；上传文件不会启动采集或将页面部署到公网。
