@@ -94,16 +94,6 @@ python3 -m unittest discover -s tests -v
 
 The automated tests use controlled source responses, clocks, and isolated storage. They do not require a live Freelancer account.
 
-## Documentation
-
-- [Collector guide — commands and data semantics](docs/collection-guide.md)
-- [Observation runbook — sampling, scheduling, and reports](docs/observation-runbook.md)
-- [Original collection specification](.scratch/freelancer-continuous-intake/spec.md)
-- [Early product discovery — illustration-focused experiments](docs/discovery.md)
-- [Historical local prototype](temp/prototype-opportunity-lab/README.md)
-
-The early discovery documents describe the initial illustration use case. The product direction above reflects our broader goal of helping freelancers across industries.
-
 ## Team
 
 **Junzheng Jia · Annie Wu**
